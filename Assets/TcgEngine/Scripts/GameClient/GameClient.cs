@@ -361,13 +361,6 @@ namespace TcgEngine.Client
             SendAction(GameAction.SelectCost, choice);
         }
 
-        public void Mulligan(string[] cards)
-        {
-            MsgMulligan mdata = new MsgMulligan();
-            mdata.cards = cards;
-            SendAction(GameAction.SelectMulligan, mdata);
-        }
-
         public void CancelSelection()
         {
             SendAction(GameAction.CancelSelect);
