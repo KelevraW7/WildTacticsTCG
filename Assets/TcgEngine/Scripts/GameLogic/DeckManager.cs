@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -54,17 +53,48 @@ namespace TcgEngine
             System.Random rng = new System.Random();
             mainDeck = mainDeck.OrderBy(a => rng.Next()).ToList();
 
-            // Asignación para cada jugador
+            // Distribución de cartas para el Jugador 1
             player1Deck = mainDeck.Take(10).ToList();
-            player1Deck.Add(mainDeck.FirstOrDefault(c => c.tipo == "Dorada"));
+            var doradaP1 = mainDeck.FirstOrDefault(c => c.tipo == "Dorada");
+            if (doradaP1 != null) mainDeck.Remove(doradaP1);
 
-            player2Deck = mainDeck.Skip(11).Take(10).ToList();
-            player2Deck.Add(mainDeck.Skip(11).FirstOrDefault(c => c.tipo == "Dorada"));
+            // Insertar la dorada en una posición aleatoria
+            int randomPositionP1 = rng.Next(0, 11);
+            player1Deck.Insert(randomPositionP1, doradaP1);
 
             // Eliminar del mazo principal
-            mainDeck.RemoveAll(c => player1Deck.Contains(c) || player2Deck.Contains(c));
+            mainDeck.RemoveAll(c => player1Deck.Contains(c));
 
-            Debug.Log($"Cartas asignadas: Jugador 1: {player1Deck.Count} | Jugador 2: {player2Deck.Count}");
+            // Distribución de cartas para el Jugador 2
+            player2Deck = mainDeck.Take(10).ToList();
+            var doradaP2 = mainDeck.FirstOrDefault(c => c.tipo == "Dorada");
+            if (doradaP2 != null) mainDeck.Remove(doradaP2);
+
+            // Insertar la dorada en una posición aleatoria
+            int randomPositionP2 = rng.Next(0, 11);
+            player2Deck.Insert(randomPositionP2, doradaP2);
+
+            // Eliminar del mazo principal
+            mainDeck.RemoveAll(c => player2Deck.Contains(c));
+
+            Debug.Log($"Jugador 1 tiene {player1Deck.Count} cartas. Jugador 2 tiene {player2Deck.Count} cartas.");
+        }
+
+        public CreatureData DrawCardForPlayer(int playerId)
+        {
+            if (playerId == 1 && player1Deck.Count > 0)
+            {
+                var card = player1Deck[0];
+                player1Deck.RemoveAt(0);
+                return card;
+            }
+            if (playerId == 2 && player2Deck.Count > 0)
+            {
+                var card = player2Deck[0];
+                player2Deck.RemoveAt(0);
+                return card;
+            }
+            return null;
         }
     }
 }
