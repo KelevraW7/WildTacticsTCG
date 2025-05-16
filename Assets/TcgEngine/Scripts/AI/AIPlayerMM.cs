@@ -34,11 +34,6 @@ namespace TcgEngine.AI
                 TimeTool.StartCoroutine(AiTurn());
             }
 
-            if (!is_playing && game_data.IsPlayerMulliganTurn(player))
-            {
-                SkipMulligan();
-            }
-
             if (!game_data.IsPlayerTurn(player) && ai_logic.IsRunning())
                 Stop();
         }
@@ -133,11 +128,6 @@ namespace TcgEngine.AI
             if (action.type == GameAction.SelectCost)
             {
                 SelectCost(action.value);
-            }
-
-            if (action.type == GameAction.SelectMulligan)
-            {
-                SkipMulligan();
             }
 
             if (action.type == GameAction.CancelSelect)
@@ -253,19 +243,6 @@ namespace TcgEngine.AI
             {
                 gameplay.CancelSelection();
             }
-        }
-
-        private void SkipMulligan()
-        {
-            string[] cards = new string[0]; //Don't mulligan
-            SelectMulligan(cards);
-        }
-
-        private void SelectMulligan(string[] cards)
-        {
-            Game game_data = gameplay.GetGameData();
-            Player player = game_data.GetPlayer(player_id);
-            gameplay.Mulligan(player, cards);
         }
 
         private void EndTurn()

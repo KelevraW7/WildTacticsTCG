@@ -306,7 +306,7 @@ namespace TcgEngine
         {
             if (instance == null)
             {
-                TcgNetwork net = FindObjectOfType<TcgNetwork>();
+                TcgNetwork net = FindAnyObjectByType<TcgNetwork>();
                 net?.Init();
             }
             return instance;

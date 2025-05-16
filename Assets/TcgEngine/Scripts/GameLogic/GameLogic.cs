@@ -99,19 +99,6 @@ namespace TcgEngine.Gameplay
             game_data.current_player = game_data.first_player;
             game_data.turn_count = 1;
 
-            //Adventure settings
-            bool should_mulligan = GameplayData.Get().mulligan;
-            LevelData level = game_data.settings.GetLevel();
-            if (level != null)
-            {
-                if (level != null && level.first_player == LevelFirst.Player)
-                    game_data.first_player = 0;
-                if (level != null && level.first_player == LevelFirst.AI)
-                    game_data.first_player = 1;
-                game_data.current_player = game_data.first_player;
-                should_mulligan = level.mulligan;
-            }
-
             //Init each players
             foreach (Player player in game_data.players)
             {
@@ -129,7 +116,7 @@ namespace TcgEngine.Gameplay
                 DrawCard(player, dcards);
 
                 //Add coin second player
-                bool is_random = level == null || level.first_player == LevelFirst.Random;
+                bool is_random = game_data.first_player == 1;
                 if (is_random && player.player_id != game_data.first_player && GameplayData.Get().second_bonus != null)
                 {
                     Card card = Card.Create(GameplayData.Get().second_bonus, VariantData.GetDefault(), player);
@@ -141,10 +128,7 @@ namespace TcgEngine.Gameplay
             RefreshData();
             onGameStart?.Invoke();
 
-            if(should_mulligan)
-                GoToMulligan();
-            else
-                StartTurn();
+            StartTurn();
         }
 
         public virtual void StartTurn()
@@ -280,12 +264,6 @@ namespace TcgEngine.Gameplay
         {
             if (game_data.state == GameState.GameEnded)
                 return;
-
-            if (game_data.phase == GamePhase.Mulligan)
-            {
-                StartTurn();
-                return;
-            }
 
             CancelSelection();
 
@@ -1792,38 +1770,6 @@ namespace TcgEngine.Gameplay
             }
         }
 
-        public virtual void Mulligan(Player player, string[] cards)
-        {
-            if (game_data.phase == GamePhase.Mulligan && !player.ready)
-            {
-                int count = 0;
-                List<Card> remove_list = new List<Card>();
-                foreach (Card card in player.cards_hand)
-                {
-                    if (cards.Contains(card.uid))
-                    {
-                        remove_list.Add(card);
-                        count++;
-                    }
-                }
-
-                foreach (Card card in remove_list)
-                {
-                    player.RemoveCardFromAllGroups(card);
-                    player.cards_discard.Add(card);
-                }
-
-                player.ready = true;
-                DrawCard(player, count);
-                RefreshData();
-
-                if (game_data.AreAllPlayersReady())
-                {
-                    StartTurn();
-                }
-            }
-        }
-
         //-----Trigger Selector-----
 
         protected virtual void GoToSelectTarget(AbilityData iability, Card caster)
@@ -1860,15 +1806,6 @@ namespace TcgEngine.Gameplay
             game_data.selector_ability_id = "";
             game_data.selector_caster_uid = caster.uid;
             game_data.selected_value = 0;
-            RefreshData();
-        }
-
-        protected virtual void GoToMulligan()
-        {
-            game_data.phase = GamePhase.Mulligan;
-            game_data.turn_timer = GameplayData.Get().turn_duration;
-            foreach (Player player in game_data.players)
-                player.ready = false;
             RefreshData();
         }
 

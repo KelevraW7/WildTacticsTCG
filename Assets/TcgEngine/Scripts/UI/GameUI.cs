@@ -60,7 +60,7 @@ namespace TcgEngine.UI
         void Update()
         {
             Game data = GameClient.Get().GetGameData();
-			bool is_connecting = data == null || data.state == GameState.Connecting;
+            bool is_connecting = data == null || data.state == GameState.Connecting;
             bool connection_lost = !is_connecting && !GameClient.Get().IsReady();
             ConnectionPanel.Get().SetVisible(connection_lost);
 
@@ -116,7 +116,7 @@ namespace TcgEngine.UI
             }
 
             //Hide
-            if (!yourturn && data.phase != GamePhase.Mulligan)
+            if (!yourturn)
             {
                 SelectorPanel.HideAll();
             }
@@ -131,7 +131,7 @@ namespace TcgEngine.UI
 
         private void OnGameStart()
         {
-            
+
         }
 
         private void OnNewTurn(int player_id)

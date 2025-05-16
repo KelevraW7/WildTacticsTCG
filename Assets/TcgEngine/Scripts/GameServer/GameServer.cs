@@ -66,7 +66,6 @@ namespace TcgEngine.Server
             RegisterAction(GameAction.SelectSlot, ReceiveSelectSlot);
             RegisterAction(GameAction.SelectChoice, ReceiveSelectChoice);
             RegisterAction(GameAction.SelectCost, ReceiveSelectCost);
-            RegisterAction(GameAction.SelectMulligan, ReceiveSelectMulligan);
             RegisterAction(GameAction.CancelSelect, ReceiveCancelSelection);
             RegisterAction(GameAction.EndTurn, ReceiveEndTurn);
             RegisterAction(GameAction.Resign, ReceiveResign);
@@ -421,16 +420,6 @@ namespace TcgEngine.Server
             if (player != null && game_data.IsPlayerSelectorTurn(player) && !gameplay.IsResolving())
             {
                 gameplay.CancelSelection();
-            }
-        }
-
-        public void ReceiveSelectMulligan(ClientData iclient, SerializedData sdata)
-        {
-            MsgMulligan msg = sdata.Get<MsgMulligan>();
-            Player player = GetPlayer(iclient);
-            if (player != null && msg != null && game_data.IsPlayerMulliganTurn(player) && !gameplay.IsResolving())
-            {
-                gameplay.Mulligan(player, msg.cards);
             }
         }
 

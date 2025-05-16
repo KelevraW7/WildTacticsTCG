@@ -72,11 +72,6 @@ namespace TcgEngine.AI
 
             }
 
-            if (!is_selecting && game_data.IsPlayerMulliganTurn(player))
-            {
-                is_selecting = true;
-                TimeTool.StartCoroutine(AiSelectMulligan());
-            }
         }
 
         private IEnumerator AiTurn()
@@ -157,16 +152,6 @@ namespace TcgEngine.AI
             yield return new WaitForSeconds(0.5f);
 
             CancelSelect();
-            is_selecting = false;
-        }
-
-        private IEnumerator AiSelectMulligan()
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            SelectMulligan();
-
-            yield return new WaitForSeconds(0.5f);
             is_selecting = false;
         }
 
@@ -311,20 +296,6 @@ namespace TcgEngine.AI
             if (CanPlay())
             {
                 gameplay.CancelSelection();
-            }
-        }
-
-        public void SelectMulligan()
-        {
-            if (!CanPlay())
-                return;
-
-            Game game_data = gameplay.GetGameData();
-            if (game_data.phase == GamePhase.Mulligan)
-            {
-                Player player = game_data.GetPlayer(player_id);
-                string[] cards = new string[0]; //Don't mulligan
-                gameplay.Mulligan(player, cards);
             }
         }
 

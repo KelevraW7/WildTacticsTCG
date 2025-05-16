@@ -93,11 +93,6 @@ namespace TcgEngine
             return player != null && selector_player_id == player.player_id 
                 && state == GameState.Play && phase == GamePhase.Main && selector != SelectorType.None;
         }
-
-        public virtual bool IsPlayerMulliganTurn(Player player)
-        {
-            return phase == GamePhase.Mulligan && !player.ready;
-        }
         
         //Check if a card is allowed to be played on slot
         public virtual bool CanPlayCard(Card card, Slot slot, bool skip_cost = false)
@@ -592,7 +587,6 @@ namespace TcgEngine
     public enum GamePhase
     {
         None = 0,
-        Mulligan = 5,
         StartTurn = 10, //Start of turn resolution
         Main = 20,      //Main play phase
         EndTurn = 30,   //End of turn resolutions

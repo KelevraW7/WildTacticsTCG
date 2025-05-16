@@ -9,7 +9,7 @@ namespace TcgEngine.AI
     /// AI player base class, other AI inherit from this
     /// </summary>
 
-    public abstract class AIPlayer 
+    public abstract class AIPlayer
     {
         public int player_id;
         public int ai_level;
@@ -26,7 +26,7 @@ namespace TcgEngine.AI
         {
             Game game_data = gameplay.GetGameData();
             Player player = game_data.GetPlayer(player_id);
-            bool can_play = game_data.IsPlayerTurn(player) || game_data.IsPlayerMulliganTurn(player);
+            bool can_play = game_data.IsPlayerTurn(player);
             return can_play && !gameplay.IsResolving();
         }
 
