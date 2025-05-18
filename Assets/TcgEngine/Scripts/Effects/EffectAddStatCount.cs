@@ -29,13 +29,6 @@ namespace TcgEngine
                 target.hp_max += ability.value;
             }
 
-            if (type == EffectStatType.Mana)
-            {
-                target.mana += val;
-                target.mana_max += val;
-                target.mana = Mathf.Max(target.mana, 0);
-                target.mana_max = Mathf.Clamp(target.mana_max, 0, GameplayData.Get().mana_max);
-            }
         }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
@@ -45,8 +38,6 @@ namespace TcgEngine
                 target.attack += val;
             if (type == EffectStatType.HP)
                 target.hp += val;
-            if (type == EffectStatType.Mana)
-                target.mana += val;
         }
 
         public override void DoOngoingEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
@@ -56,8 +47,6 @@ namespace TcgEngine
                 target.attack_ongoing += val;
             if (type == EffectStatType.HP)
                 target.hp_ongoing += val;
-            if (type == EffectStatType.Mana)
-                target.mana_ongoing += val;
         }
 
         private int GetCount(Game data, Card caster)

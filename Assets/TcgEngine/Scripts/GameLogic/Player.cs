@@ -23,8 +23,6 @@ namespace TcgEngine
 
         public int hp;
         public int hp_max;
-        public int mana = 0;
-        public int mana_max = 0;
         public int kill_count = 0;
 
         public Dictionary<string, Card> cards_all = new Dictionary<string, Card>(); //Dictionnary for quick access to any card by UID
@@ -535,25 +533,6 @@ namespace TcgEngine
 
         //---- Action Check ---------
 
-        public virtual bool CanPayMana(Card card)
-        {
-            if (card.CardData.IsDynamicManaCost())
-                return true;
-            return mana >= card.GetMana();
-        }
-
-        public virtual void PayMana(Card card)
-        {
-            if (!card.CardData.IsDynamicManaCost())
-                mana -= card.GetMana();
-        }
-
-        public virtual bool CanPayAbility(Card card, AbilityData ability)
-        {
-            bool exhaust = !card.exhausted || !ability.exhaust;
-            return exhaust && mana >= ability.mana_cost;
-        }
-
         public virtual bool IsDead()
         {
             if (cards_hand.Count == 0 && cards_board.Count == 0 && cards_deck.Count == 0)
@@ -581,8 +560,6 @@ namespace TcgEngine
 
             dest.hp = source.hp;
             dest.hp_max = source.hp_max;
-            dest.mana = source.mana;
-            dest.mana_max = source.mana_max;
             dest.kill_count = source.kill_count;
 
             Card.CloneNull(source.hero, ref dest.hero);

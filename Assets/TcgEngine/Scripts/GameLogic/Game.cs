@@ -44,7 +44,7 @@ namespace TcgEngine
         public HashSet<string> cards_attacked = new HashSet<string>();
 
         public Game() { }
-        
+
         public Game(string uid, int nb_players)
         {
             this.game_uid = uid;
@@ -84,16 +84,16 @@ namespace TcgEngine
 
         public virtual bool IsPlayerActionTurn(Player player)
         {
-            return player != null && current_player == player.player_id 
+            return player != null && current_player == player.player_id
                 && state == GameState.Play && phase == GamePhase.Main && selector == SelectorType.None;
         }
 
         public virtual bool IsPlayerSelectorTurn(Player player)
         {
-            return player != null && selector_player_id == player.player_id 
+            return player != null && selector_player_id == player.player_id
                 && state == GameState.Play && phase == GamePhase.Main && selector != SelectorType.None;
         }
-        
+
         //Check if a card is allowed to be played on slot
         public virtual bool CanPlayCard(Card card, Slot slot, bool skip_cost = false)
         {
@@ -101,12 +101,8 @@ namespace TcgEngine
                 return false;
 
             Player player = GetPlayer(card.player_id);
-            if (!skip_cost && !player.CanPayMana(card))
-                return false; //Cant pay mana
             if (!player.HasCard(player.cards_hand, card))
                 return false; // Card not in hand
-            if (player.is_ai && card.CardData.IsDynamicManaCost() && player.mana == 0)
-                return false; // AI cant play X-cost card at 0 cost
 
             if (card.CardData.IsBoardCard())
             {
@@ -166,7 +162,7 @@ namespace TcgEngine
         //Check if a card is allowed to attack a player
         public virtual bool CanAttackTarget(Card attacker, Player target, bool skip_cost = false)
         {
-            if(attacker == null || target == null)
+            if (attacker == null || target == null)
                 return false;
 
             if (!attacker.CanAttack(skip_cost))
@@ -220,8 +216,6 @@ namespace TcgEngine
                 return false; //Not an activated ability
 
             Player player = GetPlayer(card.player_id);
-            if (!player.CanPayAbility(card, ability))
-                return false; //Cant pay for ability
 
             if (!ability.AreTriggerConditionsMet(this, card))
                 return false; //Conditions not met
@@ -236,8 +230,6 @@ namespace TcgEngine
                 return false; //This card cant cast
 
             Player player = GetPlayer(card.player_id);
-            if (!player.CanPayAbility(card, ability))
-                return false; //Cant pay for ability
 
             if (!ability.AreTriggerConditionsMet(this, card))
                 return false; //Conditions not met
@@ -249,8 +241,6 @@ namespace TcgEngine
         {
             if (card == null)
                 return false;
-            if (card.CardData.IsDynamicManaCost())
-                return true; //Cost not decided so condition could be false
 
             foreach (AbilityData ability in card.GetAbilities())
             {
@@ -450,7 +440,7 @@ namespace TcgEngine
             }
             return null;
         }
-        
+
         public virtual Player GetRandomPlayer(System.Random rand)
         {
             Player player = GetPlayer(rand.NextDouble() < 0.5 ? 1 : 0);
@@ -543,7 +533,7 @@ namespace TcgEngine
             if (dest.players == null)
             {
                 dest.players = new Player[source.players.Length];
-                for(int i=0; i< source.players.Length; i++)
+                for (int i = 0; i < source.players.Length; i++)
                     dest.players[i] = new Player(i);
             }
 

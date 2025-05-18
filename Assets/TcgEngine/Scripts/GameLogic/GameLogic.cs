@@ -105,11 +105,9 @@ namespace TcgEngine.Gameplay
                 //Puzzle level deck
                 DeckPuzzleData pdeck = DeckPuzzleData.Get(player.deck);
 
-                //Hp / mana
+                //Hp
                 player.hp_max = pdeck != null ? pdeck.start_hp : GameplayData.Get().hp_start;
                 player.hp = player.hp_max;
-                player.mana_max = pdeck != null ? pdeck.start_mana : GameplayData.Get().mana_start;
-                player.mana = player.mana_max;
 
                 //Draw starting cards
                 int dcards = pdeck != null ? pdeck.start_cards : GameplayData.Get().cards_start;
@@ -148,11 +146,6 @@ namespace TcgEngine.Gameplay
             {
                 DrawCard(player, GameplayData.Get().cards_per_turn);
             }
-
-            //Mana 
-            player.mana_max += GameplayData.Get().mana_per_turn;
-            player.mana_max = Mathf.Min(player.mana_max, GameplayData.Get().mana_max);
-            player.mana = player.mana_max;
 
             //Turn timer and history
             game_data.turn_timer = GameplayData.Get().turn_duration;
@@ -400,10 +393,6 @@ namespace TcgEngine.Gameplay
             {
                 Player player = game_data.GetPlayer(card.player_id);
 
-                //Cost
-                if (!skip_cost)
-                    player.PayMana(card);
-
                 //Play card
                 player.RemoveCardFromAllGroups(card);
 
@@ -440,16 +429,9 @@ namespace TcgEngine.Gameplay
                 UpdateOngoing();
 
                 //Trigger abilities
-                if (card.CardData.IsDynamicManaCost())
-                {
-                    GoToSelectorCost(card);
-                }
-                else
-                {
-                    TriggerSecrets(AbilityTrigger.OnPlayOther, card); //After playing card
-                    TriggerCardAbilityType(AbilityTrigger.OnPlay, card);
-                    TriggerOtherCardsAbilityType(AbilityTrigger.OnPlayOther, card);
-                }
+                TriggerSecrets(AbilityTrigger.OnPlayOther, card); //After playing card
+                TriggerCardAbilityType(AbilityTrigger.OnPlay, card);
+                TriggerOtherCardsAbilityType(AbilityTrigger.OnPlayOther, card);
 
                 RefreshData();
 
@@ -1233,12 +1215,6 @@ namespace TcgEngine.Gameplay
         {
             Player player = game_data.GetPlayer(caster.player_id);
 
-            //Pay cost
-            if (iability.trigger == AbilityTrigger.Activate || iability.trigger == AbilityTrigger.None)
-            {
-                player.mana -= iability.mana_cost;
-                caster.exhausted = caster.exhausted || iability.exhaust;
-            }
 
             //Recalculate and clear
             UpdateOngoing();
@@ -1505,8 +1481,6 @@ namespace TcgEngine.Gameplay
                 card.attack_ongoing += status.value;
             if (status.type == StatusType.AddHP)
                 card.hp_ongoing += status.value;
-            if (status.type == StatusType.AddManaCost)
-                card.mana_ongoing += status.value;
         }
 
         //---- Secrets ------------
@@ -1711,62 +1685,13 @@ namespace TcgEngine.Gameplay
             }
         }
 
-        public virtual void SelectCost(int select_cost)
-        {
-            if (game_data.selector == SelectorType.None)
-                return;
-
-            Player player = game_data.GetPlayer(game_data.selector_player_id);
-            Card caster = game_data.GetCard(game_data.selector_caster_uid);
-
-            if (player == null || caster == null || select_cost < 0)
-                return;
-
-            if (game_data.selector == SelectorType.SelectorCost)
-            {
-                if (select_cost >= 0 && select_cost < 10 && select_cost <= player.mana)
-                {
-                    game_data.selector = SelectorType.None;
-                    game_data.selected_value = select_cost;
-                    player.mana -= select_cost;
-                    RefreshData();
-
-                    TriggerSecrets(AbilityTrigger.OnPlayOther, caster);
-                    TriggerCardAbilityType(AbilityTrigger.OnPlay, caster);
-                    TriggerOtherCardsAbilityType(AbilityTrigger.OnPlayOther, caster);
-                    resolve_queue.ResolveAll();
-                }
-            }
-        }
-
         public virtual void CancelSelection()
         {
             if (game_data.selector != SelectorType.None)
             {
-                //Return card to hand if was selecting cost
-                if (game_data.selector == SelectorType.SelectorCost)
-                    CancelPlayCard();
-
                 //End selection
                 game_data.selector = SelectorType.None;
                 RefreshData();
-            }
-        }
-
-        public void CancelPlayCard()
-        {
-            Card card = game_data.GetCard(game_data.selector_caster_uid);
-            if (card != null)
-            {
-                Player player = game_data.GetPlayer(card.player_id);
-                if (card.CardData.IsDynamicManaCost())
-                    player.mana += game_data.selected_value;
-                else
-                    player.mana += card.CardData.cost;
-
-                player.RemoveCardFromAllGroups(card);
-                player.AddCard(player.cards_hand, card);
-                card.Clear();
             }
         }
 

@@ -125,11 +125,6 @@ namespace TcgEngine.AI
                 SelectChoice(action.value);
             }
 
-            if (action.type == GameAction.SelectCost)
-            {
-                SelectCost(action.value);
-            }
-
             if (action.type == GameAction.CancelSelect)
             {
                 CancelSelect();
@@ -230,11 +225,6 @@ namespace TcgEngine.AI
         private void SelectChoice(int choice)
         {
             gameplay.SelectChoice(choice);
-        }
-
-        private void SelectCost(int cost)
-        {
-            gameplay.SelectCost(cost);
         }
 
         private void CancelSelect()

@@ -9,11 +9,10 @@ namespace TcgEngine
         None = 0,
         Attack = 10,
         HP = 20,
-        Mana = 30,
     }
 
     /// <summary>
-    /// Compares basic card or player stats such as attack/hp/mana
+    /// Compares basic card or player stats such as attack/hp
     /// </summary>
 
     [CreateAssetMenu(fileName = "condition", menuName = "TcgEngine/Condition/Stat", order = 10)]
@@ -36,11 +35,6 @@ namespace TcgEngine
                 return CompareInt(target.GetHP(), oper, value);
             }
 
-            if (type == ConditionStatType.Mana)
-            {
-                return CompareInt(target.GetMana(), oper, value);
-            }
-
             return false;
         }
 
@@ -49,11 +43,6 @@ namespace TcgEngine
             if (type == ConditionStatType.HP)
             {
                 return CompareInt(target.hp, oper, value);
-            }
-
-            if (type == ConditionStatType.Mana)
-            {
-                return CompareInt(target.mana, oper, value);
             }
 
             return false;

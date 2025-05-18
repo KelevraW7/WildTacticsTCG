@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TcgEngine
 {
     /// <summary>
-    /// Compares basic player stats such as attack/hp/mana
+    /// Compares basic player stats such as attack/hp
     /// </summary>
 
     [CreateAssetMenu(fileName = "condition", menuName = "TcgEngine/Condition/PlayerStat", order = 10)]
@@ -29,10 +29,6 @@ namespace TcgEngine
                 return CompareInt(target.hp, oper, value);
             }
 
-            if (type == ConditionStatType.Mana)
-            {
-                return CompareInt(target.mana, oper, value);
-            }
 
             return false;
         }

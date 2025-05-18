@@ -65,7 +65,6 @@ namespace TcgEngine.Server
             RegisterAction(GameAction.SelectPlayer, ReceiveSelectPlayer);
             RegisterAction(GameAction.SelectSlot, ReceiveSelectSlot);
             RegisterAction(GameAction.SelectChoice, ReceiveSelectChoice);
-            RegisterAction(GameAction.SelectCost, ReceiveSelectCost);
             RegisterAction(GameAction.CancelSelect, ReceiveCancelSelection);
             RegisterAction(GameAction.EndTurn, ReceiveEndTurn);
             RegisterAction(GameAction.Resign, ReceiveResign);
@@ -401,16 +400,6 @@ namespace TcgEngine.Server
             if (player != null && msg != null && game_data.IsPlayerSelectorTurn(player) && !gameplay.IsResolving())
             {
                 gameplay.SelectChoice(msg.value);
-            }
-        }
-
-        public void ReceiveSelectCost(ClientData iclient, SerializedData sdata)
-        {
-            MsgInt msg = sdata.Get<MsgInt>();
-            Player player = GetPlayer(iclient);
-            if (player != null && msg != null && game_data.IsPlayerSelectorTurn(player) && !gameplay.IsResolving())
-            {
-                gameplay.SelectCost(msg.value);
             }
         }
 

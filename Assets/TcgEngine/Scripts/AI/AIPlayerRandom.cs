@@ -62,12 +62,6 @@ namespace TcgEngine.AI
                         TimeTool.StartCoroutine(AiSelectChoice());
                     }
 
-                    if (game_data.selector == SelectorType.SelectorCost)
-                    {
-                        //AI select target
-                        is_selecting = true;
-                        TimeTool.StartCoroutine(AiSelectCost());
-                    }
                 }
 
             }
@@ -143,17 +137,6 @@ namespace TcgEngine.AI
             is_selecting = false;
         }
 
-        private IEnumerator AiSelectCost()
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            SelectCost();
-
-            yield return new WaitForSeconds(0.5f);
-
-            CancelSelect();
-            is_selecting = false;
-        }
 
         //----------
 
@@ -268,25 +251,6 @@ namespace TcgEngine.AI
                 {
                     int choice = rand.Next(0, ability.chain_abilities.Length);
                     gameplay.SelectChoice(choice);
-                }
-            }
-        }
-
-        public void SelectCost()
-        {
-            if (!CanPlay())
-                return;
-
-            Game game_data = gameplay.GetGameData();
-            if (game_data.selector != SelectorType.None)
-            {
-                Player player = game_data.GetPlayer(player_id);
-                Card card = game_data.GetCard(game_data.selector_caster_uid);
-                if (player != null && card != null)
-                {
-                    int max = Mathf.Clamp(player.mana, 0, 9);
-                    int choice = rand.Next(0, max + 1);
-                    gameplay.SelectCost(choice);
                 }
             }
         }

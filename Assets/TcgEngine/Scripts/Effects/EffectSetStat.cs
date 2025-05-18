@@ -6,7 +6,7 @@ using TcgEngine.Gameplay;
 namespace TcgEngine
 {
     /// <summary>
-    /// Effect that sets basic stats (hp/attack/mana) to a specific value
+    /// Effect that sets basic stats (hp/attack) to a specific value
     /// </summary>
 
     [CreateAssetMenu(fileName = "effect", menuName = "TcgEngine/Effect/SetStat", order = 10)]
@@ -21,19 +21,12 @@ namespace TcgEngine
                 target.hp = ability.value;
             }
 
-            if (type == EffectStatType.Mana)
-            {
-                target.mana = ability.value;
-                target.mana = Mathf.Max(target.mana, 0);
-            }
         }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             if (type == EffectStatType.Attack)
                 target.attack = ability.value;
-            if (type == EffectStatType.Mana)
-                target.mana = ability.value;
             if (type == EffectStatType.HP)
             {
                 target.hp = ability.value;
@@ -47,8 +40,6 @@ namespace TcgEngine
                 target.attack = ability.value;
             if (type == EffectStatType.HP)
                 target.hp = ability.value;
-            if (type == EffectStatType.Mana)
-                target.mana = ability.value;
         }
 
     }

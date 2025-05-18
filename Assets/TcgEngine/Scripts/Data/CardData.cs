@@ -32,7 +32,6 @@ namespace TcgEngine
         public CardType type;
         public TeamData team;
         public RarityData rarity;
-        public int mana;
         public int attack;
         public int hp;
 
@@ -64,7 +63,6 @@ namespace TcgEngine
 
         [Header("Availability")]
         public bool deckbuilding = false;
-        public int cost = 100;
         public PackData[] packs;
 
         public static List<CardData> card_list = new List<CardData>();                              //Faster access in loops
@@ -164,10 +162,6 @@ namespace TcgEngine
             return type == CardType.Equipment;
         }
 
-        public bool IsDynamicManaCost()
-        {
-            return mana > 99;
-        }
 
         public bool HasTrait(string trait)
         {

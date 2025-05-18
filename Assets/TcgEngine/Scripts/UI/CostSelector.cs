@@ -47,7 +47,6 @@ namespace TcgEngine.UI
 
             Game game = GameClient.Get().GetGameData();
             Player player = game.GetPlayer(caster.player_id);
-            selector.SetMax(player.mana);
             selector.SetValue(0);
         }
 
