@@ -64,8 +64,6 @@ namespace TcgEngine.UI
                 value.text = quantity.ToString();
             if (value != null)
                 value.enabled = quantity > 1;
-            if (cost != null)
-                cost.value = card.mana;
             if (this.value != null)
                 this.value.color = invalid ? Color.red : Color.white;
             if(invalid)

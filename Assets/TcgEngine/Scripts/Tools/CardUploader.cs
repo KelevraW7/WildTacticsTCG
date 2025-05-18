@@ -237,7 +237,6 @@ namespace TcgEngine
             req.type = card.GetTypeId();
             req.team = card.team.id;
             req.rarity = card.rarity.id;
-            req.mana = card.mana;
             req.attack = card.attack;
             req.hp = card.hp;
             req.cost = card.cost;
@@ -265,7 +264,6 @@ namespace TcgEngine
                 rcard.type = card.GetTypeId();
                 rcard.team = card.team.id;
                 rcard.rarity = card.rarity.id;
-                rcard.mana = card.mana;
                 rcard.attack = card.attack;
                 rcard.hp = card.hp;
                 rcard.cost = card.cost;
@@ -440,7 +438,6 @@ namespace TcgEngine
         public string type;
         public string team;
         public string rarity;
-        public int mana;
         public int attack;
         public int hp;
         public int cost;

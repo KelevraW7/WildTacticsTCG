@@ -105,53 +105,47 @@ namespace TcgEngine.AI
         //This calculates the score of an individual action, instead of the board state
         //When too many actions are possible in a single node, only the ones with best action score will be evaluated
         //Make sure to return a positive value
-        public int CalculateActionScore(Game data, AIAction order)
-        {
-            if (order.type == GameAction.EndTurn)
-                return 0; //Other orders are better
+public int CalculateActionScore(Game data, AIAction order)
+{
+    if (order.type == GameAction.EndTurn)
+        return 0; //Other orders are better
 
-            if (order.type == GameAction.CancelSelect)
-                return 0; //Other orders are better
+    if (order.type == GameAction.CancelSelect)
+        return 0; //Other orders are better
 
-            if (order.type == GameAction.CastAbility)
-            {
-                return 200;
-            }
+    if (order.type == GameAction.CastAbility)
+    {
+        return 200;
+    }
 
-            if (order.type == GameAction.Attack)
-            {
-                Card card = data.GetCard(order.card_uid);
-                Card target = data.GetCard(order.target_uid);
-                int ascore = card.GetAttack() >= target.GetHP() ? 300 : 100; //Are you killing the card?
-                int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0; //Are you getting killed?
-                return ascore + oscore + target.GetAttack() * 5;            //Always better to get rid of high-attack cards
-            }
-            if (order.type == GameAction.AttackPlayer)
-            {
-                Card card = data.GetCard(order.card_uid);
-                Player player = data.GetPlayer(order.target_player_id);
-                int ascore = card.GetAttack() >= player.hp ? 500 : 200;     //Are you killing the player?
-                return ascore + (card.GetAttack() * 10) - player.hp;        //Always better to inflict more damage
-            }
-            if (order.type == GameAction.PlayCard)
-            {
-                Player player = data.GetPlayer(ai_player_id);
-                Card card = data.GetCard(order.card_uid);
-                if (card.CardData.IsBoardCard())
-                    return 200 + (card.GetMana() * 5) - (30 * player.cards_board.Count); //High cost cards are better to play, better to play when not a lot of cards in play
-                else if (card.CardData.IsEquipment())
-                    return 200 + (card.GetMana() * 5) - (30 * player.cards_equip.Count);
-                else
-                    return 200 + (card.GetMana() * 5);
-            }
+    if (order.type == GameAction.Attack)
+    {
+        Card card = data.GetCard(order.card_uid);
+        Card target = data.GetCard(order.target_uid);
+        int ascore = card.GetAttack() >= target.GetHP() ? 300 : 100; //Are you killing the card?
+        int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0; //Are you getting killed?
+        return ascore + oscore + target.GetAttack() * 5; //Always better to get rid of high-attack cards
+    }
 
-            if (order.type == GameAction.Move)
-            {
-                return 100;
-            }
+    if (order.type == GameAction.PlayCard)
+    {
+        Player player = data.GetPlayer(ai_player_id);
+        Card card = data.GetCard(order.card_uid);
+        if (card.CardData.IsBoardCard())
+            return 200 - (30 * player.cards_board.Count);
+        else if (card.CardData.IsEquipment())
+            return 200 - (30 * player.cards_equip.Count);
+        else
+            return 200;
+    }
 
-            return 100; //Other actions are better than End/Cancel
-        }
+    if (order.type == GameAction.Move)
+    {
+        return 100;
+    }
+
+    return 100; //Other actions are better than End/Cancel
+}
 
         //Within the same turn, actions can only be executed in sorting order, make sure it returns positive value higher than 0 or it wont be sorted
         //This prevents calculating all possibilities of A->B->C  B->C->A   C->A->B  etc..

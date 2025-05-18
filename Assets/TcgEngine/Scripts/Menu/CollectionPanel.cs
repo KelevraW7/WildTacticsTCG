@@ -106,8 +106,6 @@ namespace TcgEngine.UI
                     string color = ColorUtility.ToHtmlStringRGBA(icard.team.color);
                     hover.text = "<b><color=#" + color + ">Hero Power: </color>";
                     hover.text += icard.title + "</b>\n " + iability.GetDesc(icard);
-                    if (iability.mana_cost > 0)
-                        hover.text += " <size=16>Mana: " + iability.mana_cost + "</size>";
                 }
             }
         }
@@ -216,7 +214,7 @@ namespace TcgEngine.UI
             deck_list_panel.Hide();
             card_list_panel.Show();
         }
-        
+
         public void RefreshCards()
         {
             if (!spawned)
@@ -251,8 +249,6 @@ namespace TcgEngine.UI
                 all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.attack == a.card.attack ? b.card.hp.CompareTo(a.card.hp) : b.card.attack.CompareTo(a.card.attack); });
             if (filter_dropdown == 2) //hp
                 all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.hp == a.card.hp ? b.card.attack.CompareTo(a.card.attack) : b.card.hp.CompareTo(a.card.hp); });
-            if (filter_dropdown == 3) //Cost
-                all_cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.mana == a.card.mana ? a.card.title.CompareTo(b.card.title) : a.card.mana.CompareTo(b.card.mana); });
 
             foreach (CardDataQ card in all_cards)
             {
@@ -385,7 +381,7 @@ namespace TcgEngine.UI
                     if (deck.hero != null && btn.value == deck.hero.tid)
                         btn.Activate();
                 }
-                
+
                 for (int i = 0; i < deck.cards.Length; i++)
                 {
                     CardData card = CardData.Get(deck.cards[i].tid);
@@ -501,7 +497,7 @@ namespace TcgEngine.UI
                 {
                     ucard.quantity--;
 
-                    if(ucard.quantity <= 0)
+                    if (ucard.quantity <= 0)
                         deck_cards.RemoveAt(i);
                 }
             }
@@ -709,7 +705,7 @@ namespace TcgEngine.UI
                 DeleteDeck(deck.tid);
             }
         }
-        
+
         // ---- Getters -----
 
         public int CountDeckCards(CardData card, VariantData cvariant)

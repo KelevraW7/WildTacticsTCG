@@ -50,10 +50,6 @@ namespace TcgEngine.UI
 
             SetCard(card.CardData, card.VariantData);
 
-            if (cost != null)
-                cost.text = card.GetMana().ToString();
-            if (cost != null && card.CardData.IsDynamicManaCost())
-                cost.text = "X";
             if (attack != null)
                 attack.text = card.GetAttack().ToString();
             if (hp != null)
@@ -93,10 +89,6 @@ namespace TcgEngine.UI
             if (cost != null)
                 cost.enabled = card.type != CardType.Hero;
 
-            if (cost != null)
-                cost.text = card.mana.ToString();
-            if (cost != null && card.IsDynamicManaCost())
-                cost.text = "X";
             if (attack != null)
                 attack.text = card.attack.ToString();
             if (hp != null)

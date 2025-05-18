@@ -63,6 +63,7 @@ namespace TcgEngine
 
         [Header("Availability")]
         public bool deckbuilding = false;
+        public int cost = 100;
         public PackData[] packs;
 
         public static List<CardData> card_list = new List<CardData>();                              //Faster access in loops

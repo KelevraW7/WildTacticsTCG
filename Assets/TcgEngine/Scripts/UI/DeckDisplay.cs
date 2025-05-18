@@ -141,8 +141,6 @@ namespace TcgEngine.UI
 
         public void ShowCards(List<CardDataQ> cards)
         {
-            cards.Sort((CardDataQ a, CardDataQ b) => { return b.card.mana.CompareTo(a.card.mana); });
-
             int index = 0;
             foreach (CardDataQ icard in cards)
             {
