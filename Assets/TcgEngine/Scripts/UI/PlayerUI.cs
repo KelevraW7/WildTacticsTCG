@@ -17,7 +17,6 @@ namespace TcgEngine.UI
         public bool is_opponent;
         public Text pname;
         public AvatarUI avatar;
-        public IconBar mana_bar;
         public Text hp_txt;
         public Text hp_max_txt;
 
@@ -68,8 +67,6 @@ namespace TcgEngine.UI
             if (player != null)
             {
                 pname.text = player.username;
-                mana_bar.value = player.mana;
-                mana_bar.max_value = player.mana_max;
                 hp_txt.text = prev_hp.ToString();
                 hp_max_txt.text = "/" + player.hp_max.ToString();
 
