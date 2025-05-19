@@ -145,9 +145,6 @@ namespace TcgEngine.Gameplay
             //Player poison
             if (player.HasStatus(StatusType.Poisoned))
 
-                if (player.hero != null)
-                    player.hero.Refresh();
-
             //Refresh Cards and Status Effects
             for (int i = player.cards_board.Count - 1; i >= 0; i--)
             {
@@ -305,13 +302,8 @@ namespace TcgEngine.Gameplay
             player.cards_all.Clear();
             player.cards_deck.Clear();
             player.deck = deck.id;
-            player.hero = null;
 
             VariantData variant = VariantData.GetDefault();
-            if (deck.hero != null)
-            {
-                player.hero = Card.Create(deck.hero, variant, player);
-            }
 
             foreach (CardData card in deck.cards)
             {
@@ -346,15 +338,7 @@ namespace TcgEngine.Gameplay
             player.cards_all.Clear();
             player.cards_deck.Clear();
             player.deck = deck.tid;
-            player.hero = null;
 
-            if (deck.hero != null)
-            {
-                CardData hdata = CardData.Get(deck.hero.tid);
-                VariantData hvariant = VariantData.Get(deck.hero.variant);
-                if (hdata != null && hvariant != null)
-                    player.hero = Card.Create(hdata, hvariant, player);
-            }
 
             foreach (UserCardData card in deck.cards)
             {
@@ -886,8 +870,6 @@ namespace TcgEngine.Gameplay
         {
             foreach (Player oplayer in game_data.players)
             {
-                if (oplayer.hero != null)
-                    TriggerCardAbilityType(type, oplayer.hero, triggerer);
 
                 foreach (Card card in oplayer.cards_board)
                     TriggerCardAbilityType(type, card, triggerer);
@@ -896,8 +878,6 @@ namespace TcgEngine.Gameplay
 
         public virtual void TriggerPlayerCardsAbilityType(Player player, AbilityTrigger type)
         {
-            if (player.hero != null)
-                TriggerCardAbilityType(type, player.hero, player.hero);
 
             foreach (Card card in player.cards_board)
                 TriggerCardAbilityType(type, card, card);
@@ -1122,7 +1102,6 @@ namespace TcgEngine.Gameplay
             for (int p = 0; p < game_data.players.Length; p++)
             {
                 Player player = game_data.players[p];
-                UpdateOngoingAbilities(player, player.hero);  //Remove this line if hero is on the board
 
                 for (int c = 0; c < player.cards_board.Count; c++)
                 {

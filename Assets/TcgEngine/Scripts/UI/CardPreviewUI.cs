@@ -46,7 +46,6 @@ namespace TcgEngine.UI
             PlayerControls controls = PlayerControls.Get();
             HandCard hcard = HandCard.GetFocus();
             BoardCard bcard = BoardCard.GetFocus();
-            HeroUI hero_ui = HeroUI.GetFocus();
             Card histcard = TurnHistoryLine.GetHoverCard();
             Card secret_card = SecretIconUI.GetHoverCard();
 
@@ -59,8 +58,6 @@ namespace TcgEngine.UI
                 pcard = histcard;
             if (pcard == null)
                 pcard = secret_card;
-            if (pcard == null)
-                pcard = hero_ui?.GetCard();
 
             bool hover_only = !Input.GetMouseButton(0) && !HandCardArea.Get().IsDragging();
             bool should_show_preview = hover_only && pcard != null && !GameUI.IsUIOpened();
