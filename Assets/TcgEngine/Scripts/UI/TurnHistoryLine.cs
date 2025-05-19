@@ -75,12 +75,6 @@ namespace TcgEngine.UI
                 SetLine(icard, variant, text);
             }
 
-            if (history.type == GameAction.AttackPlayer && ptarget != null)
-            {
-                string text = icard.title + " attacked " + ptarget.username;
-                SetLine(icard, variant, text);
-            }
-
             if (history.type == GameAction.CastAbility && iability != null)
             {
                 if (iability.target == AbilityTarget.SelectTarget && itarget != null)

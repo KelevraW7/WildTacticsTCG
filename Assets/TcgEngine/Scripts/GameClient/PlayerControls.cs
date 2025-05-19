@@ -89,16 +89,6 @@ namespace TcgEngine.Client
 
                     GameClient.Get().CastAbility(card, ability.GetAbility());
                 }
-                else if (tslot is BoardSlotPlayer)
-                {
-                    if (!Tutorial.Get().CanDo(TutoEndTrigger.AttackPlayer, card))
-                        return;
-
-                    if (card.exhausted)
-                        WarningText.ShowExhausted();
-                    else
-                        GameClient.Get().AttackPlayer(card, tslot.GetPlayer());
-                }
                 else if (target != null && target.uid != card.uid && target.player_id != card.player_id)
                 {
                     if (!Tutorial.Get().CanDo(TutoEndTrigger.Attack, card) && !Tutorial.Get().CanDo(TutoEndTrigger.Attack, target))

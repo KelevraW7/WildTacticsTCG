@@ -30,19 +30,14 @@ namespace TcgEngine.Gameplay
 
         public UnityAction<AbilityData, Card> onAbilityStart;
         public UnityAction<AbilityData, Card, Card> onAbilityTargetCard;  //Ability, Caster, Target
-        public UnityAction<AbilityData, Card, Player> onAbilityTargetPlayer;
         public UnityAction<AbilityData, Card, Slot> onAbilityTargetSlot;
         public UnityAction<AbilityData, Card> onAbilityEnd;
 
         public UnityAction<Card, Card> onAttackStart;  //Attacker, Defender
         public UnityAction<Card, Card> onAttackEnd;     //Attacker, Defender
-        public UnityAction<Card, Player> onAttackPlayerStart;
-        public UnityAction<Card, Player> onAttackPlayerEnd;
 
         public UnityAction<Card, int> onCardDamaged;
         public UnityAction<Card, int> onCardHealed;
-        public UnityAction<Player, int> onPlayerDamaged;
-        public UnityAction<Player, int> onPlayerHealed;
 
         public UnityAction<Card, Card> onSecretTrigger;    //Secret, Triggerer
         public UnityAction<Card, Card> onSecretResolve;    //Secret, Triggerer
@@ -105,10 +100,6 @@ namespace TcgEngine.Gameplay
                 //Puzzle level deck
                 DeckPuzzleData pdeck = DeckPuzzleData.Get(player.deck);
 
-                //Hp
-                player.hp_max = pdeck != null ? pdeck.start_hp : GameplayData.Get().hp_start;
-                player.hp = player.hp_max;
-
                 //Draw starting cards
                 int dcards = pdeck != null ? pdeck.start_cards : GameplayData.Get().cards_start;
                 DrawCard(player, dcards);
@@ -153,10 +144,9 @@ namespace TcgEngine.Gameplay
 
             //Player poison
             if (player.HasStatus(StatusType.Poisoned))
-                player.hp -= player.GetStatusValue(StatusType.Poisoned);
 
-            if (player.hero != null)
-                player.hero.Refresh();
+                if (player.hero != null)
+                    player.hero.Refresh();
 
             //Refresh Cards and Status Effects
             for (int i = player.cards_board.Count - 1; i >= 0; i--)
@@ -273,7 +263,6 @@ namespace TcgEngine.Gameplay
             Player alive = null;
             foreach (Player player in game_data.players)
             {
-                if (!player.IsDead())
                 {
                     alive = player;
                     count_alive++;
@@ -553,64 +542,6 @@ namespace TcgEngine.Gameplay
             resolve_queue.ResolveAll(0.2f);
         }
 
-        public virtual void AttackPlayer(Card attacker, Player target, bool skip_cost = false)
-        {
-            if (attacker == null || target == null)
-                return;
-
-            if (!game_data.CanAttackTarget(attacker, target, skip_cost))
-                return;
-
-            Player player = game_data.GetPlayer(attacker.player_id);
-            if (!is_ai_predict)
-                player.AddHistory(GameAction.AttackPlayer, attacker, target);
-
-            //Resolve abilities
-            TriggerSecrets(AbilityTrigger.OnBeforeAttack, attacker);
-            TriggerCardAbilityType(AbilityTrigger.OnBeforeAttack, attacker, target);
-
-            //Resolve attack
-            resolve_queue.AddAttack(attacker, target, ResolveAttackPlayer, skip_cost);
-            resolve_queue.ResolveAll();
-        }
-
-        protected virtual void ResolveAttackPlayer(Card attacker, Player target, bool skip_cost)
-        {
-            if (!game_data.IsOnBoard(attacker))
-                return;
-
-            onAttackPlayerStart?.Invoke(attacker, target);
-
-            attacker.RemoveStatus(StatusType.Stealth);
-            UpdateOngoing();
-
-            resolve_queue.AddAttack(attacker, target, ResolveAttackPlayerHit, skip_cost);
-            resolve_queue.ResolveAll(0.3f);
-        }
-
-        protected virtual void ResolveAttackPlayerHit(Card attacker, Player target, bool skip_cost)
-        {
-            DamagePlayer(attacker, target, attacker.GetAttack());
-
-            //Save attack and exhaust
-            if (!skip_cost)
-                ExhaustBattle(attacker);
-
-            //Recalculate bonus
-            UpdateOngoing();
-
-            if (game_data.IsOnBoard(attacker))
-                TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
-
-            TriggerSecrets(AbilityTrigger.OnAfterAttack, attacker);
-
-            onAttackPlayerEnd?.Invoke(attacker, target);
-            RefreshData();
-            CheckForWinner();
-
-            resolve_queue.ResolveAll(0.2f);
-        }
-
         //Exhaust after battle
         public virtual void ExhaustBattle(Card attacker)
         {
@@ -643,7 +574,6 @@ namespace TcgEngine.Gameplay
                 {
                     att.ptarget = new_target;
                     att.target = null;
-                    att.pcallback = ResolveAttackPlayer;
                     att.callback = null;
                 }
             }
@@ -783,21 +713,6 @@ namespace TcgEngine.Gameplay
             }
         }
 
-        //Damage a player
-        public virtual void DamagePlayer(Card attacker, Player target, int value)
-        {
-            //Damage player
-            target.hp -= value;
-            target.hp = Mathf.Clamp(target.hp, 0, target.hp_max);
-
-            //Lifesteal
-            Player aplayer = game_data.GetPlayer(attacker.player_id);
-            if (attacker.HasStatus(StatusType.LifeSteal))
-                aplayer.hp += value;
-
-            onPlayerDamaged?.Invoke(target, value);
-        }
-
         //Heal a card
         public virtual void HealCard(Card target, int value)
         {
@@ -811,17 +726,6 @@ namespace TcgEngine.Gameplay
             target.damage = Mathf.Max(target.damage, 0);
 
             onCardHealed?.Invoke(target, value);
-        }
-
-        public virtual void HealPlayer(Player target, int value)
-        {
-            if (target == null)
-                return;
-
-            target.hp += value;
-            target.hp = Mathf.Clamp(target.hp, 0, target.hp_max);
-
-            onPlayerHealed?.Invoke(target, value);
         }
 
         //Generic damage that doesnt come from another card
@@ -872,16 +776,6 @@ namespace TcgEngine.Gameplay
             int damage_max = Mathf.Min(value, target.GetHP());
             int extra = value - target.GetHP();
             target.damage += value;
-
-            //Trample
-            Player tplayer = game_data.GetPlayer(target.player_id);
-            if (!spell_damage && extra > 0 && attacker.player_id == game_data.current_player && attacker.HasStatus(StatusType.Trample))
-                tplayer.hp -= extra;
-
-            //Lifesteal
-            Player player = game_data.GetPlayer(attacker.player_id);
-            if (!spell_damage && attacker.HasStatus(StatusType.LifeSteal))
-                player.hp += damage_max;
 
             //Remove sleep on damage
             target.RemoveStatus(StatusType.Sleep);
@@ -988,21 +882,6 @@ namespace TcgEngine.Gameplay
                 TriggerCardAbilityType(type, equipped, triggerer);
         }
 
-        public virtual void TriggerCardAbilityType(AbilityTrigger type, Card caster, Player triggerer)
-        {
-            foreach (AbilityData iability in caster.GetAbilities())
-            {
-                if (iability && iability.trigger == type)
-                {
-                    TriggerCardAbility(iability, caster, triggerer);
-                }
-            }
-
-            Card equipped = game_data.GetEquipCard(caster.equipped_uid);
-            if (equipped != null)
-                TriggerCardAbilityType(type, equipped, triggerer);
-        }
-
         public virtual void TriggerOtherCardsAbilityType(AbilityTrigger type, Card triggerer)
         {
             foreach (Player oplayer in game_data.players)
@@ -1074,7 +953,6 @@ namespace TcgEngine.Gameplay
                 return; //Wait for player to select
 
             ResolveCardAbilityPlayTarget(iability, caster);
-            ResolveCardAbilityPlayers(iability, caster);
             ResolveCardAbilityCards(iability, caster);
             ResolveCardAbilitySlots(iability, caster);
             ResolveCardAbilityCardData(iability, caster);
@@ -1109,13 +987,8 @@ namespace TcgEngine.Gameplay
             {
                 Slot slot = caster.slot;
                 Card slot_card = game_data.GetSlotCard(slot);
-                if (slot.IsPlayerSlot())
-                {
-                    Player tplayer = game_data.GetPlayer(slot.p);
-                    if (iability.CanTarget(game_data, caster, tplayer))
-                        ResolveEffectTarget(iability, caster, tplayer);
-                }
-                else if (slot_card != null)
+
+                if (slot_card != null)
                 {
                     if (iability.CanTarget(game_data, caster, slot_card))
                     {
@@ -1128,18 +1001,6 @@ namespace TcgEngine.Gameplay
                     if (iability.CanTarget(game_data, caster, slot))
                         ResolveEffectTarget(iability, caster, slot);
                 }
-            }
-        }
-
-        protected virtual void ResolveCardAbilityPlayers(AbilityData iability, Card caster)
-        {
-            //Get Player Targets based on conditions
-            List<Player> targets = iability.GetPlayerTargets(game_data, caster, player_array);
-
-            //Resolve effects
-            foreach (Player target in targets)
-            {
-                ResolveEffectTarget(iability, caster, target);
             }
         }
 
@@ -1183,13 +1044,6 @@ namespace TcgEngine.Gameplay
         {
             if (iability.target == AbilityTarget.None)
                 iability.DoEffects(this, caster);
-        }
-
-        protected virtual void ResolveEffectTarget(AbilityData iability, Card caster, Player target)
-        {
-            iability.DoEffects(this, caster, target);
-
-            onAbilityTargetPlayer?.Invoke(iability, caster, target);
         }
 
         protected virtual void ResolveEffectTarget(AbilityData iability, Card caster, Card target)
@@ -1598,33 +1452,6 @@ namespace TcgEngine.Gameplay
 
                 game_data.selector = SelectorType.None;
                 game_data.last_target = target.uid;
-                ResolveEffectTarget(ability, caster, target);
-                AfterAbilityResolved(ability, caster);
-                resolve_queue.ResolveAll();
-            }
-        }
-
-        public virtual void SelectPlayer(Player target)
-        {
-            if (game_data.selector == SelectorType.None)
-                return;
-
-            Card caster = game_data.GetCard(game_data.selector_caster_uid);
-            AbilityData ability = AbilityData.Get(game_data.selector_ability_id);
-
-            if (caster == null || target == null || ability == null)
-                return;
-
-            if (game_data.selector == SelectorType.SelectTarget)
-            {
-                if (!ability.CanTarget(game_data, caster, target))
-                    return; //Can't target that target
-
-                Player player = game_data.GetPlayer(caster.player_id);
-                if (!is_ai_predict)
-                    player.AddHistory(GameAction.CastAbility, caster, ability, target);
-
-                game_data.selector = SelectorType.None;
                 ResolveEffectTarget(ability, caster, target);
                 AfterAbilityResolved(ability, caster);
                 resolve_queue.ResolveAll();

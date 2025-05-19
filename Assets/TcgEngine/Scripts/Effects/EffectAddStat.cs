@@ -16,11 +16,6 @@ namespace TcgEngine
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Player target)
         {
-            if (type == EffectStatType.HP)
-            {
-                target.hp += ability.value;
-                target.hp_max += ability.value;
-            }
 
         }
 
@@ -28,16 +23,12 @@ namespace TcgEngine
         {
             if (type == EffectStatType.Attack)
                 target.attack += ability.value;
-            if (type == EffectStatType.HP)
-                target.hp += ability.value;
         }
 
         public override void DoOngoingEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             if (type == EffectStatType.Attack)
                 target.attack_ongoing += ability.value;
-            if (type == EffectStatType.HP)
-                target.hp_ongoing += ability.value;
         }
 
     }
@@ -46,6 +37,5 @@ namespace TcgEngine
     {
         None = 0,
         Attack = 10,
-        HP = 20,
     }
 }

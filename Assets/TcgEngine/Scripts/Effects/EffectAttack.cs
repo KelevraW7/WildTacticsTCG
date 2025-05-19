@@ -14,14 +14,6 @@ namespace TcgEngine
     {
         public EffectAttackerType attacker_type;
 
-        public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Player target)
-        {
-            Card attacker = GetAttacker(logic.GetGameData(), caster);
-            if (attacker != null)
-            {
-                logic.AttackPlayer(attacker, target, true);
-            }
-        }
 
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {

@@ -36,7 +36,6 @@ namespace TcgEngine.FX
             client.onCardPlayed += OnPlayed;
             client.onCardDamaged += OnCardDamaged;
             client.onAttackStart += OnAttack;
-            client.onAttackPlayerStart += OnAttackPlayer;
             client.onAbilityStart += OnAbilityStart;
             client.onAbilityTargetCard += OnAbilityEffect;
             client.onAbilityEnd += OnAbilityAfter;
@@ -51,7 +50,6 @@ namespace TcgEngine.FX
             client.onCardPlayed -= OnPlayed;
             client.onCardDamaged -= OnCardDamaged;
             client.onAttackStart -= OnAttack;
-            client.onAttackPlayerStart -= OnAttackPlayer;
             client.onAbilityStart -= OnAbilityStart;
             client.onAbilityTargetCard -= OnAbilityEffect;
             client.onAbilityEnd -= OnAbilityAfter;

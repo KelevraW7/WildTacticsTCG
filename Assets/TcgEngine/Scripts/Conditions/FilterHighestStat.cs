@@ -39,11 +39,8 @@ namespace TcgEngine
             {
                 return card.GetAttack();
             }
-            if (stat == ConditionStatType.HP)
-            {
-                return card.GetHP();
-            }
             return 0;
         }
+
     }
 }

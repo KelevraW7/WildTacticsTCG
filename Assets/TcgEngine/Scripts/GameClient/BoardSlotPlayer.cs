@@ -40,9 +40,7 @@ namespace TcgEngine.Client
 
         private void Start()
         {
-            GameClient.Get().onPlayerDamaged += OnPlayerDamaged;
             GameClient.Get().onAbilityStart += OnAbilityStart;
-            GameClient.Get().onAbilityTargetPlayer += OnAbilityEffect;
 
         }
 
@@ -159,12 +157,6 @@ namespace TcgEngine.Client
             if (GameUI.IsUIOpened() || GameUI.IsOverUILayer("UI"))
                 return;
 
-            Game gdata = GameClient.Get().GetGameData();
-            int player_id = GameClient.Get().GetPlayerID();
-            if (gdata.selector == SelectorType.SelectTarget && player_id == gdata.selector_player_id)
-            {
-                GameClient.Get().SelectPlayer(GetPlayer());
-            }
         }
 
         public int GetPlayerID()
@@ -184,7 +176,7 @@ namespace TcgEngine.Client
 
         public static BoardSlotPlayer Get(bool opponent)
         {
-            if(opponent)
+            if (opponent)
                 return instance_other;
             return instance_self;
         }

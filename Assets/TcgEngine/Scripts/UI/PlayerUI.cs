@@ -17,8 +17,6 @@ namespace TcgEngine.UI
         public bool is_opponent;
         public Text pname;
         public AvatarUI avatar;
-        public Text hp_txt;
-        public Text hp_max_txt;
 
         public Animator[] secrets;
 
@@ -29,8 +27,6 @@ namespace TcgEngine.UI
         private bool killed = false;
         private float timer = 0f;
 
-        private int prev_hp = 0;
-        private float delayed_damage_timer = 0f;
 
         private static List<PlayerUI> ui_list = new List<PlayerUI>();
 
@@ -47,8 +43,6 @@ namespace TcgEngine.UI
         void Start()
         {
             pname.text = "";
-            hp_txt.text = "";
-            hp_max_txt.text = "";
 
             for (int i = 0; i < secrets.Length; i++)
                 secrets[i].gameObject.SetActive(false);
@@ -67,18 +61,13 @@ namespace TcgEngine.UI
             if (player != null)
             {
                 pname.text = player.username;
-                hp_txt.text = prev_hp.ToString();
-                hp_max_txt.text = "/" + player.hp_max.ToString();
 
                 AvatarData adata = AvatarData.Get(player.avatar);
                 if (avatar != null && adata != null && !killed)
                     avatar.SetAvatar(adata);
 
-                delayed_damage_timer -= Time.deltaTime;
-                if (!IsDamagedDelayed())
-                    prev_hp = player.hp;
             }
-            
+
 
             timer += Time.deltaTime;
             if (timer > 0.4f)
@@ -117,27 +106,9 @@ namespace TcgEngine.UI
             FXTool.DoFX(dead_fx, avatar.transform.position);
         }
 
-        public void DelayDamage(int damage, float duration = 1f)
-        {
-            if (damage != 0)
-            {
-                delayed_damage_timer = duration;
-            }
-        }
-
-        public bool IsDamagedDelayed()
-        {
-            return delayed_damage_timer > 0f;
-        }
-
         private void OnClickAvatar(AvatarData avatar)
         {
-            Game gdata = GameClient.Get().GetGameData();
-            int player_id = GameClient.Get().GetPlayerID();
-            if (gdata.selector == SelectorType.SelectTarget && player_id == gdata.selector_player_id)
-            {
-                GameClient.Get().SelectPlayer(GetPlayer());
-            }
+
         }
 
         private void OnSecretTrigger(Card secret, Card triggerer)

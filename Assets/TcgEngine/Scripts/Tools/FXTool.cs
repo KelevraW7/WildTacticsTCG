@@ -53,8 +53,6 @@ namespace TcgEngine
 
                 projectile.SetSource(source);
                 projectile.SetTarget(target);
-                projectile.damage = damage;
-                projectile.DelayDamage();
 
                 Destroy(fx, projectile.duration);
                 return fx;

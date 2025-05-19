@@ -18,11 +18,6 @@ namespace TcgEngine
         {
             Game data = logic.GetGameData();
 
-            if (type == EffectStatType.HP)
-            {
-                target.hp += data.rolled_value;
-                target.hp_max += data.rolled_value;
-            }
 
         }
 
@@ -32,8 +27,6 @@ namespace TcgEngine
 
             if (type == EffectStatType.Attack)
                 target.attack += data.rolled_value;
-            if (type == EffectStatType.HP)
-                target.hp += data.rolled_value;
         }
     }
 }

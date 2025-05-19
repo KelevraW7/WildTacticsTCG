@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TcgEngine
 {
     /// <summary>
-    /// Check if a card/player is damaged
+    /// Check if a card is damaged
     /// </summary>
 
     [CreateAssetMenu(fileName = "condition", menuName = "TcgEngine/Condition/Damaged", order = 10)]
@@ -17,11 +17,6 @@ namespace TcgEngine
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Card target)
         {
             return CompareBool(target.damage > 0, oper);
-        }
-
-        public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Player target)
-        {
-            return CompareBool(target.hp < target.hp_max, oper);
         }
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Slot target)

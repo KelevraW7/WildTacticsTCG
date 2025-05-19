@@ -42,7 +42,6 @@ namespace TcgEngine.Client
 
         public UnityAction<AbilityData, Card> onAbilityStart;
         public UnityAction<AbilityData, Card, Card> onAbilityTargetCard;      //Ability, Caster, Target
-        public UnityAction<AbilityData, Card, Player> onAbilityTargetPlayer;
         public UnityAction<AbilityData, Card, Slot> onAbilityTargetSlot;
         public UnityAction<AbilityData, Card> onAbilityEnd;
         public UnityAction<Card, Card> onSecretTrigger;    //Secret, Triggerer
@@ -50,13 +49,9 @@ namespace TcgEngine.Client
 
         public UnityAction<Card, Card> onAttackStart;   //Attacker, Defender
         public UnityAction<Card, Card> onAttackEnd;     //Attacker, Defender
-        public UnityAction<Card, Player> onAttackPlayerStart;
-        public UnityAction<Card, Player> onAttackPlayerEnd;
 
         public UnityAction<Card, int> onCardDamaged;
-        public UnityAction<Player, int> onPlayerDamaged;
         public UnityAction<Card, int> onCardHealed;
-        public UnityAction<Player, int> onPlayerHealed;
 
         public UnityAction<int, string> onChatMsg;  //player_id, msg
         public UnityAction< string> onServerMsg;  //msg
@@ -97,16 +92,11 @@ namespace TcgEngine.Client
 
             RegisterRefresh(GameAction.AttackStart, OnAttackStart);
             RegisterRefresh(GameAction.AttackEnd, OnAttackEnd);
-            RegisterRefresh(GameAction.AttackPlayerStart, OnAttackPlayerStart);
-            RegisterRefresh(GameAction.AttackPlayerEnd, OnAttackPlayerEnd);
             RegisterRefresh(GameAction.CardDamaged, OnCardDamaged);
-            RegisterRefresh(GameAction.PlayerDamaged, OnPlayerDamaged);
             RegisterRefresh(GameAction.CardHealed, OnCardHealed);
-            RegisterRefresh(GameAction.PlayerHealed, OnPlayerHealed);
 
             RegisterRefresh(GameAction.AbilityTrigger, OnAbilityTrigger);
             RegisterRefresh(GameAction.AbilityTargetCard, OnAbilityTargetCard);
-            RegisterRefresh(GameAction.AbilityTargetPlayer, OnAbilityTargetPlayer);
             RegisterRefresh(GameAction.AbilityTargetSlot, OnAbilityTargetSlot);
             RegisterRefresh(GameAction.AbilityEnd, OnAbilityAfter);
 
@@ -303,13 +293,6 @@ namespace TcgEngine.Client
             SendAction(GameAction.Attack, mdata);
         }
 
-        public void AttackPlayer(Card card, Player target)
-        {
-            MsgAttackPlayer mdata = new MsgAttackPlayer();
-            mdata.attacker_uid = card.uid;
-            mdata.target_id = target.player_id;
-            SendAction(GameAction.AttackPlayer, mdata);
-        }
 
         public void Move(Card card, Slot slot)
         {
@@ -333,13 +316,6 @@ namespace TcgEngine.Client
             MsgCard mdata = new MsgCard();
             mdata.card_uid = card.uid;
             SendAction(GameAction.SelectCard, mdata);
-        }
-
-        public void SelectPlayer(Player player)
-        {
-            MsgPlayer mdata = new MsgPlayer();
-            mdata.player_id = player.player_id;
-            SendAction(GameAction.SelectPlayer, mdata);
         }
 
         public void SelectSlot(Slot slot)
@@ -542,22 +518,6 @@ namespace TcgEngine.Client
             onAttackEnd?.Invoke(attacker, target);
         }
 
-        private void OnAttackPlayerStart(SerializedData sdata)
-        {
-            MsgAttackPlayer msg = sdata.Get<MsgAttackPlayer>();
-            Card attacker = game_data.GetCard(msg.attacker_uid);
-            Player target = game_data.GetPlayer(msg.target_id);
-            onAttackPlayerStart?.Invoke(attacker, target);
-        }
-
-        private void OnAttackPlayerEnd(SerializedData sdata)
-        {
-            MsgAttackPlayer msg = sdata.Get<MsgAttackPlayer>();
-            Card attacker = game_data.GetCard(msg.attacker_uid);
-            Player target = game_data.GetPlayer(msg.target_id);
-            onAttackPlayerEnd?.Invoke(attacker, target);
-        }
-
         private void OnCardDamaged(SerializedData sdata)
         {
             MsgCardValue msg = sdata.Get<MsgCardValue>();
@@ -565,25 +525,11 @@ namespace TcgEngine.Client
             onCardDamaged?.Invoke(card, msg.value);
         }
 
-        private void OnPlayerDamaged(SerializedData sdata)
-        {
-            MsgPlayerValue msg = sdata.Get<MsgPlayerValue>();
-            Player player = game_data.GetPlayer(msg.player_id);
-            onPlayerDamaged?.Invoke(player, msg.value);
-        }
-
         private void OnCardHealed(SerializedData sdata)
         {
             MsgCardValue msg = sdata.Get<MsgCardValue>();
             Card card = game_data.GetCard(msg.card_uid);
             onCardHealed?.Invoke(card, msg.value);
-        }
-
-        private void OnPlayerHealed(SerializedData sdata)
-        {
-            MsgPlayerValue msg = sdata.Get<MsgPlayerValue>();
-            Player player = game_data.GetPlayer(msg.player_id);
-            onPlayerHealed?.Invoke(player, msg.value);
         }
 
         private void OnAbilityTrigger(SerializedData sdata)
@@ -601,15 +547,6 @@ namespace TcgEngine.Client
             Card caster = game_data.GetCard(msg.caster_uid);
             Card target = game_data.GetCard(msg.target_uid);
             onAbilityTargetCard?.Invoke(ability, caster, target);
-        }
-
-        private void OnAbilityTargetPlayer(SerializedData sdata)
-        {
-            MsgCastAbilityPlayer msg = sdata.Get<MsgCastAbilityPlayer>();
-            AbilityData ability = AbilityData.Get(msg.ability_id);
-            Card caster = game_data.GetCard(msg.caster_uid);
-            Player target = game_data.GetPlayer(msg.target_id);
-            onAbilityTargetPlayer?.Invoke(ability, caster, target);
         }
 
         private void OnAbilityTargetSlot(SerializedData sdata)

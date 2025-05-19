@@ -15,7 +15,6 @@ namespace TcgEngine.FX
         public AudioClip explode_audio;
 
         [HideInInspector]
-        public int damage; //Damage dealth by projectile, to delay HP display by this amount
 
         private Transform source;
         private Transform target;
@@ -23,22 +22,6 @@ namespace TcgEngine.FX
         private Vector3 target_offset;
         private float timer = 0f;
 
-        public void DelayDamage()
-        {
-            BoardCard tcard = target?.GetComponent<BoardCard>();
-            if (tcard != null)
-            {
-                //Delay visual HP so that the HP dont change before projectile hit
-                tcard.DelayDamage(damage, 8f / speed);
-            }
-
-            BoardSlotPlayer pslot = target?.GetComponent<BoardSlotPlayer>();
-            if (pslot != null)
-            {
-                PlayerUI player_ui = PlayerUI.Get(pslot.GetPlayerID() != GameClient.Get().GetPlayerID());
-                player_ui.DelayDamage(damage, 8f / speed);
-            }
-        }
 
         void Update()
         {

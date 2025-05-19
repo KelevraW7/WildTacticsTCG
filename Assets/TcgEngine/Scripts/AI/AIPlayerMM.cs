@@ -90,11 +90,6 @@ namespace TcgEngine.AI
                 AttackCard(action.card_uid, action.target_uid);
             }
 
-            if (action.type == GameAction.AttackPlayer)
-            {
-                AttackPlayer(action.card_uid, action.target_player_id);
-            }
-
             if (action.type == GameAction.Move)
             {
                 MoveCard(action.card_uid, action.slot);
@@ -108,11 +103,6 @@ namespace TcgEngine.AI
             if (action.type == GameAction.SelectCard)
             {
                 SelectCard(action.target_uid);
-            }
-
-            if (action.type == GameAction.SelectPlayer)
-            {
-                SelectPlayer(action.target_player_id);
             }
 
             if (action.type == GameAction.SelectSlot)
@@ -172,17 +162,6 @@ namespace TcgEngine.AI
             }
         }
 
-        private void AttackPlayer(string attacker_uid, int target_player_id)
-        {
-            Game game_data = gameplay.GetGameData();
-            Card card = game_data.GetCard(attacker_uid);
-            if (card != null)
-            {
-                Player oplayer = game_data.GetPlayer(target_player_id);
-                gameplay.AttackPlayer(card, oplayer);
-            }
-        }
-
         private void CastAbility(string caster_uid, string ability_id)
         {
             Game game_data = gameplay.GetGameData();
@@ -201,16 +180,6 @@ namespace TcgEngine.AI
             if (target != null)
             {
                 gameplay.SelectCard(target);
-            }
-        }
-
-        private void SelectPlayer(int tplayer_id)
-        {
-            Game game_data = gameplay.GetGameData();
-            Player target = game_data.GetPlayer(tplayer_id);
-            if (target != null)
-            {
-                gameplay.SelectPlayer(target);
             }
         }
 

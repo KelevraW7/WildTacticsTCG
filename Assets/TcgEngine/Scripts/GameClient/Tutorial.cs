@@ -35,10 +35,8 @@ namespace TcgEngine.Client
                     GameClient.Get().onNewTurn += OnNewTurn;
                     GameClient.Get().onCardPlayed += OnCardPlayed;
                     GameClient.Get().onAttackStart += OnAttack;
-                    GameClient.Get().onAttackPlayerStart += OnAttackPlayer;
                     GameClient.Get().onAbilityStart += OnCastAbility;
                     GameClient.Get().onAbilityTargetCard += OnTargetCard;
-                    GameClient.Get().onAbilityTargetPlayer += OnTargetPlayer;
                 }
 
                 HideAll();
@@ -78,16 +76,6 @@ namespace TcgEngine.Client
                 TriggerEndStep(TutoEndTrigger.Attack, 2f);
                 TriggerStartGroup(TutoStartTrigger.Attack, card);
                 TriggerStartGroup(TutoStartTrigger.Attack, target);
-            }
-        }
-
-        private void OnAttackPlayer(Card card, Player target)
-        {
-            Game data = GameClient.Get().GetGameData();
-            if (card.player_id == GameClient.Get().GetPlayerID())
-            {
-                TriggerEndStep(TutoEndTrigger.AttackPlayer, 2f);
-                TriggerStartGroup(TutoStartTrigger.Attack, card);
             }
         }
 

@@ -142,7 +142,6 @@ namespace TcgEngine.AI
                     {
                         Card card = player.cards_board[c];
                         AddActions(action_list, data, node, GameAction.Attack, card);
-                        AddActions(action_list, data, node, GameAction.AttackPlayer, card);
                         AddActions(action_list, data, node, GameAction.CastAbility, card);
                         //AddActions(action_list, data, node, GameAction.Move, card);        //Uncomment to consider move actions
                     }
@@ -156,9 +155,8 @@ namespace TcgEngine.AI
                 }
             }
 
-            //End Turn (dont add action if ai can still attack player)
-            bool can_attack_player = HasAction(action_list, GameAction.AttackPlayer);
-            bool can_end = !can_attack_player && data.selector == SelectorType.None;
+            //End Turn (dont add action if ai can still attack)
+            bool can_end = data.selector == SelectorType.None;
 
             if (action_list.Count == 0 || can_end)
             {
@@ -418,26 +416,6 @@ namespace TcgEngine.AI
                 }
             }
 
-            if (type == GameAction.AttackPlayer)
-            {
-                if (card.CanAttack())
-                {
-                    for (int p = 0; p < data.players.Length; p++)
-                    {
-                        if (p != player.player_id)
-                        {
-                            Player oplayer = data.players[p];
-                            if (data.CanAttackTarget(card, oplayer))
-                            {
-                                AIAction action = CreateAction(type, card);
-                                action.target_player_id = oplayer.player_id;
-                                actions.Add(action);
-                            }
-                        }
-                    }
-                }
-            }
-
             if (type == GameAction.CastAbility)
             {
                 List<AbilityData> abilities = card.GetAbilities();
@@ -473,25 +451,13 @@ namespace TcgEngine.AI
             if (data.selector == SelectorType.None)
                 return;
 
-            Player player = data.GetPlayer(data.selector_player_id);
             Card caster = data.GetCard(data.selector_caster_uid);
             AbilityData ability = AbilityData.Get(data.selector_ability_id);
-            if (player == null || caster == null)
+            if (caster == null)
                 return;
 
             if (data.selector == SelectorType.SelectTarget && ability != null)
             {
-                for (int p = 0; p < data.players.Length; p++)
-                {
-                    Player tplayer = data.players[p];
-                    if (ability.CanTarget(data, caster, tplayer))
-                    {
-                        AIAction action = CreateAction(GameAction.SelectPlayer, caster);
-                        action.target_player_id = tplayer.player_id;
-                        actions.Add(action);
-                    }
-                }
-
                 foreach (Slot slot in Slot.GetAll())
                 {
                     Card tcard = data.GetSlotCard(slot);
@@ -512,15 +478,12 @@ namespace TcgEngine.AI
 
             if (data.selector == SelectorType.SelectorCard && ability != null)
             {
-                for (int p = 0; p < data.players.Length; p++)
+                List<Card> cards = ability.GetCardTargets(data, caster, card_array);
+                foreach (Card tcard in cards)
                 {
-                    List<Card> cards = ability.GetCardTargets(data, caster, card_array);
-                    foreach (Card tcard in cards)
-                    {
-                        AIAction action = CreateAction(GameAction.SelectCard, caster);
-                        action.target_uid = tcard.uid;
-                        actions.Add(action);
-                    }
+                    AIAction action = CreateAction(GameAction.SelectCard, caster);
+                    action.target_uid = tcard.uid;
+                    actions.Add(action);
                 }
             }
 
@@ -537,7 +500,6 @@ namespace TcgEngine.AI
                     }
                 }
             }
-
 
             //Add option to cancel, if no valid options
             if (actions.Count == 0)
@@ -590,13 +552,6 @@ namespace TcgEngine.AI
                 game_logic.AttackTarget(card, target);
             }
 
-            if (action.type == GameAction.AttackPlayer)
-            {
-                Card card = player.GetBoardCard(action.card_uid);
-                Player tplayer = data.GetPlayer(action.target_player_id);
-                game_logic.AttackPlayer(card, tplayer);
-            }
-
             if (action.type == GameAction.CastAbility)
             {
                 Card card = player.GetCard(action.card_uid);
@@ -608,12 +563,6 @@ namespace TcgEngine.AI
             {
                 Card target = data.GetCard(action.target_uid);
                 game_logic.SelectCard(target);
-            }
-
-            if (action.type == GameAction.SelectPlayer)
-            {
-                Player target = data.GetPlayer(action.target_player_id);
-                game_logic.SelectPlayer(target);
             }
 
             if (action.type == GameAction.SelectSlot)

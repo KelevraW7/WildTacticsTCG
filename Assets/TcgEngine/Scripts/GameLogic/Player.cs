@@ -21,8 +21,6 @@ namespace TcgEngine
         public bool connected = false; //Connected to server and game
         public bool ready = false;     //Sent all player data, ready to play
 
-        public int hp;
-        public int hp_max;
         public int kill_count = 0;
 
         public Dictionary<string, Card> cards_all = new Dictionary<string, Card>(); //Dictionnary for quick access to any card by UID
@@ -530,18 +528,6 @@ namespace TcgEngine
             history_list.Add(order);
         }
 
-
-        //---- Action Check ---------
-
-        public virtual bool IsDead()
-        {
-            if (cards_hand.Count == 0 && cards_board.Count == 0 && cards_deck.Count == 0)
-                return true;
-            if (hp <= 0)
-                return true;
-            return false;
-        }
-
         //--------------------
 
         //Clone all player variables into another var, used mostly by the AI when building a prediction tree
@@ -558,8 +544,6 @@ namespace TcgEngine
             //dest.connected = source.connected;
             //dest.ready = source.ready;
 
-            dest.hp = source.hp;
-            dest.hp_max = source.hp_max;
             dest.kill_count = source.kill_count;
 
             Card.CloneNull(source.hero, ref dest.hero);

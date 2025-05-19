@@ -19,8 +19,6 @@ namespace TcgEngine.AI
         public int secret_card_value = 10;       //Score of having cards in secret zone
         public int hand_card_value = 5;         //Score of having cards in hand
         public int kill_value = 5;              //Score of killing a card
-
-        public int player_hp_value = 4;         //Score per player hp
         public int card_attack_value = 3;       //Score per board card attack
         public int card_hp_value = 2;           //Score per board card hp
         public int card_status_value = 15;       //Score per status on card (multiplied by hvalue of StatusData)
@@ -54,10 +52,10 @@ namespace TcgEngine.AI
             int score = 0;
 
             //Victories
-            if (aiplayer.IsDead())
-                score += -100000 + node.tdepth * 1000; //Add node depth to seek surviving longest
-            if (oplayer.IsDead())
-                score += 100000 - node.tdepth * 1000; //Reduce node depth to seek fastest win
+            //if (aiplayer.IsDead())
+                //score += -100000 + node.tdepth * 1000; //Add node depth to seek surviving longest
+            //if (oplayer.IsDead())
+                //score += 100000 - node.tdepth * 1000; //Reduce node depth to seek fastest win
 
             //Board state
             score += aiplayer.cards_board.Count * board_card_value;
@@ -65,14 +63,12 @@ namespace TcgEngine.AI
             score += aiplayer.cards_secret.Count * secret_card_value;
             score += aiplayer.cards_hand.Count * hand_card_value;
             score += aiplayer.kill_count * kill_value;
-            score += aiplayer.hp * player_hp_value;
 
             score -= oplayer.cards_board.Count * board_card_value;
             score -= oplayer.cards_equip.Count * board_card_value;
             score -= oplayer.cards_secret.Count * secret_card_value;
             score -= oplayer.cards_hand.Count * hand_card_value;
             score -= oplayer.kill_count * kill_value;
-            score -= oplayer.hp * player_hp_value;
 
 
             foreach (Card card in aiplayer.cards_board)
@@ -172,8 +168,6 @@ public int CalculateActionScore(Game data, AIAction order)
                 type_sort = 3; //Move third
             if (order.type == GameAction.Attack)
                 type_sort = 4; //Attacks fourth
-            if (order.type == GameAction.AttackPlayer)
-                type_sort = 5; //Player attacks fifth
             if (order.type == GameAction.PlayCard && !is_spell)
                 type_sort = 7; //Play Characters last
 

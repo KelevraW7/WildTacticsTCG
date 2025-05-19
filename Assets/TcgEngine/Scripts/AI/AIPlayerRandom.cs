@@ -92,8 +92,6 @@ namespace TcgEngine.AI
 
             yield return new WaitForSeconds(0.5f);
 
-            AttackPlayer();
-
             yield return new WaitForSeconds(0.5f);
 
             EndTurn();
@@ -176,22 +174,6 @@ namespace TcgEngine.AI
                 Card rtarget = game_data.GetRandomBoardCard(rand);
                 if (random != null && rtarget != null)
                     gameplay.AttackTarget(random, rtarget);
-            }
-        }
-
-        public void AttackPlayer()
-        {
-            if (!CanPlay())
-                return;
-
-            Game game_data = gameplay.GetGameData();
-            Player player = game_data.GetPlayer(player_id);
-            Player oplayer = game_data.GetRandomPlayer(rand);
-            if (player.cards_board.Count > 0 && game_data.IsPlayerActionTurn(player))
-            {
-                Card random = player.GetRandomCard(player.cards_board, rand);
-                if (random != null && oplayer != null && oplayer != player)
-                    gameplay.AttackPlayer(random, oplayer);
             }
         }
 

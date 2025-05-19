@@ -24,13 +24,8 @@ namespace TcgEngine
 
         public override bool IsTargetConditionMet(Game data, AbilityData ability, Card caster, Player target)
         {
-            if (type == ConditionStatType.HP)
-            {
-                return CompareInt(target.hp, oper, value);
-            }
-
-
             return false;
         }
+
     }
 }

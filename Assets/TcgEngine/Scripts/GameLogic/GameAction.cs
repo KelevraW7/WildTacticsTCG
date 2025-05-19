@@ -15,11 +15,9 @@ namespace TcgEngine
         //Commands (client to server)
         public const ushort PlayCard = 1000;
         public const ushort Attack = 1010;
-        public const ushort AttackPlayer = 1012;
         public const ushort Move = 1015;
         public const ushort CastAbility = 1020;
         public const ushort SelectCard = 1030;
-        public const ushort SelectPlayer = 1032;
         public const ushort SelectSlot = 1034;
         public const ushort SelectChoice = 1036;
         public const ushort SelectCost = 1037;
@@ -49,16 +47,11 @@ namespace TcgEngine
 
         public const ushort AttackStart = 2030;
         public const ushort AttackEnd = 2031;
-        public const ushort AttackPlayerStart = 2032;
-        public const ushort AttackPlayerEnd = 2033;
         public const ushort CardDamaged = 2036;
-        public const ushort PlayerDamaged = 2037;
         public const ushort CardHealed = 2038;
-        public const ushort PlayerHealed = 2039;
 
         public const ushort AbilityTrigger = 2040;
         public const ushort AbilityTargetCard = 2042;
-        public const ushort AbilityTargetPlayer = 2043;
         public const ushort AbilityTargetSlot = 2044;
         public const ushort AbilityEnd = 2048;
 
@@ -77,16 +70,12 @@ namespace TcgEngine
                 return "move";
             if (type == GameAction.Attack)
                 return "attack";
-            if (type == GameAction.AttackPlayer)
-                return "attack_player";
             if (type == GameAction.CastAbility)
                 return "cast_ability";
             if (type == GameAction.EndTurn)
                 return "end_turn";
             if (type == GameAction.SelectCard)
                 return "select_card";
-            if (type == GameAction.SelectPlayer)
-                return "select_player";
             if (type == GameAction.SelectChoice)
                 return "select_choice";
             if (type == GameAction.SelectCost)
