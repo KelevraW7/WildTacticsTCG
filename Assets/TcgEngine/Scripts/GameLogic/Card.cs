@@ -10,6 +10,8 @@ namespace TcgEngine
     public class Card
     {
         public string card_id;
+        public bool revealed = false;
+
         public string uid;
         public int player_id;
         public string variant_id;

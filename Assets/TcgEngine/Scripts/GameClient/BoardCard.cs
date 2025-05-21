@@ -17,6 +17,8 @@ namespace TcgEngine.Client
     public class BoardCard : MonoBehaviour
     {
         public SpriteRenderer card_sprite;
+        public Sprite reverse_sprite; // Sprite para carta boca abajo
+
         public SpriteRenderer card_glow;
         public SpriteRenderer card_shadow;
 
@@ -132,7 +134,13 @@ namespace TcgEngine.Client
             armor_icon.enabled = armor_val > 0;
 
             //Update card image
-            Sprite sprite = card.CardData.GetBoardArt(card.VariantData);
+            bool isPlayer = card.player_id == GameClient.Get().GetPlayerID();
+            bool isRevealed = card.revealed;
+
+            Sprite sprite = (isPlayer && !isRevealed && reverse_sprite != null)
+                ? reverse_sprite
+                : card.CardData.GetBoardArt(card.VariantData);
+
             if (sprite != card_sprite.sprite)
                 card_sprite.sprite = sprite;
 
@@ -386,6 +394,16 @@ namespace TcgEngine.Client
             if (GameUI.IsOverUILayer("UI"))
                 return;
 
+            Player player = GameClient.Get().GetPlayer();
+            Card card = GetCard();
+
+            // Solo si es tu carta y está oculta
+            if (card != null && card.player_id == player.player_id && !card.revealed)
+            {
+                card.revealed = true;  // Volteamos
+                return; // No hacer nada más
+            }
+
             PlayerControls.Get().SelectCard(this);
 
             if (GameTool.IsMobile())
@@ -437,7 +455,7 @@ namespace TcgEngine.Client
                 return GetEquipCard();
             return GetCard();
         }
-        
+
         public CardData GetCardData()
         {
             Card card = GetCard();

@@ -434,8 +434,15 @@ namespace TcgEngine.Client
             if (game_settings.IsOffline())  // Solo si estamos en modo test o local
             {
                 List<CardData> allCards = new List<CardData>(Resources.LoadAll<CardData>("Cards/WildTactics"));
-                List<CardData> common = allCards.FindAll(c => c.team != null && c.team.id != "Gold");
-                List<CardData> gold = allCards.FindAll(c => c.team != null && c.team.id == "Gold");
+                Debug.Log("Total cartas cargadas: " + allCards.Count);
+                foreach (var c in allCards)
+                    Debug.Log("Carta: " + c.title + " - Team: " + (c.team != null ? c.team.id : "NULL"));
+
+                List<CardData> common = allCards.FindAll(c => c.team != null && c.team.id.ToLower() != "gold");
+                List<CardData> gold = allCards.FindAll(c => c.team != null && c.team.id.ToLower() == "gold");
+                Debug.Log("Cartas comunes: " + common.Count);
+                Debug.Log("Cartas doradas: " + gold.Count);
+
 
                 for (int p = 0; p < game_data.players.Length; p++)
                 {
@@ -449,18 +456,17 @@ namespace TcgEngine.Client
                     // Crear cartas y añadirlas al mazo del jugador
                     foreach (CardData data in selected)
                     {
-                        Card newCard = new Card(data.id, data.title, player.player_id);
+                        Card newCard = new Card(data.id, System.Guid.NewGuid().ToString(), player.player_id);
                         player.cards_deck.Add(newCard);
                     }
 
                     // Colocar automáticamente 3 primeras criaturas en slots 0,1,2
-                    for (int i = 0; i < 3; i++)
-                    {
-                        if (i >= player.cards_deck.Count)
-                            break;
+                    int maxCards = Mathf.Min(3, player.cards_deck.Count);
 
+                    for (int i = 0; i < maxCards; i++)
+                    {
                         Card toPlay = player.cards_deck[i];
-                        toPlay.slot = new Slot(i, 0, p);  // x, y, player
+                        toPlay.slot = new Slot(i, 0, p);  // (x, y, player_id)
                         player.cards_board.Add(toPlay);
                         player.cards_deck.Remove(toPlay);
                     }
