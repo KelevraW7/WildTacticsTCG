@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "name": "Eagle",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "eagle_fire_card.png",
+    "image board": "eagle_fire_board.png"
+  },
+  {
+    "id": 2,
+    "name": "Raven",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "raven_fire_card.png",
+    "image board": "raven_fire_board.png"
+  },
+  {
+    "id": 3,
+    "name": "Owl",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "owl_fire_card.png",
+    "image board": "owl_fire_board.png"
+  },
+  {
+    "id": 4,
+    "name": "Eagle",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "eagle_water_card.png",
+    "image board": "eagle_water_board.png"
+  },
+  {
+    "id": 5,
+    "name": "Raven",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "raven_water_card.png",
+    "image board": "raven_water_board.png"
+  },
+  {
+    "id": 6,
+    "name": "Owl",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "owl_water_card.png",
+    "image board": "owl_water_board.png"
+  },
+  {
+    "id": 7,
+    "name": "Eagle",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "eagle_plant_card.png",
+    "image board": "eagle_plant_board.png"
+  },
+  {
+    "id": 8,
+    "name": "Raven",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "raven_plant_card.png",
+    "image board": "raven_plant_board.png"
+  },
+  {
+    "id": 9,
+    "name": "Owl",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "owl_plant_card.png",
+    "image board": "owl_plant_board.png"
+  },
+  {
+    "id": 10,
+    "name": "Lion",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "lion_fire_card.png",
+    "image board": "lion_fire_board.png"
+  },
+  {
+    "id": 11,
+    "name": "Tiger",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "tiger_fire_card.png",
+    "image board": "tiger_fire_board.png"
+  },
+  {
+    "id": 12,
+    "name": "Wolf",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "wolf_fire_card.png",
+    "image board": "wolf_fire_board.png"
+  },
+  {
+    "id": 13,
+    "name": "Lion",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "lion_water_card.png",
+    "image board": "lion_water_board.png"
+  },
+  {
+    "id": 14,
+    "name": "Tiger",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "tiger_water_card.png",
+    "image board": "tiger_water_board.png"
+  },
+  {
+    "id": 15,
+    "name": "Wolf",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "wolf_water_card.png",
+    "image board": "wolf_water_board.png"
+  },
+  {
+    "id": 16,
+    "name": "Lion",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "lion_plant_card.png",
+    "image board": "lion_plant_board.png"
+  },
+  {
+    "id": 17,
+    "name": "Tiger",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "tiger_plant_card.png",
+    "image board": "tiger_plant_board.png"
+  },
+  {
+    "id": 18,
+    "name": "Wolf",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "DESTROZAR",
+    "image card": "wolf_plant_card.png",
+    "image board": "wolf_plant_board.png"
+  },
+  {
+    "id": 19,
+    "name": "Bear",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "bear_fire_card.png",
+    "image board": "bear_fire_board.png"
+  },
+  {
+    "id": 20,
+    "name": "Gorilla",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "gorilla_fire_card.png",
+    "image board": "gorilla_fire_board.png"
+  },
+  {
+    "id": 21,
+    "name": "Kangaroo",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "kangaroo_fire_card.png",
+    "image board": "kangaroo_fire_board.png"
+  },
+  {
+    "id": 22,
+    "name": "Bear",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "bear_water_card.png",
+    "image board": "bear_water_board.png"
+  },
+  {
+    "id": 23,
+    "name": "Gorilla",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "gorilla_water_card.png",
+    "image board": "gorilla_water_board.png"
+  },
+  {
+    "id": 24,
+    "name": "Kangaroo",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "kangaroo_water_card.png",
+    "image board": "kangaroo_water_board.png"
+  },
+  {
+    "id": 25,
+    "name": "Bear",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "bear_plant_card.png",
+    "image board": "bear_plant_board.png"
+  },
+  {
+    "id": 26,
+    "name": "Gorilla",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "gorilla_plant_card.png",
+    "image board": "gorilla_plant_board.png"
+  },
+  {
+    "id": 27,
+    "name": "Kangaroo",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "GOLPEAR ",
+    "image card": "kangaroo_plant_card.png",
+    "image board": "kangaroo_plant_board.png"
+  },
+  {
+    "id": 28,
+    "name": "Elephant",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "elephant_fire_card.png",
+    "image board": "elephant_fire_board.png"
+  },
+  {
+    "id": 29,
+    "name": "Deer",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "deer_fire_card.png",
+    "image board": "deer_fire_board.png"
+  },
+  {
+    "id": 30,
+    "name": "Bull",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "bull_fire_card.png",
+    "image board": "bull_fire_board.png"
+  },
+  {
+    "id": 31,
+    "name": "Elephant",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "elephant_water_card.png",
+    "image board": "elephant_water_board.png"
+  },
+  {
+    "id": 32,
+    "name": "Deer",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "deer_water_card.png",
+    "image board": "deer_water_board.png"
+  },
+  {
+    "id": 33,
+    "name": "Bull",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "bull_water_card.png",
+    "image board": "bull_water_board.png"
+  },
+  {
+    "id": 34,
+    "name": "Elephant",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "elephant_plant_card.png",
+    "image board": "elephant_plant_board.png"
+  },
+  {
+    "id": 35,
+    "name": "Deer",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "deer_plant_card.png",
+    "image board": "deer_plant_board.png"
+  },
+  {
+    "id": 36,
+    "name": "Bull",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "bull_plant_card.png",
+    "image board": "bull_plant_board.png"
+  },
+  {
+    "id": 37,
+    "name": "Shark",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "shark_fire_card.png",
+    "image board": "shark_fire_board.png"
+  },
+  {
+    "id": 38,
+    "name": "Whale",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "whale_fire_card.png",
+    "image board": "whale_fire_board.png"
+  },
+  {
+    "id": 39,
+    "name": "Crocodile",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "crocodile_fire_card.png",
+    "image board": "crocodile_fire_board.png"
+  },
+  {
+    "id": 40,
+    "name": "Shark",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "shark_water_card.png",
+    "image board": "shark_water_board.png"
+  },
+  {
+    "id": 41,
+    "name": "Whale",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "whale_water_card.png",
+    "image board": "whale_water_board.png"
+  },
+  {
+    "id": 42,
+    "name": "Crocodile",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "crocodile_water_card.png",
+    "image board": "crocodile_water_board.png"
+  },
+  {
+    "id": 43,
+    "name": "Shark",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "shark_plant_card.png",
+    "image board": "shark_plant_board.png"
+  },
+  {
+    "id": 44,
+    "name": "Whale",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "whale_plant_card.png",
+    "image board": "whale_plant_board.png"
+  },
+  {
+    "id": 45,
+    "name": "Crocodile",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "crocodile_plant_card.png",
+    "image board": "crocodile_plant_board.png"
+  },
+  {
+    "id": 46,
+    "name": "Snake",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "snake_fire_card.png",
+    "image board": "snake_fire_board.png"
+  },
+  {
+    "id": 47,
+    "name": "Rat",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "rat_fire_card.png",
+    "image board": "rat_fire_board.png"
+  },
+  {
+    "id": 48,
+    "name": "Octopus",
+    "team": "Fire",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "octopus_fire_card.png",
+    "image board": "octopus_fire_board.png"
+  },
+  {
+    "id": 49,
+    "name": "Snake",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "snake_water_card.png",
+    "image board": "snake_water_board.png"
+  },
+  {
+    "id": 50,
+    "name": "Rat",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "rat_water_card.png",
+    "image board": "rat_water_board.png"
+  },
+  {
+    "id": 51,
+    "name": "Octopus",
+    "team": "Water",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "octopus_water_card.png",
+    "image board": "octopus_water_board.png"
+  },
+  {
+    "id": 52,
+    "name": "Snake",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "snake_plant_card.png",
+    "image board": "snake_plant_board.png"
+  },
+  {
+    "id": 53,
+    "name": "Rat",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "rat_plant_card.png",
+    "image board": "rat_plant_board.png"
+  },
+  {
+    "id": 54,
+    "name": "Octopus",
+    "team": "Plant",
+    "hp": 5,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "octopus_plant_card.png",
+    "image board": "octopus_plant_board.png"
+  },
+  {
+    "id": 55,
+    "name": "Phoenix",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "VOLAR",
+    "image card": "phoenix_card.png",
+    "image board": "phoenix_board.png"
+  },
+  {
+    "id": 56,
+    "name": "Cerberus",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "DESTROZAR ",
+    "image card": "cerberus_card.png",
+    "image board": "cerberus_board.png"
+  },
+  {
+    "id": 57,
+    "name": "Dragon",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "GOLPEAR",
+    "image card": "dragon_card.png",
+    "image board": "dragon_board.png"
+  },
+  {
+    "id": 58,
+    "name": "Unicorn",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "EMBESTIR",
+    "image card": "unicorn_card.png",
+    "image board": "unicorn_board.png"
+  },
+  {
+    "id": 59,
+    "name": "Megalodon",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "SUMERGIR",
+    "image card": "megalodon_card.png",
+    "image board": "megalodon_board.png"
+  },
+  {
+    "id": 60,
+    "name": "Cthulhu",
+    "team": "Gold",
+    "hp": 10,
+    "damage": 2,
+    "trait": "INTOXICAR",
+    "image card": "cthulhu_card.png",
+    "image board": "cthulhu_board.png"
+  }
+]

@@ -23,7 +23,6 @@ namespace TcgEngine.UI
         [Header("Turn Area")]
         public Text turn_count;
         public Text turn_timer;
-        public Button end_turn_button;
         public Animator timeout_animator;
         public AudioClip timeout_audio;
 
@@ -73,7 +72,6 @@ namespace TcgEngine.UI
 
             bool yourturn = GameClient.Get().IsYourTurn();
             LoadPanel.Get().SetVisible(is_connecting && !data.HasStarted());
-            end_turn_button.interactable = yourturn && end_turn_timer > 1f;
             end_turn_timer += Time.deltaTime;
             selector_timer += Time.deltaTime;
 
@@ -138,15 +136,6 @@ namespace TcgEngine.UI
         {
             CardSelector.Get().Hide();
             SelectTargetUI.Get().Hide();
-        }
-
-        public void OnClickNextTurn()
-        {
-            if (!Tutorial.Get().CanDo(TutoEndTrigger.EndTurn))
-                return;
-
-            GameClient.Get().EndTurn();
-            end_turn_timer = 0f; //Disable button immediately (dont wait for refresh)
         }
 
         public void OnClickRestart()

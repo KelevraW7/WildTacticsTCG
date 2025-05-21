@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.Netcode;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace TcgEngine.Client
 {
@@ -54,7 +55,7 @@ namespace TcgEngine.Client
         public UnityAction<Card, int> onCardHealed;
 
         public UnityAction<int, string> onChatMsg;  //player_id, msg
-        public UnityAction< string> onServerMsg;  //msg
+        public UnityAction<string> onServerMsg;  //msg
         public UnityAction onRefreshAll;
 
         private int player_id = 0; //Player playing on this device;
@@ -428,6 +429,44 @@ namespace TcgEngine.Client
                 onConnectGame.Invoke();
 
             SendGameSettings();
+
+            // --- WILDTACTICS: GENERAR MAZOS PERSONALIZADOS ---
+            if (game_settings.IsOffline())  // Solo si estamos en modo test o local
+            {
+                List<CardData> allCards = new List<CardData>(Resources.LoadAll<CardData>("Cards/WildTactics"));
+                List<CardData> common = allCards.FindAll(c => c.team != null && c.team.id != "Gold");
+                List<CardData> gold = allCards.FindAll(c => c.team != null && c.team.id == "Gold");
+
+                for (int p = 0; p < game_data.players.Length; p++)
+                {
+                    Player player = game_data.players[p];
+                    System.Random rand = new System.Random(p); // Semilla diferente por jugador
+
+                    List<CardData> selected = new List<CardData>();
+                    selected.AddRange(common.OrderBy(x => rand.Next()).Take(10));
+                    selected.Add(gold[rand.Next(gold.Count)]);
+
+                    // Crear cartas y añadirlas al mazo del jugador
+                    foreach (CardData data in selected)
+                    {
+                        Card newCard = new Card(data.id, data.title, player.player_id);
+                        player.cards_deck.Add(newCard);
+                    }
+
+                    // Colocar automáticamente 3 primeras criaturas en slots 0,1,2
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (i >= player.cards_deck.Count)
+                            break;
+
+                        Card toPlay = player.cards_deck[i];
+                        toPlay.slot = new Slot(i, 0, p);  // x, y, player
+                        player.cards_board.Add(toPlay);
+                        player.cards_deck.Remove(toPlay);
+                    }
+                }
+            }
+
         }
 
         protected virtual void OnPlayerReady(SerializedData sdata)
