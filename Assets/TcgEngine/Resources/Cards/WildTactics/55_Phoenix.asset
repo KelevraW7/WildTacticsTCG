@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 55
   title: Phoenix
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: -5115908945865237989, guid: e1e605d18100c004099bfce446b85e5f,
+    type: 3}
+  art_board: {fileID: 446412136400846317, guid: f1c8db759570b58479e64e8b74dc662c,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: 39eeb56b4a814be4a8c8b06cda4ce06f, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 10
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: de0a9d36cc1106c42b9ea2c7036385c9, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

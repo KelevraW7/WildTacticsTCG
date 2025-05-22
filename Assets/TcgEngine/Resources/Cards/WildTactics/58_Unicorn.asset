@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 58
   title: Unicorn
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: -791793500224108431, guid: 87462bb1f31cb82458ad2dba4ef96434,
+    type: 3}
+  art_board: {fileID: 3055830378453168769, guid: 52203d75e81aa2a44b2f7aaa68e21ecc,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: 39eeb56b4a814be4a8c8b06cda4ce06f, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 10
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 875d0967adeb7bc4b97bfa10c566a1f0, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

@@ -1,14 +1,5 @@
 fileFormatVersion: 2
 guid: cca20da9cbfd28a449b51ac452845bc8
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 253269
@@ -16,3 +7,42 @@ AssetOrigin:
   packageVersion: 1.14
   assetPath: Assets/TcgEngine/Scripts/Data/AssetData.cs
   uploadId: 729051
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - card_spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
+      type: 3}
+  - card_destroy_fx: {instanceID: 0}
+  - card_attack_fx: {instanceID: 0}
+  - card_damage_fx: {instanceID: 0}
+  - card_exhausted_fx: {instanceID: 0}
+  - player_damage_fx: {instanceID: 0}
+  - damage_fx: {instanceID: 0}
+  - play_card_fx: {instanceID: 0}
+  - play_card_other_fx: {instanceID: 0}
+  - play_secret_fx: {instanceID: 0}
+  - play_secret_other_fx: {instanceID: 0}
+  - dice_roll_fx: {instanceID: 0}
+  - hover_text_box: {instanceID: 0}
+  - new_turn_fx: {instanceID: 0}
+  - win_fx: {instanceID: 0}
+  - lose_fx: {instanceID: 0}
+  - tied_fx: {instanceID: 0}
+  - card_spawn_audio: {instanceID: 0}
+  - card_destroy_audio: {instanceID: 0}
+  - card_attack_audio: {instanceID: 0}
+  - card_move_audio: {instanceID: 0}
+  - card_damage_audio: {instanceID: 0}
+  - player_damage_audio: {instanceID: 0}
+  - hand_card_click_audio: {instanceID: 0}
+  - new_turn_audio: {instanceID: 0}
+  - win_audio: {instanceID: 0}
+  - defeat_audio: {instanceID: 0}
+  - win_music: {instanceID: 0}
+  - defeat_music: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

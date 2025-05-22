@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 42
   title: Crocodile
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: -7998944681900490370, guid: c908675eb016fc44f9fd0c6d273728e0,
+    type: 3}
+  art_board: {fileID: -70467516154499374, guid: d1068c3dba501184d8c4b3ca26eb78ba,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: ed6dfd9dc7797584994eaf1fba66535f, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 5
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 03d2d953c9f652f45aaa4c2ed027eda0, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 2106287953758554471, guid: a1e1ec86d02e969408bf2a6c17010f46,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

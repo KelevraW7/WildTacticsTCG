@@ -19,7 +19,7 @@ MonoBehaviour:
     type: 3}
   type: 10
   team: {fileID: 11400000, guid: 76e82b9e2297c8a4baf81d0e7e4fe67a, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 5
   traits:

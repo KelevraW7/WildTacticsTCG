@@ -42,14 +42,43 @@ namespace TcgEngine
         [System.NonSerialized] private VariantData vdata = null;
         [System.NonSerialized] private List<AbilityData> abilities_data = null;
 
-        public Card(string card_id, string uid, int player_id) { this.card_id = card_id; this.uid = uid; this.player_id = player_id; }
+        public Card(string card_id, string uid, int player_id)
+        {
+            this.card_id = card_id;
+            this.uid = uid;
+            this.player_id = player_id;
+        }
+
+        public Card(CardData data, int player_id)
+        {
+            this.card_id = data.id;
+            this.uid = System.Guid.NewGuid().ToString();
+            this.player_id = player_id;
+            this.hp = data.hp;
+            this.attack = data.attack;
+            this.status = new List<CardStatus>();
+            this.traits = new List<CardTrait>();
+
+            foreach (TraitData trait in data.traits)
+            {
+                this.traits.Add(new CardTrait(trait.id, 0));
+            }
+
+            if (data.stats != null)
+            {
+                foreach (TraitStat stat in data.stats)
+                {
+                    this.traits.Add(new CardTrait(stat.trait.id, stat.value));
+                }
+            }
+        }
 
         public virtual void Refresh() { exhausted = false; }
         public virtual void ClearOngoing() { ongoing_status.Clear(); ongoing_traits.Clear(); ClearOngoingAbility(); attack_ongoing = 0; hp_ongoing = 0; }
 
         public virtual void Clear()
         {
-            ClearOngoing(); Refresh(); damage = 0; status.Clear(); 
+            ClearOngoing(); Refresh(); damage = 0; status.Clear();
             SetCard(CardData, VariantData); //Reset to initial stats
             equipped_uid = null;
         }
@@ -91,7 +120,7 @@ namespace TcgEngine
             foreach (AbilityData ability in icard.abilities)
                 AddAbility(ability);
         }
-        
+
         //------ Custom Traits/Stats ---------
 
         public void SetTrait(string id, int value)
@@ -198,7 +227,7 @@ namespace TcgEngine
             all_traits.AddRange(ongoing_traits);
             return all_traits;
         }
-        
+
         //Alternate names since traits/stats are stored in same var
         public void SetStat(string id, int value) => SetTrait(id, value);
         public void AddStat(string id, int value) => AddTrait(id, value);
@@ -329,8 +358,8 @@ namespace TcgEngine
         public void AddAbility(AbilityData ability)
         {
             abilities.Add(ability.id);
-			if (abilities_data != null)
-				abilities_data.Add(ability);
+            if (abilities_data != null)
+                abilities_data.Add(ability);
         }
 
         public void RemoveAbility(AbilityData ability)
@@ -455,7 +484,7 @@ namespace TcgEngine
             //   return false;
             //if (!skip_cost && exhausted)
             //    return false; //no more action
-            return true; 
+            return true;
         }
 
         public virtual bool CanDoActivatedAbilities()
@@ -482,13 +511,14 @@ namespace TcgEngine
 
         //----------------
 
-        public CardData CardData 
-        { 
-            get { 
-                if(data == null || data.id != card_id)
+        public CardData CardData
+        {
+            get
+            {
+                if (data == null || data.id != card_id)
                     data = CardData.Get(card_id); //Optimization, store for future use
                 return data;
-            } 
+            }
         }
 
         public VariantData VariantData
@@ -505,7 +535,8 @@ namespace TcgEngine
 
         public int Hash
         {
-            get {
+            get
+            {
                 if (hash == 0)
                     hash = Mathf.Abs(uid.GetHashCode()); //Optimization, store for future use
                 return hash;
@@ -556,8 +587,8 @@ namespace TcgEngine
             CardTrait.CloneList(source.ongoing_traits, dest.ongoing_traits);
             CardStatus.CloneList(source.status, dest.status);
             CardStatus.CloneList(source.ongoing_status, dest.ongoing_status);
-            GameTool.CloneList(source.abilities, dest.abilities); 
-            GameTool.CloneList(source.abilities_ongoing, dest.abilities_ongoing); 
+            GameTool.CloneList(source.abilities, dest.abilities);
+            GameTool.CloneList(source.abilities_ongoing, dest.abilities_ongoing);
             GameTool.CloneListRefNull(source.abilities_data, ref dest.abilities_data); //No need to deep copy since AbilityData doesn't change dynamically, its just a reference
         }
 
@@ -611,7 +642,7 @@ namespace TcgEngine
                 }
             }
 
-            if(dest.Count > source.Count)
+            if (dest.Count > source.Count)
                 dest.RemoveRange(source.Count, dest.Count - source.Count);
         }
     }
@@ -637,7 +668,8 @@ namespace TcgEngine
             this.permanent = (duration == 0);
         }
 
-        public StatusData StatusData { 
+        public StatusData StatusData
+        {
             get
             {
                 if (data == null || data.effect != type)

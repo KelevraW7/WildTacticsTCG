@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5567fab726837e542a517fb5b4079949, type: 3}
   m_Name: wildtactics_default
   m_EditorClassIdentifier: 
-  id: 
+  id: 'wildtactics_default '
   title: 
   icon: {fileID: 0}
   rank: 0

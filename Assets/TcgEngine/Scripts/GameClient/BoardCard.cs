@@ -37,11 +37,13 @@ namespace TcgEngine.Client
 
         public UnityAction onKill;
 
+        [SerializeField]
         private CardUI card_ui;
+
         private BoardCardFX card_fx;
         private Canvas canvas;
 
-        private string card_uid = "";
+        public string card_uid = "";
         private bool destroyed = false;
         private bool focus = false;
         private float timer = 0f;
@@ -57,7 +59,8 @@ namespace TcgEngine.Client
         void Awake()
         {
             card_list.Add(this);
-            card_ui = GetComponent<CardUI>();
+            card_ui = GetComponentInChildren<CardUI>();
+            Debug.Log("📌 card_ui asignado correctamente: " + (card_ui != null));
             card_fx = GetComponent<BoardCardFX>();
             canvas = GetComponentInChildren<Canvas>();
             card_glow.color = new Color(card_glow.color.r, card_glow.color.g, card_glow.color.b, 0f);
@@ -85,18 +88,23 @@ namespace TcgEngine.Client
 
         void Update()
         {
-            if (!GameClient.Get().IsReady())
+            if (!GameClient.Get().IsReady() || string.IsNullOrEmpty(card_uid))
+                return;
+
+            Game data = GameClient.Get().GetGameData();
+            Card card = data.GetCard(card_uid);
+
+            if (card == null)
                 return;
 
             delayed_damage_timer -= Time.deltaTime;
             timer += Time.deltaTime;
+
             if (timer > 0.15f && !destroyed && !canvas.gameObject.activeSelf)
                 canvas.gameObject.SetActive(true);
 
             PlayerControls controls = PlayerControls.Get();
-            Game data = GameClient.Get().GetGameData();
             Player player = GameClient.Get().GetPlayer();
-            Card card = data.GetCard(card_uid);
 
             if (!destroyed)
             {
@@ -104,14 +112,13 @@ namespace TcgEngine.Client
                 card_ui.SetHP(prev_hp);
             }
 
-            //Save Previous HP
+            // Save Previous HP
             if (!IsDamagedDelayed())
                 prev_hp = card.GetHP();
 
             bool selected = controls.GetSelected() == this;
             Vector3 targ_pos = GetTargetPos();
             float speed = 12f;
-
             transform.position = Vector3.MoveTowards(transform.position, targ_pos, speed * Time.deltaTime);
 
             float target_alpha = IsFocus() || selected ? 1f : 0f;
@@ -127,13 +134,13 @@ namespace TcgEngine.Client
             card_sprite.color = card.HasStatus(StatusType.Stealth) ? Color.gray : Color.white;
             card_ui.hp.color = (destroyed || card.damage > 0) ? Color.yellow : Color.white;
 
-            //armor
+            // Armor
             int armor_val = card.GetStatusValue(StatusType.Armor);
             armor.text = armor_val.ToString();
             armor.enabled = armor_val > 0;
             armor_icon.enabled = armor_val > 0;
 
-            //Update card image
+            // Card image
             bool isPlayer = card.player_id == GameClient.Get().GetPlayerID();
             bool isRevealed = card.revealed;
 
@@ -144,19 +151,19 @@ namespace TcgEngine.Client
             if (sprite != card_sprite.sprite)
                 card_sprite.sprite = sprite;
 
-            //Update frame image
+            // Frame image
             Sprite frame = card.VariantData.frame_board;
             if (frame != null && card_ui.frame_image != null)
                 card_ui.frame_image.sprite = frame;
 
-            //Equipment
+            // Equipment
             if (equipment != null)
             {
                 Card equip = data.GetEquipCard(card.equipped_uid);
                 equipment.SetEquip(equip);
             }
 
-            //Ability buttons
+            // Ability buttons
             foreach (AbilityButton button in buttons)
                 button.Hide();
 
@@ -198,15 +205,23 @@ namespace TcgEngine.Client
                 }
             }
 
-            //Status bar
+            // Status bar
             if (status_group != null)
                 status_group.alpha = Mathf.MoveTowards(status_group.alpha, status_alpha_target, 5f * Time.deltaTime);
         }
 
         private Vector3 GetTargetPos()
         {
-            Game data = GameClient.Get().GetGameData();
+            Game data = GameClient.Get()?.GetGameData();
+            if (data == null)
+                return transform.position;
+
             Card card = data.GetCard(card_uid);
+            if (card == null || card.slot == null)
+            {
+                Debug.LogWarning("❌ Carta o slot nulo en GetTargetPos para UID: " + card_uid);
+                return transform.position;
+            }
 
             if (destroyed && back_to_hand && timer > 0.5f)
                 return back_to_hand_target;
@@ -218,24 +233,43 @@ namespace TcgEngine.Client
                 return targ_pos;
             }
 
+            Debug.LogWarning("❌ No se encontró BoardSlot para slot: " + card.slot.ToString());
             return transform.position;
         }
 
         public void SetCard(Card card)
         {
             this.card_uid = card.uid;
-
-            transform.position = GetTargetPos();
-            prev_hp = card.GetHP();
+            this.card_ui.SetCard(card);
 
             CardData icard = CardData.Get(card.card_id);
-            if (icard)
+            if (card == null || card_uid == null)
+                return;
             {
-                card_ui.SetCard(card);
                 card_sprite.sprite = icard.GetBoardArt(card.VariantData);
                 armor.enabled = false;
                 armor_icon.enabled = false;
                 status_alpha_target = 0f;
+            }
+
+            prev_hp = card.GetHP();
+
+            // 📌 Posicionar en el slot correspondiente
+            if (card.slot.IsValid())
+            {
+                BSlot slot = BoardSlot.Get(card.slot);  // usa BSlot
+                if (slot != null)
+                {
+                    transform.position = slot.transform.position;
+                }
+                else
+                {
+                    Debug.LogWarning($"⚠️ Slot no encontrado para {card.card_id} con slot {card.slot}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"❌ Slot inválido para {card.card_id}");
             }
         }
 

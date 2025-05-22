@@ -54,13 +54,18 @@ namespace TcgEngine.FX
             client.onAbilityTargetCard -= OnAbilityEffect;
             client.onAbilityEnd -= OnAbilityAfter;
         }
-        
+
         void Update()
         {
             if (!GameClient.Get().IsReady())
                 return;
 
             Card card = bcard.GetCard();
+            if (card == null)
+            {
+                Debug.LogWarning("⚠️ BoardCardFX: card es null para UID: " + bcard.card_uid);
+                return;
+            }
 
             //Status FX
             List<CardStatus> status_all = card.GetAllStatus();
@@ -100,13 +105,22 @@ namespace TcgEngine.FX
         {
             CardData icard = bcard.GetCardData();
 
+            if (icard == null)
+            {
+                Debug.LogWarning("❌ BoardCardFX → CardData es null para: " + bcard?.card_uid);
+                return;
+            }
+
             //Spawn Audio
-            AudioClip audio = icard?.spawn_audio != null ? icard.spawn_audio : AssetData.Get().card_spawn_audio;
+            AudioClip audio = icard.spawn_audio != null ? icard.spawn_audio : AssetData.Get().card_spawn_audio;
             AudioTool.Get().PlaySFX("card_spawn", audio);
 
             //Spawn FX
             GameObject spawn_fx = icard.spawn_fx != null ? icard.spawn_fx : AssetData.Get().card_spawn_fx;
-            FXTool.DoFX(spawn_fx, transform.position);
+            if (spawn_fx != null)
+                FXTool.DoFX(spawn_fx, transform.position);
+            else
+                Debug.LogWarning("⚠️ spawn_fx es null para esta carta: " + icard.id);
 
             //Spawn dissolve fx
             if (GameTool.IsURP())
@@ -162,8 +176,8 @@ namespace TcgEngine.FX
                 FadeKill(bcard.card_sprite, 0f, 0.5f);
             }
         }
-		
-		private void FadeSetVal(SpriteRenderer render, float val)
+
+        private void FadeSetVal(SpriteRenderer render, float val)
         {
             render.material = kill_mat;
             render.material.SetFloat(kill_mat_fade, val);

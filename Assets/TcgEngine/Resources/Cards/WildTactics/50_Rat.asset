@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 50
   title: Rat
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: -8671191446169042526, guid: 7fe92247b944d204897f2d71be73f3e1,
+    type: 3}
+  art_board: {fileID: 6694576674403147589, guid: b6dc6136d9c6c2041baf443533bc2772,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: ed6dfd9dc7797584994eaf1fba66535f, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 5
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 9ce99799331bea543afb434dcf42ee84, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 2106287953758554471, guid: a1e1ec86d02e969408bf2a6c17010f46,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

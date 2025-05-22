@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 43
   title: Shark
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: -6834968588276354451, guid: 046dc4d11fcf3c447b7e3e7e5419af5f,
+    type: 3}
+  art_board: {fileID: -2570087779471701410, guid: 2597c6bf44853e0478cd9441a6256c6f,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: 76e82b9e2297c8a4baf81d0e7e4fe67a, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 5
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 03d2d953c9f652f45aaa4c2ed027eda0, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 5791330189299518109, guid: 1fa8fa11b2c6b9b4d976743e5bbb3956,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

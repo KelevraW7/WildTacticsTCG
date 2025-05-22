@@ -54,7 +54,7 @@ namespace TcgEngine.Client
         {
             return GetSlot();
         }
-        
+
         public virtual Card GetSlotCard(Vector3 wpos)
         {
             Game gdata = GameClient.Get().GetGameData();
@@ -75,7 +75,7 @@ namespace TcgEngine.Client
         public virtual bool HasSlot(Slot slot)
         {
             Slot aslot = GetSlot();
-            return aslot == slot;
+            return aslot.Equals(slot);
         }
 
         public virtual bool IsPlayer()
@@ -107,11 +107,13 @@ namespace TcgEngine.Client
 
         public static BSlot Get(Slot slot)
         {
-            foreach (BSlot bslot in GetAll())
+            foreach (BSlot bslot in slot_list)  // ✅ Corrección
             {
                 if (bslot.HasSlot(slot))
                     return bslot;
             }
+
+            Debug.LogWarning($"❌ No se encontró ningún BSlot con Slot {slot.ToString()}");
             return null;
         }
 

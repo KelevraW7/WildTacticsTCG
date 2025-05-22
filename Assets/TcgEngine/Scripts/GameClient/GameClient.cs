@@ -160,16 +160,16 @@ namespace TcgEngine.Client
             {
                 Authenticator.Get().LoginTest("Player");
 
-                if (!player_settings.HasDeck())
-                {
-                    player_settings.deck = new UserDeckData(GameplayData.Get().test_deck);
-                }
+                // if (!player_settings.HasDeck())
+                // {
+                //     player_settings.deck = new UserDeckData(GameplayData.Get().test_deck);
+                //  }
 
-                if (!ai_settings.HasDeck())
-                {
-                    ai_settings.deck = new UserDeckData(GameplayData.Get().test_deck_ai);
-                    ai_settings.ai_level = GameplayData.Get().ai_level;
-                }
+                //  if (!ai_settings.HasDeck())
+                //  {
+                //     ai_settings.deck = new UserDeckData(GameplayData.Get().test_deck_ai);
+                //     ai_settings.ai_level = GameplayData.Get().ai_level;
+                // }
             }
 
             //Set avatar, cardback based on your api data
@@ -456,8 +456,14 @@ namespace TcgEngine.Client
                     // Crear cartas y añadirlas al mazo del jugador
                     foreach (CardData data in selected)
                     {
-                        Card newCard = new Card(data.id, System.Guid.NewGuid().ToString(), player.player_id);
-                        player.cards_deck.Add(newCard);
+                        if (data == null)
+                        {
+                            Debug.LogError("⚠️ CardData nulo detectado durante la creación de carta.");
+                            continue;
+                        }
+
+                        Card newCard = new Card(data, player.player_id);
+                        player.cards_all[newCard.uid] = newCard;
                     }
 
                     // Colocar automáticamente 3 primeras criaturas en slots 0,1,2
@@ -465,10 +471,10 @@ namespace TcgEngine.Client
 
                     for (int i = 0; i < maxCards; i++)
                     {
-                        Card toPlay = player.cards_deck[i];
-                        toPlay.slot = new Slot(i, 0, p);  // (x, y, player_id)
+                        Card toPlay = player.cards_deck[0];  // Siempre tomamos el primero
+                        toPlay.slot = new Slot(i + 1, 1, player.player_id);
                         player.cards_board.Add(toPlay);
-                        player.cards_deck.Remove(toPlay);
+                        player.cards_deck.RemoveAt(0); // Y lo eliminamos sin afectar el bucle
                     }
                 }
             }

@@ -14,19 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 52
   title: Snake
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: 6965381418206944907, guid: a2f250f86316e03489e6aaf07e287873,
+    type: 3}
+  art_board: {fileID: 1051966406287424983, guid: 79f2cea521f23b94e912e838c76f3274,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: 76e82b9e2297c8a4baf81d0e7e4fe67a, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 5
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 9ce99799331bea543afb434dcf42ee84, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 5791330189299518109, guid: 1fa8fa11b2c6b9b4d976743e5bbb3956,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

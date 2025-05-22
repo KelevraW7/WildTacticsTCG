@@ -14,19 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 59
   title: Megalodon
-  art_full: {fileID: 0}
-  art_board: {fileID: 0}
-  type: 0
+  art_full: {fileID: 806946233008793545, guid: 080773ee6ba363c4295443af633084c2, type: 3}
+  art_board: {fileID: 6984558280708808962, guid: 2581566f77cd8a349a60084b2abfd90f,
+    type: 3}
+  type: 10
   team: {fileID: 11400000, guid: 39eeb56b4a814be4a8c8b06cda4ce06f, type: 2}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
   attack: 2
   hp: 10
-  traits: []
+  traits:
+  - {fileID: 11400000, guid: 03d2d953c9f652f45aaa4c2ed027eda0, type: 2}
   stats: []
   abilities: []
   text: 
   desc: 
-  spawn_fx: {fileID: 0}
+  spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
+    type: 3}
   death_fx: {fileID: 0}
   attack_fx: {fileID: 0}
   damage_fx: {fileID: 0}

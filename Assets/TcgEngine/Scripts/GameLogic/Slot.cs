@@ -92,7 +92,7 @@ namespace TcgEngine
 
         public static int MaxP
         {
-            get { return ignore_p ? 0 : 1; } 
+            get { return ignore_p ? 0 : 1; }
         }
 
         //Return slot P-value of player, usually its same as player_id, unless we ignore P value then its 0 for all
@@ -117,8 +117,8 @@ namespace TcgEngine
                 return new Slot(rand.Next(x_min, x_max + 1), rand.Next(y_min, y_max + 1), rand.Next(0, 2));
             return new Slot(rand.Next(x_min, x_max + 1), y_min, rand.Next(0, 2));
         }
-		
-		public static Slot Get(int x, int y, int p)
+
+        public static Slot Get(int x, int y, int p)
         {
             List<Slot> slots = GetAll();
             foreach (Slot slot in slots)
@@ -178,14 +178,21 @@ namespace TcgEngine
             return slot1.x != slot2.x || slot1.y != slot2.y || slot1.p != slot2.p;
         }
 
-        public override bool Equals(object o)
+        public override bool Equals(object obj)
         {
-            return base.Equals(o);
+            if (obj is Slot other)
+                return x == other.x && y == other.y && p == other.p;
+            return false;
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return x ^ y ^ p;
+        }
+
+        public override string ToString()
+        {
+            return $"(x:{x}, y:{y}, p:{p})";
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
