@@ -226,11 +226,10 @@ namespace TcgEngine.Client
             if (destroyed && back_to_hand && timer > 0.5f)
                 return back_to_hand_target;
 
-            BSlot slot = BSlot.Get(card.slot);
+            BoardSlot slot = (BoardSlot)BoardSlot.Get(card.slot);
             if (slot != null)
             {
-                Vector3 targ_pos = slot.GetPosition(card.slot);
-                return targ_pos;
+                return slot.transform.position;
             }
 
             Debug.LogWarning("❌ No se encontró BoardSlot para slot: " + card.slot.ToString());
@@ -257,7 +256,8 @@ namespace TcgEngine.Client
             // 📌 Posicionar en el slot correspondiente
             if (card.slot.IsValid())
             {
-                BSlot slot = BoardSlot.Get(card.slot);  // usa BSlot
+                BoardSlot slot = (BoardSlot)BoardSlot.Get(card.slot);
+
                 if (slot != null)
                 {
                     transform.position = slot.transform.position;

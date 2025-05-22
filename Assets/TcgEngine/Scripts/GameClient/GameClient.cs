@@ -113,6 +113,8 @@ namespace TcgEngine.Client
 
             ConnectToAPI();
             ConnectToServer();
+
+            onGameStart += OnGameStartBoard;
         }
 
         protected virtual void OnDestroy()
@@ -471,11 +473,16 @@ namespace TcgEngine.Client
 
                     for (int i = 0; i < maxCards; i++)
                     {
-                        Card toPlay = player.cards_deck[0];  // Siempre tomamos el primero
+                        Card toPlay = player.cards_deck[0];
                         toPlay.slot = new Slot(i + 1, 1, player.player_id);
                         player.cards_board.Add(toPlay);
-                        player.cards_deck.RemoveAt(0); // Y lo eliminamos sin afectar el bucle
+                        player.cards_deck.RemoveAt(0);
                     }
+
+                    // Marcar el inicio del juego
+                    game_data.state = GameState.Play;
+                    game_data.phase = GamePhase.Main;
+                    game_data.current_player = 0;
                 }
             }
 
@@ -718,6 +725,12 @@ namespace TcgEngine.Client
             return instance;
         }
 
+        // 🔁 Refresca tablero al iniciar la partida
+        private void OnGameStartBoard()
+        {
+            Debug.Log("🧩 Refrescando el tablero desde GameClient → GameBoard.Get()?.RefreshBoard();");
+            GameBoard.Get()?.RefreshBoard();
+        }
     }
 
     public class RefreshEvent

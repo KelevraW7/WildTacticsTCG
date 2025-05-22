@@ -30,7 +30,7 @@ namespace TcgEngine.Client
 
         private void Start()
         {
-            
+
         }
 
         void Update()
@@ -61,7 +61,7 @@ namespace TcgEngine.Client
             for (int i = cards.Count - 1; i >= 0; i--)
             {
                 BoardCard bcard = cards[i];
-                if (bcard != null && HasBoardCard(bcard) &&!bcard.IsDamagedDelayed())
+                if (bcard != null && HasBoardCard(bcard) && !bcard.IsDamagedDelayed())
                 {
                     KillCard(bcard);
                 }
@@ -160,6 +160,30 @@ namespace TcgEngine.Client
         public static GameBoard Get()
         {
             return _instance;
+        }
+
+        public void RefreshBoard()
+        {
+            Debug.Log("♻️ Refrescando Board desde GameBoard.RefreshBoard()");
+
+            Game game = GameClient.Get()?.GetGameData();
+            if (game == null)
+            {
+                Debug.LogWarning("❌ No se encontró GameData en GameBoard");
+                return;
+            }
+
+            foreach (Player player in game.players)
+            {
+                foreach (Card card in player.cards_board)
+                {
+                    if (card != null && card.slot.IsValid() && BoardCard.Get(card.uid) == null)
+                    {
+                        Debug.Log($"🧩 Instanciando BoardCard para {card.card_id} en slot {card.slot.x},{card.slot.y},{card.slot.p}");
+                        SpawnNewCard(card);
+                    }
+                }
+            }
         }
     }
 }
