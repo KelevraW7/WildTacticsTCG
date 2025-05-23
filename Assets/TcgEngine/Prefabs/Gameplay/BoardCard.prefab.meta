@@ -1,14 +1,7 @@
 fileFormatVersion: 2
-guid: 8f53edad154c4b4438bb6bb17f0ab033
+guid: 5e8f835fc354c6a42b4e577184b2753d
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 253269
-  packageName: TCG Engine - Online Card Game
-  packageVersion: 1.14
-  assetPath: Assets/TcgEngine/Prefabs/Gameplay/BoardCard.prefab
-  uploadId: 729051

@@ -88,7 +88,7 @@ MonoBehaviour:
   - {fileID: 6539638598109738867}
   glow_ally: {r: 0.23113209, g: 1, b: 0.9919755, a: 0.8}
   glow_enemy: {r: 0.8962264, g: 0.114142045, b: 0.114142045, a: 0.8}
-  card_ui: {fileID: 9052337821236471554}
+  card_ui: {fileID: 8878157023945928430}
   card_uid: 
 --- !u!114 &7205200960357975702
 MonoBehaviour:
@@ -722,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &250707393468964272
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1937,7 +1937,6 @@ GameObject:
   - component: {fileID: 5430734384145199175}
   - component: {fileID: 6132934038323766916}
   - component: {fileID: 7032634262582322677}
-  - component: {fileID: 9052337821236471554}
   m_Layer: 0
   m_Name: CanvasUI
   m_TagString: Untagged
@@ -2036,31 +2035,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9052337821236471554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5587919881771459304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943be08264f3555448cac48ac16c1e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  card_image: {fileID: 2641896698832385425}
-  frame_image: {fileID: 4353264925981202626}
-  team_icon: {fileID: 2375695989467368818}
-  rarity_icon: {fileID: 7398188178660183509}
-  attack_icon: {fileID: 1568863074443046534}
-  hp_icon: {fileID: 4725780009765445995}
-  cost_icon: {fileID: 0}
-  attack: {fileID: 1095425094801124750}
-  hp: {fileID: 2630487396038922837}
-  cost: {fileID: 0}
-  card_title: {fileID: 3046232166395948562}
-  card_text: {fileID: 3494950096228029749}
-  stats: []
 --- !u!1 &6478447576842003055
 GameObject:
   m_ObjectHideFlags: 0

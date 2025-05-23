@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 5
   title: Raven
   art_full: {fileID: 565396604748973149, guid: 010e388013f41504b8eefffe4414065d, type: 3}
-  art_board: {fileID: 565396604748973149, guid: 010e388013f41504b8eefffe4414065d,
+  art_board: {fileID: 7781285217328276621, guid: a8d02787454ba024292835880a15c433,
     type: 3}
   type: 10
   team: {fileID: 11400000, guid: ed6dfd9dc7797584994eaf1fba66535f, type: 2}

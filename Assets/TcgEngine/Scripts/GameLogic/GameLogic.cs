@@ -88,32 +88,18 @@ namespace TcgEngine.Gameplay
             if (game_data.state == GameState.GameEnded)
                 return;
 
-            //Choose first player
+            // Elegir jugador inicial
             game_data.state = GameState.Play;
             game_data.first_player = random.NextDouble() < 0.5 ? 0 : 1;
             game_data.current_player = game_data.first_player;
             game_data.turn_count = 1;
 
-            //Init each players
+            // Inicializar jugadores (no se roba cartas aquí)
             foreach (Player player in game_data.players)
             {
-                //Puzzle level deck
-                DeckPuzzleData pdeck = DeckPuzzleData.Get(player.deck);
-
-                //Draw starting cards
-                int dcards = pdeck != null ? pdeck.start_cards : GameplayData.Get().cards_start;
-                DrawCard(player, dcards);
-
-                //Add coin second player
-                bool is_random = game_data.first_player == 1;
-                if (is_random && player.player_id != game_data.first_player && GameplayData.Get().second_bonus != null)
-                {
-                    Card card = Card.Create(GameplayData.Get().second_bonus, VariantData.GetDefault(), player);
-                    player.cards_hand.Add(card);
-                }
+                // Nada que hacer por ahora: ya hemos asignado el mazo desde GameManager
             }
 
-            //Start state
             RefreshData();
             onGameStart?.Invoke();
 
@@ -132,20 +118,23 @@ namespace TcgEngine.Gameplay
 
             Player player = game_data.GetActivePlayer();
 
-            //Cards draw
-            if (game_data.turn_count > 1 || player.player_id != game_data.first_player)
-            {
-                DrawCard(player, GameplayData.Get().cards_per_turn);
-            }
+            // Eliminar robo automático de carta por turno
+            // if (game_data.turn_count > 1 || player.player_id != game_data.first_player)
+            // {
+            //     DrawCard(player, GameplayData.Get().cards_per_turn);
+            // }
 
-            //Turn timer and history
+            // Turn timer and history
             game_data.turn_timer = GameplayData.Get().turn_duration;
             player.history_list.Clear();
 
-            //Player poison
+            // Poison
             if (player.HasStatus(StatusType.Poisoned))
+            {
+                // Efectos por veneno
+            }
 
-            //Refresh Cards and Status Effects
+            // Refresh cards and statuses
             for (int i = player.cards_board.Count - 1; i >= 0; i--)
             {
                 Card card = player.cards_board[i];
@@ -157,10 +146,8 @@ namespace TcgEngine.Gameplay
                     DamageCard(card, card.GetStatusValue(StatusType.Poisoned));
             }
 
-            //Ongoing Abilities
+            // Habilidades continuas y de inicio de turno
             UpdateOngoing();
-
-            //StartTurn Abilities
             TriggerPlayerCardsAbilityType(player, AbilityTrigger.StartOfTurn);
             TriggerPlayerSecrets(player, AbilityTrigger.StartOfTurn);
 
@@ -582,7 +569,17 @@ namespace TcgEngine.Gameplay
                 {
                     Card card = player.cards_deck[0];
                     player.cards_deck.RemoveAt(0);
-                    player.cards_hand.Add(card);
+
+                    // Solo se añaden a la mano si NO son de tipo "Character"
+                    if (card.CardData.type != CardType.Character)
+                    {
+                        player.cards_hand.Add(card);
+                        Debug.Log("✋ Robada carta válida a la mano: " + card.card_id);
+                    }
+                    else
+                    {
+                        Debug.Log("🚫 No se roba criatura a la mano: " + card.card_id);
+                    }
                 }
             }
 

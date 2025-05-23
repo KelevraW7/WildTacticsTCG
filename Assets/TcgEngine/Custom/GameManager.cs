@@ -38,34 +38,32 @@ public class GameManager : MonoBehaviour
 
     private void AssignDecks(Game game)
     {
+        // Usamos solo cartas WildTactics (ajusta el filtro si es necesario)
         List<CardData> pool = new List<CardData>(CardData.GetAll());
         System.Random rand = new System.Random();
 
         foreach (Player player in game.players)
         {
-            List<CardData> copy = new List<CardData>(pool);
             List<CardData> selected = new List<CardData>();
 
-            // 1 dorada
-            CardData gold = copy.Find(c => c.rarity != null && c.rarity.id == "gold");
+            // 1 carta dorada
+            CardData gold = pool.Find(c => c.rarity != null && c.rarity.id == "gold");
             if (gold != null)
             {
                 selected.Add(gold);
-                copy.Remove(gold);
+                pool.Remove(gold);
             }
 
-            // 10 comunes
-            while (selected.Count < 11 && copy.Count > 0)
+            // 10 comunes (únicas, sin repetir)
+            while (selected.Count < 11 && pool.Count > 0)
             {
-                int index = rand.Next(copy.Count);
-                CardData c = copy[index];
-                if (!selected.Contains(c))
-                {
-                    selected.Add(c);
-                    copy.Remove(c);
-                }
+                int index = rand.Next(pool.Count);
+                CardData c = pool[index];
+                selected.Add(c);
+                pool.RemoveAt(index);
             }
 
+            // Crear las cartas del jugador
             foreach (CardData data in selected)
             {
                 Card card = Card.Create(data, VariantData.GetDefault(), player);
