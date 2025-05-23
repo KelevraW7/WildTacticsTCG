@@ -38,29 +38,37 @@ public class GameManager : MonoBehaviour
 
     private void AssignDecks(Game game)
     {
-        // Usamos solo cartas WildTactics (ajusta el filtro si es necesario)
-        List<CardData> pool = new List<CardData>(CardData.GetAll());
+        List<CardData> allCards = new List<CardData>(CardData.GetAll());
         System.Random rand = new System.Random();
+
+        // Separar doradas y comunes
+        List<CardData> goldCards = allCards.FindAll(c => c.rarity != null && c.rarity.id == "gold");
+        List<CardData> commonCards = allCards.FindAll(c => c.rarity == null || c.rarity.id != "gold");
 
         foreach (Player player in game.players)
         {
             List<CardData> selected = new List<CardData>();
 
-            // 1 carta dorada
-            CardData gold = pool.Find(c => c.rarity != null && c.rarity.id == "gold");
-            if (gold != null)
+            // ✅ Seleccionar una carta dorada aleatoria
+            if (goldCards.Count > 0)
             {
+                int index = rand.Next(goldCards.Count);
+                CardData gold = goldCards[index];
                 selected.Add(gold);
-                pool.Remove(gold);
+                goldCards.RemoveAt(index); // Eliminarla para que no se repita
             }
 
-            // 10 comunes (únicas, sin repetir)
-            while (selected.Count < 11 && pool.Count > 0)
+            // ✅ Seleccionar 10 comunes sin repetir
+            int attempts = 0;
+            while (selected.Count < 11 && commonCards.Count > 0 && attempts++ < 100)
             {
-                int index = rand.Next(pool.Count);
-                CardData c = pool[index];
-                selected.Add(c);
-                pool.RemoveAt(index);
+                int index = rand.Next(commonCards.Count);
+                CardData c = commonCards[index];
+                if (!selected.Contains(c))
+                {
+                    selected.Add(c);
+                    commonCards.RemoveAt(index);
+                }
             }
 
             // Crear las cartas del jugador

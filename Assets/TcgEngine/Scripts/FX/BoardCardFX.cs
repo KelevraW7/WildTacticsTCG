@@ -47,13 +47,33 @@ namespace TcgEngine.FX
 
         private IEnumerator WaitAndSpawn()
         {
-            yield return new WaitForSeconds(0.1f);  // Espera breve para que card.revealed se inicialice correctamente
+            Debug.Log("🕓 [BoardCardFX] WaitAndSpawn iniciado para: " + gameObject.name);
+
+            int timeout = 50;
+            while (card == null && timeout-- > 0)
+            {
+                card = GetComponent<BoardCard>()?.GetCard();
+                yield return null;
+            }
 
             if (card == null)
-                card = GetComponent<BoardCard>().GetCard();
+            {
+                Debug.LogWarning("❌ [BoardCardFX] Card sigue siendo null tras esperar: " + gameObject.name);
+                yield break;
+            }
 
-            if (card != null && card.revealed)
+            // ✅ Nueva lógica más robusta
+            bool mustShowFX = bcard != null && bcard.GetCard() != null && bcard.GetCard().revealed;
+
+            if (mustShowFX)
+            {
+                Debug.Log($"🔥 Ejecutando OnSpawn() para {bcard.GetCard().card_id} (spawn inmediato)");
                 OnSpawn();
+            }
+            else
+            {
+                Debug.Log($"⏳ No se lanza Spawn aún para: {bcard?.GetCard()?.card_id}");
+            }
         }
 
         private void OnDestroy()
@@ -132,7 +152,12 @@ namespace TcgEngine.FX
             AudioTool.Get().PlaySFX("card_spawn", audio);
 
             // Spawn FX
-            GameObject spawn_fx = icard.spawn_fx != null ? icard.spawn_fx : AssetData.Get().card_spawn_fx;
+            GameObject spawn_fx = icard.spawn_fx;
+            if (spawn_fx == null)
+            {
+                Debug.LogWarning($"⚠️ Carta sin spawn_fx asignado: {icard.id}, usando FX por defecto");
+                spawn_fx = AssetData.Get().card_spawn_fx;
+            }
             if (spawn_fx != null)
                 FXTool.DoFX(spawn_fx, transform.position);
             else

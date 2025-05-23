@@ -128,14 +128,15 @@ namespace TcgEngine.Client
             float speed = 12f;
             transform.position = Vector3.MoveTowards(transform.position, targ_pos, speed * Time.deltaTime);
 
-            float target_alpha = IsFocus() || selected ? 1f : 0f;
+            float target_alpha = (IsFocus() || selected) ? 1f : 0f;
             if (destroyed || timer < 1f)
                 target_alpha = 0f;
             if (equipment != null && equipment.IsFocus())
                 target_alpha = 0f;
 
+            // 🔧 Usamos alpha 1f forzado
             Color ccolor = player.player_id == card.player_id ? glow_ally : glow_enemy;
-            float calpha = Mathf.MoveTowards(card_glow.color.a, target_alpha * ccolor.a, 4f * Time.deltaTime);
+            float calpha = Mathf.MoveTowards(card_glow.color.a, target_alpha, 4f * Time.deltaTime);
             card_glow.color = new Color(ccolor.r, ccolor.g, ccolor.b, calpha);
             card_shadow.enabled = !destroyed && timer > 0.4f;
             card_sprite.color = card.HasStatus(StatusType.Stealth) ? Color.gray : Color.white;
@@ -443,6 +444,10 @@ namespace TcgEngine.Client
             if (GameTool.IsMobile())
                 return;
 
+            Card card = GetCard(); // ✅ Añadir esto
+            if (!card.revealed)
+                return;
+
             focus = true;
             ShowStatusBar();
         }
@@ -474,6 +479,8 @@ namespace TcgEngine.Client
                     card_fx.OnSpawn();
                     hasPlayedSpawnFX = true;
                 }
+                // ✅ Mostrar preview/status inmediatamente tras clic
+                OnMouseEnter();
 
                 return;
             }
