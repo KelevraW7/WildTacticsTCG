@@ -46,6 +46,8 @@ namespace TcgEngine.Client
         private CardUI card_ui;
 
         private BoardCardFX card_fx;
+        private bool hasPlayedSpawnFX = false;
+
         private Canvas canvas;
 
         public string card_uid = "";
@@ -276,7 +278,7 @@ namespace TcgEngine.Client
                 HpIcon.SetActive(!hideUI);
 
             if (StatusPanel != null)
-                StatusPanel.alpha = hideUI ? 0f : 1f;
+                StatusPanel.gameObject.SetActive(!hideUI);
 
             if (StatusText != null)
                 StatusText.enabled = !hideUI;
@@ -462,9 +464,18 @@ namespace TcgEngine.Client
             // Solo si es tu carta y está oculta
             if (card != null && card.player_id == player.player_id && !card.revealed)
             {
-                card.revealed = true;  // Volteamos
+                card.revealed = true;
                 SetCard(card);
-                return; // No hacer nada más
+                ShowStatusBar();
+
+                // 🌀 Ejecutar SpawnFX al revelar manualmente
+                if (!hasPlayedSpawnFX && card_fx != null)
+                {
+                    card_fx.OnSpawn();
+                    hasPlayedSpawnFX = true;
+                }
+
+                return;
             }
 
             PlayerControls.Get().SelectCard(this);

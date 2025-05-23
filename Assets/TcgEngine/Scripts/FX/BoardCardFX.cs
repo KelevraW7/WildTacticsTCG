@@ -16,6 +16,8 @@ namespace TcgEngine.FX
     {
         public Material kill_mat;
         public string kill_mat_fade = "noise_fade";
+        public Card card;
+        public CardData icard;
 
         private BoardCard bcard;
 
@@ -40,7 +42,18 @@ namespace TcgEngine.FX
             client.onAbilityTargetCard += OnAbilityEffect;
             client.onAbilityEnd += OnAbilityAfter;
 
-            OnSpawn();
+            StartCoroutine(WaitAndSpawn());
+        }
+
+        private IEnumerator WaitAndSpawn()
+        {
+            yield return new WaitForSeconds(0.1f);  // Espera breve para que card.revealed se inicialice correctamente
+
+            if (card == null)
+                card = GetComponent<BoardCard>().GetCard();
+
+            if (card != null && card.revealed)
+                OnSpawn();
         }
 
         private void OnDestroy()
@@ -101,9 +114,12 @@ namespace TcgEngine.FX
                 exhausted_fx.Stop();
         }
 
-        private void OnSpawn()
+        public void OnSpawn()
         {
-            CardData icard = bcard.GetCardData();
+            if (bcard == null)
+                bcard = GetComponent<BoardCard>();
+
+            CardData icard = bcard?.GetCardData();
 
             if (icard == null)
             {
@@ -111,18 +127,18 @@ namespace TcgEngine.FX
                 return;
             }
 
-            //Spawn Audio
+            // Spawn Audio
             AudioClip audio = icard.spawn_audio != null ? icard.spawn_audio : AssetData.Get().card_spawn_audio;
             AudioTool.Get().PlaySFX("card_spawn", audio);
 
-            //Spawn FX
+            // Spawn FX
             GameObject spawn_fx = icard.spawn_fx != null ? icard.spawn_fx : AssetData.Get().card_spawn_fx;
             if (spawn_fx != null)
                 FXTool.DoFX(spawn_fx, transform.position);
             else
                 Debug.LogWarning("⚠️ spawn_fx es null para esta carta: " + icard.id);
 
-            //Spawn dissolve fx
+            // Spawn dissolve fx
             if (GameTool.IsURP())
             {
                 SpriteRenderer render = bcard.card_sprite;
@@ -132,7 +148,7 @@ namespace TcgEngine.FX
                 FadeKill(bcard.card_sprite, 1f, 0.5f);
             }
 
-            //Exhausted fx
+            // Exhausted fx
             if (AssetData.Get().card_exhausted_fx != null)
             {
                 GameObject efx = Instantiate(AssetData.Get().card_exhausted_fx, transform);
@@ -140,7 +156,7 @@ namespace TcgEngine.FX
                 exhausted_fx = efx.GetComponent<ParticleSystem>();
             }
 
-            //Idle status
+            // Idle status
             TimeTool.WaitFor(1f, () =>
             {
                 if (icard.idle_fx != null)
