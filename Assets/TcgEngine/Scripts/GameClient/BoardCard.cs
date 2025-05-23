@@ -487,7 +487,7 @@ namespace TcgEngine.Client
 
                 return;
             }
-
+            Debug.Log("🖱️ Carta clicada");
             PlayerControls.Get().SelectCard(this);
 
             if (GameTool.IsMobile())

@@ -27,10 +27,18 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
+        Debug.Log("⏱️ current_player: " + game.current_player);
+        Debug.Log("🎯 phase: " + game.phase);
+
         logic = new GameLogic(game);
 
         AssignDecks(game);
         PlaceInitialCards(game);
+
+        Debug.Log("📌 Estado justo antes de StartGame(): " + game.state);
+        logic.StartGame();
+        Debug.Log("📌 Estado justo después de StartGame(): " + game.state);
+
         logic.StartGame();
 
         Debug.Log("✅ GameManager: partida iniciada correctamente");

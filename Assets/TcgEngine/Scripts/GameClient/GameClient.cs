@@ -294,6 +294,7 @@ namespace TcgEngine.Client
             mdata.attacker_uid = card.uid;
             mdata.target_uid = target.uid;
             SendAction(GameAction.Attack, mdata);
+            Debug.Log($"📤 Enviando ataque: {mdata.attacker_uid} → {mdata.target_uid}");
         }
 
 

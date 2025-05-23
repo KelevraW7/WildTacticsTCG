@@ -47,6 +47,12 @@ namespace TcgEngine.Client
             Player player = GameClient.Get().GetPlayer();
             Card card = bcard.GetFocusCard();
 
+            Debug.Log("🧪 player_id: " + player.player_id);
+            Debug.Log("🧪 current_player: " + gdata.current_player);
+            Debug.Log("🧪 phase: " + gdata.phase);
+            Debug.Log("🧪 selector: " + gdata.selector);
+            Debug.Log("🧪 state: " + gdata.state);
+
             if (gdata.IsPlayerSelectorTurn(player) && gdata.selector == SelectorType.SelectTarget)
             {
                 if (!Tutorial.Get().CanDo(TutoEndTrigger.SelectTarget, card))
@@ -59,6 +65,7 @@ namespace TcgEngine.Client
             {
                 //Start dragging card
                 selected_card = bcard;
+                Debug.Log("✅ Carta seleccionada correctamente: " + card.card_id);
             }
         }
 
@@ -98,6 +105,7 @@ namespace TcgEngine.Client
                         WarningText.ShowExhausted();
                     else
                         GameClient.Get().AttackTarget(card, target);
+                    Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
                 }
                 else if (tslot != null && tslot is BoardSlot)
                 {

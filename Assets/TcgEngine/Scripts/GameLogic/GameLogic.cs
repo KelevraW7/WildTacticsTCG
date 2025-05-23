@@ -90,7 +90,7 @@ namespace TcgEngine.Gameplay
 
             // Elegir jugador inicial
             game_data.state = GameState.Play;
-            game_data.first_player = random.NextDouble() < 0.5 ? 0 : 1;
+            game_data.first_player = 0; // Fuerza que el jugador humano empiece
             game_data.current_player = game_data.first_player;
             game_data.turn_count = 1;
 
