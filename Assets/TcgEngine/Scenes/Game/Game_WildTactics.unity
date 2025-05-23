@@ -1796,7 +1796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af8ce7f0f0acf4408922e1c9fe6d764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card_prefab: {fileID: 105093220294494356, guid: 8f53edad154c4b4438bb6bb17f0ab033,
+  card_prefab: {fileID: 105093220294494356, guid: 5e8f835fc354c6a42b4e577184b2753d,
     type: 3}
 --- !u!1001 &1918581210
 PrefabInstance:

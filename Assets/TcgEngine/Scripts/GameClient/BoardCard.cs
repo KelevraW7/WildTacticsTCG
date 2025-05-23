@@ -302,6 +302,9 @@ namespace TcgEngine.Client
             {
                 Debug.LogWarning($"❌ Slot inválido para {card.card_id}");
             }
+
+            if (card_glow != null)
+                card_glow.enabled = true;
         }
 
         public void SetOrder(int order)
