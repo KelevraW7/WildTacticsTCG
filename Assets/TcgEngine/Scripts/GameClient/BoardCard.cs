@@ -16,6 +16,11 @@ namespace TcgEngine.Client
 
     public class BoardCard : MonoBehaviour
     {
+        public GameObject TeamIcon;
+        public GameObject AttackIcon;
+        public GameObject HpIcon;
+        public CanvasGroup StatusPanel;
+        public Text StatusText;
         public SpriteRenderer card_sprite;
         public Sprite reverse_sprite; // Sprite para carta boca abajo
 
@@ -151,6 +156,7 @@ namespace TcgEngine.Client
             if (sprite != card_sprite.sprite)
                 card_sprite.sprite = sprite;
 
+
             // Frame image
             Sprite frame = card.VariantData.frame_board;
             if (frame != null && card_ui.frame_image != null)
@@ -252,6 +258,28 @@ namespace TcgEngine.Client
             }
 
             prev_hp = card.GetHP();
+
+            // Determinar si ocultar la UI
+            // 📌 Ocultar info si la carta está boca abajo
+            bool isPlayer = card.player_id == GameClient.Get().GetPlayerID();
+            bool isRevealed = card.revealed;
+            bool hideUI = isPlayer && !isRevealed;
+
+            // Ocultar info visual sensible
+            if (TeamIcon != null)
+                TeamIcon.SetActive(!hideUI);
+
+            if (AttackIcon != null)
+                AttackIcon.SetActive(!hideUI);
+
+            if (HpIcon != null)
+                HpIcon.SetActive(!hideUI);
+
+            if (StatusPanel != null)
+                StatusPanel.alpha = hideUI ? 0f : 1f;
+
+            if (StatusText != null)
+                StatusText.enabled = !hideUI;
 
             // 📌 Posicionar en el slot correspondiente
             if (card.slot.IsValid())
@@ -435,6 +463,7 @@ namespace TcgEngine.Client
             if (card != null && card.player_id == player.player_id && !card.revealed)
             {
                 card.revealed = true;  // Volteamos
+                SetCard(card);
                 return; // No hacer nada más
             }
 

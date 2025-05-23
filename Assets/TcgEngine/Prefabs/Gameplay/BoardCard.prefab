@@ -73,6 +73,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0667b5470f3948f498f8dbd5e0af2433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamIcon: {fileID: 1061054608979203695}
+  AttackIcon: {fileID: 2221684170674875442}
+  HpIcon: {fileID: 4899108891327977212}
+  StatusPanel: {fileID: 7530644308830308252}
+  StatusText: {fileID: 5515156283686671572}
   card_sprite: {fileID: 4561419592773535510}
   reverse_sprite: {fileID: -4335151106855458035, guid: 33277e954dfeddf44b11228dec001242,
     type: 3}
