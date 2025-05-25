@@ -153,6 +153,8 @@ namespace TcgEngine.Gameplay
 
             resolve_queue.AddCallback(StartMainPhase);
             resolve_queue.ResolveAll(0.2f);
+
+            StartMainPhase();
         }
 
         public virtual void StartNextTurn()
