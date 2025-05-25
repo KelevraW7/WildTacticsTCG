@@ -472,6 +472,7 @@ namespace TcgEngine.Gameplay
             attacker.RemoveStatus(StatusType.Stealth);
             UpdateOngoing();
 
+            // Aquí estaba el error 👇
             resolve_queue.AddAttack(attacker, target, ResolveAttackHit, skip_cost);
             resolve_queue.ResolveAll(0.3f);
         }
@@ -481,6 +482,8 @@ namespace TcgEngine.Gameplay
             //Count attack damage
             int datt1 = attacker.GetAttack();
             int datt2 = target.GetAttack();
+
+            Debug.Log($"🧮 Daño calculado: attacker {attacker.card_id} ({datt1}) → target {target.card_id} ({target.GetHP()} HP)");
 
             //Damage Cards
             DamageCard(attacker, target, datt1);
