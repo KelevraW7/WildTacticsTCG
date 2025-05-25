@@ -84,10 +84,15 @@ namespace TcgEngine.Client
 
             if (yourturn && selected_card != null)
             {
+                Debug.Log("🎯 ReleaseClick ejecutado");
                 Card card = selected_card.GetCard();
+                Debug.Log("📌 Carta seleccionada: " + card.card_id);
                 Vector3 wpos = GameBoard.Get().RaycastMouseBoard();
                 BSlot tslot = BSlot.GetNearest(wpos);
                 Card target = tslot?.GetSlotCard(wpos);
+                Debug.Log("📍 Slot objetivo: " + (tslot != null ? tslot.ToString() : "null"));
+                Debug.Log("🏹 Carta objetivo: " + (target != null ? target.card_id : "null"));
+
                 AbilityButton ability = AbilityButton.GetFocus(wpos, 1f);
 
                 if (ability != null && ability.IsInteractable())
@@ -99,14 +104,19 @@ namespace TcgEngine.Client
                 }
                 else if (target != null && target.uid != card.uid && target.player_id != card.player_id)
                 {
+                    Debug.Log("🛡️ target.player_id: " + target.player_id + " vs card.player_id: " + card.player_id);
+
                     if (!Tutorial.Get().CanDo(TutoEndTrigger.Attack, card) && !Tutorial.Get().CanDo(TutoEndTrigger.Attack, target))
                         return;
 
                     if (card.exhausted)
                         WarningText.ShowExhausted();
                     else
+                    {
+                        Debug.Log("🗡️ Enviando ataque a GameClient");
                         GameClient.Get().ApplyAttack(card, target);  // Ataca directamente en local
-                    Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
+                        Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
+                    }
                 }
                 else if (tslot != null && tslot is BoardSlot)
                 {

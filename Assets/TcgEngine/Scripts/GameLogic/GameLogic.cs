@@ -474,7 +474,9 @@ namespace TcgEngine.Gameplay
 
             // Aquí estaba el error 👇
             resolve_queue.AddAttack(attacker, target, ResolveAttackHit, skip_cost);
-            resolve_queue.ResolveAll(0.3f);
+            resolve_queue.SetDelay(0f);
+            resolve_queue.ResolveAll();
+
         }
 
         protected virtual void ResolveAttackHit(Card attacker, Card target, bool skip_cost)
@@ -489,8 +491,8 @@ namespace TcgEngine.Gameplay
             DamageCard(attacker, target, datt1);
 
             //Counter Damage
-            if (!attacker.HasStatus(StatusType.Intimidate))
-                DamageCard(target, attacker, datt2);
+            //if (!attacker.HasStatus(StatusType.Intimidate))
+                //DamageCard(target, attacker, datt2);
 
             //Save attack and exhaust
             if (!skip_cost)

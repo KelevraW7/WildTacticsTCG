@@ -304,9 +304,14 @@ namespace TcgEngine.Client
         {
             Debug.Log($"⚔️ Ejecutando ataque localmente: {attacker.card_id} → {target.card_id}");
 
+            bool isInBoard = GetGameData().GetPlayer(target.player_id).cards_board.Contains(target);
+            Debug.Log("🎯 ¿Target está en cards_board?: " + isInBoard);
+
             // Aseguramos que GameLogic use la misma instancia de datos
             GameLogic logic = new GameLogic(GetGameData());
             logic.AttackTarget(attacker, target);
+
+            Debug.Log("❤️ HP del objetivo después del ataque: " + target.hp);
         }
 
         public void Move(Card card, Slot slot)
@@ -456,7 +461,6 @@ namespace TcgEngine.Client
                 List<CardData> gold = allCards.FindAll(c => c.team != null && c.team.id.ToLower() == "gold");
                 Debug.Log("Cartas comunes: " + common.Count);
                 Debug.Log("Cartas doradas: " + gold.Count);
-
 
                 for (int p = 0; p < game_data.players.Length; p++)
                 {
