@@ -36,7 +36,6 @@ namespace TcgEngine.Client
                 if (Input.GetMouseButtonUp(0))
                 {
                     ReleaseClick();
-                    UnselectAll();
                 }
             }
         }
@@ -63,8 +62,10 @@ namespace TcgEngine.Client
             }
             else if (gdata.IsPlayerActionTurn(player) && card.player_id == player.player_id)
             {
-                //Start dragging card
+                UnselectAll(); // Limpia cualquier selección anterior
                 selected_card = bcard;
+                selected_card.SetSelectedVisual(true); // Aplica glow dorado
+
                 Debug.Log("✅ Carta seleccionada correctamente: " + card.card_id);
             }
         }
@@ -104,7 +105,7 @@ namespace TcgEngine.Client
                     if (card.exhausted)
                         WarningText.ShowExhausted();
                     else
-                        GameClient.Get().AttackTarget(card, target);
+                        GameClient.Get().ApplyAttack(card, target);  // Ataca directamente en local
                     Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
                 }
                 else if (tslot != null && tslot is BoardSlot)
@@ -119,6 +120,9 @@ namespace TcgEngine.Client
 
         public void UnselectAll()
         {
+            if (selected_card != null)
+                selected_card.SetSelectedVisual(false);
+
             selected_card = null;
         }
 

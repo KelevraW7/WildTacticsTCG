@@ -39,6 +39,8 @@ namespace TcgEngine.Client
 
         public Color glow_ally;
         public Color glow_enemy;
+        public Color glow_selected = new Color(1f, 0.84f, 0f); // Amarillo dorado
+        private bool is_selected = false;
 
         public UnityAction onKill;
 
@@ -119,7 +121,6 @@ namespace TcgEngine.Client
                 card_ui.SetHP(prev_hp);
             }
 
-            // Save Previous HP
             if (!IsDamagedDelayed())
                 prev_hp = card.GetHP();
 
@@ -134,9 +135,36 @@ namespace TcgEngine.Client
             if (equipment != null && equipment.IsFocus())
                 target_alpha = 0f;
 
-            // 🔧 Usamos alpha 1f forzado
-            Color ccolor = player.player_id == card.player_id ? glow_ally : glow_enemy;
-            float calpha = Mathf.MoveTowards(card_glow.color.a, target_alpha, 4f * Time.deltaTime);
+            // 🟡 Color del glow: dorado si está seleccionada, azul/rojo si no
+            Color ccolor;
+            float calpha;
+
+            if (is_selected)
+            {
+                ccolor = glow_selected;
+
+                // Pulso entre 0.4 y 1.0 con efecto seno (brillo)
+                float pulse = 0.3f * Mathf.Sin(Time.time * 4f) + 0.7f;
+                calpha = pulse;
+
+                // Pulso de escala (latido)
+                float scale_pulse = 1f + 0.03f * Mathf.Sin(Time.time * 4f);
+                transform.localScale = new Vector3(scale_pulse, scale_pulse, 1f);
+            }
+            else
+            {
+                ccolor = player.player_id == card.player_id ? glow_ally : glow_enemy;
+
+                target_alpha = (IsFocus()) ? 1f : 0f;
+                if (destroyed || timer < 1f || (equipment != null && equipment.IsFocus()))
+                    target_alpha = 0f;
+
+                calpha = Mathf.MoveTowards(card_glow.color.a, target_alpha, 4f * Time.deltaTime);
+
+                // Reset escala cuando no está seleccionada
+                transform.localScale = Vector3.one;
+            }
+
             card_glow.color = new Color(ccolor.r, ccolor.g, ccolor.b, calpha);
             card_shadow.enabled = !destroyed && timer > 0.4f;
             card_sprite.color = card.HasStatus(StatusType.Stealth) ? Color.gray : Color.white;
@@ -158,7 +186,6 @@ namespace TcgEngine.Client
 
             if (sprite != card_sprite.sprite)
                 card_sprite.sprite = sprite;
-
 
             // Frame image
             Sprite frame = card.VariantData.frame_board;
@@ -311,6 +338,11 @@ namespace TcgEngine.Client
         {
             card_sprite.sortingOrder = order;
             canvas.sortingOrder = order + 1;
+        }
+
+        public void SetSelectedVisual(bool selected)
+        {
+            is_selected = selected;
         }
 
         public void Destroy()

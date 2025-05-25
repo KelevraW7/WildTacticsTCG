@@ -5,6 +5,9 @@ using UnityEngine.Events;
 using Unity.Netcode;
 using System.Threading.Tasks;
 using System.Linq;
+using TcgEngine.Server;
+using TcgEngine.Gameplay;
+
 
 namespace TcgEngine.Client
 {
@@ -297,6 +300,14 @@ namespace TcgEngine.Client
             Debug.Log($"📤 Enviando ataque: {mdata.attacker_uid} → {mdata.target_uid}");
         }
 
+        public void ApplyAttack(Card attacker, Card target)
+        {
+            Debug.Log($"⚔️ Ejecutando ataque localmente: {attacker.card_id} → {target.card_id}");
+
+            // Aseguramos que GameLogic use la misma instancia de datos
+            GameLogic logic = new GameLogic(GetGameData());
+            logic.AttackTarget(attacker, target);
+        }
 
         public void Move(Card card, Slot slot)
         {
