@@ -32,44 +32,47 @@ namespace TcgEngine.AI
             StartCoroutine(PlayTurnCoroutine());
         }
 
-private IEnumerator PlayTurnCoroutine()
-{
-    yield return new WaitForSeconds(1f); // Delay inicial
-
-    List<BoardCard> iaCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == IA_ID);
-    List<BoardCard> playerCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == PLAYER_ID);
-
-    foreach (BoardCard attacker in iaCards)
-    {
-        BoardCard target = ElegirObjetivo(attacker, playerCards);
-
-        if (target != null)
+        private IEnumerator PlayTurnCoroutine()
         {
-            Debug.Log($"🤖 IA ataca con {attacker.GetCard().card_id} a {target.GetCard().card_id}");
+            yield return new WaitForSeconds(1f); // Delay inicial
 
-            // Selecciona la carta (esto activa el glow y la línea automáticamente)
-            PlayerControls.Get().SelectCard(attacker);
+            List<BoardCard> iaCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == IA_ID);
+            List<BoardCard> playerCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == PLAYER_ID);
 
-            yield return new WaitForSeconds(0.5f); // Deja que se vea la línea
+            BoardCard attacker = ElegirAtacante(iaCards);
+            BoardCard target = attacker != null ? ElegirObjetivo(attacker, playerCards) : null;
 
-            // Ejecuta el ataque como el jugador humano
-            GameClient.Get().ApplyAttack(attacker.GetCard(), target.GetCard());
+            if (attacker != null && target != null)
+            {
+                Debug.Log($"🤖 IA ataca con {attacker.GetCard().card_id} a {target.GetCard().card_id}");
 
-            yield return new WaitForSeconds(1.2f); // Tiempo para ver el daño
+                // Mostrar glow
+                PlayerControls.Get().SelectCard(attacker);
 
-            // Oculta efectos visuales
-            Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
-            PlayerControls.Get().UnselectAll();
+                yield return new WaitForSeconds(0.5f); // Deja que se vea la selección
 
-            yield return new WaitForSeconds(0.3f);
+                // Mostrar línea de ataque
+                Object.FindFirstObjectByType<MouseLineFX>()?.SetLine(attacker.transform.position, target.transform.position);
+
+                yield return new WaitForSeconds(0.4f); // Tiempo para ver la línea
+
+                // Ejecutar ataque real
+                GameClient.Get().ApplyAttack(attacker.GetCard(), target.GetCard());
+
+                yield return new WaitForSeconds(1.2f); // Tiempo para visualizar daño
+
+                // Ocultar visuales
+                Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
+                PlayerControls.Get().UnselectAll();
+
+                yield return new WaitForSeconds(0.3f);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            // Finaliza turno
+            GameClient.Get().EndTurn();
         }
-    }
-
-    yield return new WaitForSeconds(0.5f);
-
-    // Finaliza turno (esto activa el cambio de turno visual y lógico)
-    GameClient.Get().EndTurn();
-}
 
         private BoardCard ElegirObjetivo(BoardCard atacante, List<BoardCard> posibles)
         {
@@ -107,6 +110,15 @@ private IEnumerator PlayTurnCoroutine()
 
             // 3. Si no hay ventaja, devolver uno al azar
             return posibles[Random.Range(0, posibles.Count)];
+        }
+
+        private BoardCard ElegirAtacante(List<BoardCard> disponibles)
+        {
+            if (disponibles.Count == 0)
+                return null;
+
+            // Por ahora, elige una criatura aleatoria
+            return disponibles[Random.Range(0, disponibles.Count)];
         }
 
         private bool TieneVentajaDeTipo(string atacante, string objetivo)

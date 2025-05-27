@@ -124,6 +124,22 @@ namespace TcgEngine.FX
 
             points.Clear();
         }
+        public void SetLine(Vector3 from, Vector3 to)
+        {
+            Hide();  // Limpiar puntos anteriores
 
+            Vector3 dir = (to - from).normalized;
+            float dist = Vector3.Distance(from, to);
+
+            float value = 0f;
+            while (value < dist)
+            {
+                Vector3 pos = from + dir * value;
+                points.Add(pos);
+                value += dot_spacing;
+            }
+
+            RefreshRender();
+        }
     }
 }
