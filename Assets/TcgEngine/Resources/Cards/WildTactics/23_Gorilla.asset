@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 23_Gorilla
   m_EditorClassIdentifier: 
   id: 23
-  title: Gorilla
+  title: Elyas
   art_full: {fileID: 8741728763419276020, guid: 32947b0be9384e74281c96ee1e8dc2f8,
     type: 3}
   art_board: {fileID: -359176403916117441, guid: 71dabdda97906b04f8a5c014aab8fce2,

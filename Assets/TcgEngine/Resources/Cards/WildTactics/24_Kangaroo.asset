@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 24_Kangaroo
   m_EditorClassIdentifier: 
   id: 24
-  title: Kangaroo
+  title: Felix
   art_full: {fileID: -6256299440580749055, guid: a2802c10057ea754496a8e104f10ddb9,
     type: 3}
   art_board: {fileID: -6763651441221861117, guid: 47ef25467d65b0c4eac335caaf7f3f4e,

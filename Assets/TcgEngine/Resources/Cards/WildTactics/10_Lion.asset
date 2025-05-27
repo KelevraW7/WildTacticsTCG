@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 10_Lion
   m_EditorClassIdentifier: 
   id: 10
-  title: Lion
+  title: Dante
   art_full: {fileID: -6238478747200689555, guid: 4d4a643d7e0d2b24e87ea056f8fed313,
     type: 3}
   art_board: {fileID: 3228473557970536715, guid: 66efb17c88bc8e843810c35b8fc16351,

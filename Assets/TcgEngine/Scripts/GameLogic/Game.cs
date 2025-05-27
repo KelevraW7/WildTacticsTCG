@@ -18,6 +18,8 @@ namespace TcgEngine
         public int turn_count = 0;
         public float turn_timer = 0f;
 
+        public bool has_attacked_this_turn = false;
+
         public GameState state = GameState.Connecting;
         public GamePhase phase = GamePhase.None;
 

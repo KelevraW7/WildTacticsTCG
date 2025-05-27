@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 13_Lion
   m_EditorClassIdentifier: 
   id: 13
-  title: Lion
+  title: Caleb
   art_full: {fileID: -6078392490056069737, guid: 2ca09ef800c2fca4ca5d236101813ea3,
     type: 3}
   art_board: {fileID: -3947162674785664321, guid: d2cd4cc2995c9b446b9de3768723edda,

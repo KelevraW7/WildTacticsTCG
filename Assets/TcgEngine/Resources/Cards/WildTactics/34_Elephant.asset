@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 34_Elephant
   m_EditorClassIdentifier: 
   id: 34
-  title: Elephant
+  title: Mara
   art_full: {fileID: 5199615079562923340, guid: 738b3adccc30ad34cb38bc09a47eb222,
     type: 3}
   art_board: {fileID: 6371141884157642194, guid: 0c510082f5ec73d43b1cee451dca55a9,

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 25_Bear
   m_EditorClassIdentifier: 
   id: 25
-  title: Bear
+  title: Cedric
   art_full: {fileID: -5211604146245743853, guid: 0d9b84b8d51b894469261ef55b7717f2,
     type: 3}
   art_board: {fileID: 4305256531451409797, guid: b10c1652379ea584792358e7978c5e8c,

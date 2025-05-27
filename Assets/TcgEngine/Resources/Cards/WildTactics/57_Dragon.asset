@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 57_Dragon
   m_EditorClassIdentifier: 
   id: 57
-  title: Dragon
+  title: Zephyrion
   art_full: {fileID: -177788990929246876, guid: 30b3a2127a2209c47b36482a406953a0,
     type: 3}
   art_board: {fileID: 4642337526893791137, guid: 5f4014288bcc1cb4587d81fc863b3267,

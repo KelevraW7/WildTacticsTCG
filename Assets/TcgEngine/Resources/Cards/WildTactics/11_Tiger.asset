@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 11_Tiger
   m_EditorClassIdentifier: 
   id: 11
-  title: Tiger
+  title: Ragnar
   art_full: {fileID: -2398579128163856453, guid: a4ea363aea6990d49bbc4fabf1f94966,
     type: 3}
   art_board: {fileID: 4455346378933569524, guid: 6ec78a983c4bdc14fa06294955d8efe0,

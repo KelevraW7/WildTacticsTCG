@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 36_Bull
   m_EditorClassIdentifier: 
   id: 36
-  title: Bull
+  title: Leonard
   art_full: {fileID: 6653835726562711690, guid: d343f8c0ff9c5e94ab35b5573f3887ed,
     type: 3}
   art_board: {fileID: -4274171417508042499, guid: 755ab8863a5f40d40bcfca0c702340b7,

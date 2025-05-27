@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 38_Whale
   m_EditorClassIdentifier: 
   id: 38
-  title: Whale
+  title: Magnus
   art_full: {fileID: -3013110046867743400, guid: 3591ceabfdef4ff4c85b732242f00f3c,
     type: 3}
   art_board: {fileID: 2296409679773713795, guid: 2ea1e826bbb21d740a0e3a2c68c61b6d,

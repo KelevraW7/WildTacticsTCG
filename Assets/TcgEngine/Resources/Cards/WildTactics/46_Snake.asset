@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 46_Snake
   m_EditorClassIdentifier: 
   id: 46
-  title: Snake
+  title: Vera
   art_full: {fileID: 5236558070763802787, guid: d4d2b579f4fb4e740b1671cf2a4d545a,
     type: 3}
   art_board: {fileID: -6572850105315253259, guid: 8e3fdfc3b9aea02448327b1315a21ed3,

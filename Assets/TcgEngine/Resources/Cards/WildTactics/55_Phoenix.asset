@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 55_Phoenix
   m_EditorClassIdentifier: 
   id: 55
-  title: Phoenix
+  title: Everflame
   art_full: {fileID: -5115908945865237989, guid: e1e605d18100c004099bfce446b85e5f,
     type: 3}
   art_board: {fileID: 446412136400846317, guid: f1c8db759570b58479e64e8b74dc662c,

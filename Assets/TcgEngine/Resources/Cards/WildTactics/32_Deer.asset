@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 32_Deer
   m_EditorClassIdentifier: 
   id: 32
-  title: Deer
+  title: Alaric
   art_full: {fileID: -3831342872761067766, guid: 872982d0a76d19545bfbd27235c8117e,
     type: 3}
   art_board: {fileID: 6899788035044567133, guid: 2dfbac4a8fa656146ab32111a3c22695,

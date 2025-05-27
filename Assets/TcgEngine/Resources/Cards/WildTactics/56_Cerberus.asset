@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 56_Cerberus
   m_EditorClassIdentifier: 
   id: 56
-  title: Cerberus
+  title: Hellbound
   art_full: {fileID: 3232576297527654408, guid: b2c8f7daaab4bdc4698b7bf1a7879a5d,
     type: 3}
   art_board: {fileID: -2738127191378729164, guid: 24c0373fb23298a4c96d8cfd7e38a01b,

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4_Eagle
   m_EditorClassIdentifier: 
   id: 4
-  title: Eagle
+  title: Celeste
   art_full: {fileID: -6643382586730260004, guid: 4a34850ff1bd6be47bdc695c1c974b6d,
     type: 3}
   art_board: {fileID: 581182079303737306, guid: a7797ee45209f0b4092f0c387fd52525,

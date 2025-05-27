@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 48_Octopus
   m_EditorClassIdentifier: 
   id: 48
-  title: Octopus
+  title: Cyrus
   art_full: {fileID: -5143837382868867436, guid: d42fb8121915b8c4ea7f1cd847ddd061,
     type: 3}
   art_board: {fileID: 4687771176001046557, guid: 5823f9c2f920d1c4da2846664c8695e4,

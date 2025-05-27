@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 49_Snake
   m_EditorClassIdentifier: 
   id: 49
-  title: Snake
+  title: Rhea
   art_full: {fileID: 3574084938712144616, guid: a8fe4efe743189d4a976f301a11ce70d,
     type: 3}
   art_board: {fileID: -4880302681971310332, guid: 8c406c8f9a4a5684d8b64e31f806f1b9,

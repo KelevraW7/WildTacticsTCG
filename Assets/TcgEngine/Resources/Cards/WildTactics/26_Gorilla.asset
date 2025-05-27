@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 26_Gorilla
   m_EditorClassIdentifier: 
   id: 26
-  title: Gorilla
+  title: Caesar
   art_full: {fileID: -9140020588472245672, guid: 9d67e505c2906dd4b8a3a63d3ba17a0e,
     type: 3}
   art_board: {fileID: -6998714756920862936, guid: e4dda3d2b266d9641b82bef090edd298,

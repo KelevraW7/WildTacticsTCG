@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 15_Wolf
   m_EditorClassIdentifier: 
   id: 15
-  title: Wolf
+  title: Nikolai
   art_full: {fileID: -3623121044190335869, guid: 5958347f8bf53304697e459e4b60d9b2,
     type: 3}
   art_board: {fileID: -6953945886460748233, guid: 3d2948ec935f6384c9c42e24a139eee8,

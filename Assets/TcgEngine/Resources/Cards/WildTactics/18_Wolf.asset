@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 18_Wolf
   m_EditorClassIdentifier: 
   id: 18
-  title: Wolf
+  title: Rowan
   art_full: {fileID: 4218620430010262808, guid: a1a41901af49eac4d9abeb23243cfd65,
     type: 3}
   art_board: {fileID: 3103911024725581217, guid: 3dfc887936fe3cb41bf0dfa5ca265941,

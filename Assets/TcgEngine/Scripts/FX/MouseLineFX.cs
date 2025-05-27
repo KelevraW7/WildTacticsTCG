@@ -113,5 +113,17 @@ namespace TcgEngine.FX
             dot.SetActive(true);
             dot_list.Add(dot);
         }
+
+        public void Hide()
+        {
+            foreach (GameObject dot in dot_list)
+            {
+                if (dot != null && dot.activeSelf)
+                    dot.SetActive(false);
+            }
+
+            points.Clear();
+        }
+
     }
 }

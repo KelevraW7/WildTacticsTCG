@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 28_Elephant
   m_EditorClassIdentifier: 
   id: 28
-  title: Elephant
+  title: Rocky
   art_full: {fileID: 2718910618330451643, guid: 77c88f0b6783dc2429965f9c6d35f784,
     type: 3}
   art_board: {fileID: 1899613376293918130, guid: 23cf16184c212f54fbb430498376f38c,

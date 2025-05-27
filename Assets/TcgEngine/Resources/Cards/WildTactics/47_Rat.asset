@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 47_Rat
   m_EditorClassIdentifier: 
   id: 47
-  title: Rat
+  title: Remy
   art_full: {fileID: 2413180691662434792, guid: 14988c6211616c340bacc7e90a092c28,
     type: 3}
   art_board: {fileID: 5418013302516956634, guid: 30b07824dfef5664293927af4792f478,

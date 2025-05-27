@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 44_Whale
   m_EditorClassIdentifier: 
   id: 44
-  title: Whale
+  title: Silas
   art_full: {fileID: -390159885459318560, guid: ff2d73b3623cff04ab79135ae950dfd1,
     type: 3}
   art_board: {fileID: -3874036608425105854, guid: 1dd2ed73874cb9d409282f2c91e24a44,

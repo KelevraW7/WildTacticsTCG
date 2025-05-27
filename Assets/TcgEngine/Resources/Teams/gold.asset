@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: gold
   m_EditorClassIdentifier: 
   id: gold
-  title: Gold
+  title: gold
   icon: {fileID: 0}
   color: {r: 0.6981132, g: 0.54042804, b: 0, a: 0}

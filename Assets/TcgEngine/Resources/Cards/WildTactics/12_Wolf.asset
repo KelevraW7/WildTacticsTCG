@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 12_Wolf
   m_EditorClassIdentifier: 
   id: 12
-  title: Wolf
+  title: Hektor
   art_full: {fileID: 1885816332270137899, guid: f4b6cf54cd4ed884d87036cec71efda3,
     type: 3}
   art_board: {fileID: -6301245278920320610, guid: 050946ee0d5854f4dbc549ad55c9eb3e,

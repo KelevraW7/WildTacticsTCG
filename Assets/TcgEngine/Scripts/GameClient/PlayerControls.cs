@@ -4,6 +4,8 @@ using UnityEngine;
 using TcgEngine.Client;
 using UnityEngine.Events;
 using TcgEngine.UI;
+using TcgEngine.FX;
+
 
 namespace TcgEngine.Client
 {
@@ -106,6 +108,12 @@ namespace TcgEngine.Client
                 {
                     Debug.Log("🛡️ target.player_id: " + target.player_id + " vs card.player_id: " + card.player_id);
 
+                    if (GameClient.Get().GetGameData().has_attacked_this_turn)
+                    {
+                        WarningText.ShowText("⚠️ Ya has atacado este turno");
+                        return;
+                    }
+
                     if (!Tutorial.Get().CanDo(TutoEndTrigger.Attack, card) && !Tutorial.Get().CanDo(TutoEndTrigger.Attack, target))
                         return;
 
@@ -116,6 +124,9 @@ namespace TcgEngine.Client
                         Debug.Log("🗡️ Enviando ataque a GameClient");
                         GameClient.Get().ApplyAttack(card, target);  // Ataca directamente en local
                         Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
+
+                        Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
+                        UnselectAll();               // ✅ Limpia selección visual
                     }
                 }
                 else if (tslot != null && tslot is BoardSlot)

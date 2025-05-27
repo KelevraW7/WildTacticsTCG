@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 35_Deer
   m_EditorClassIdentifier: 
   id: 35
-  title: Deer
+  title: Sylvain
   art_full: {fileID: -6695438628362081743, guid: 95b5f5f0afe510547adb5420f5f0ad8c,
     type: 3}
   art_board: {fileID: -6250488502526175487, guid: d71fd30c74530b04bbc0f8a6837047de,

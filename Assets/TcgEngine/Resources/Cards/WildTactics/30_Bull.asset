@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 30_Bull
   m_EditorClassIdentifier: 
   id: 30
-  title: Bull
+  title: "Th\xE9odore"
   art_full: {fileID: -7649232836425558088, guid: ba678c1120add7140aeaf9cd95921e13,
     type: 3}
   art_board: {fileID: 357544235353251135, guid: 5109a73ccc3072a4f8ff91c96adfb278,

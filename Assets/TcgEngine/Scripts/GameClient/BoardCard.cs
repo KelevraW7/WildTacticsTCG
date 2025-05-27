@@ -29,6 +29,7 @@ namespace TcgEngine.Client
 
         public Image armor_icon;
         public Text armor;
+        public GameObject damageTextPrefab;  // Asignar en el inspector
 
         public CanvasGroup status_group;
         public Text status_text;
@@ -343,6 +344,11 @@ namespace TcgEngine.Client
         public void SetSelectedVisual(bool selected)
         {
             is_selected = selected;
+        }
+
+        public void ShowDamage(int amount)
+        {
+
         }
 
         public void Destroy()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 45_Crocodile
   m_EditorClassIdentifier: 
   id: 45
-  title: Crocodile
+  title: Malik
   art_full: {fileID: 2878466272907338148, guid: c2f92a383c0124945b32f353656d9546,
     type: 3}
   art_board: {fileID: -3480793778380590247, guid: 2135613ad597cf5499534de63618b46f,

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_Eagle
   m_EditorClassIdentifier: 
   id: 1
-  title: Eagle
+  title: Kaelis
   art_full: {fileID: 2912652437716000243, guid: 789a4cdd46d141d4097edfd1e27e1c1e,
     type: 3}
   art_board: {fileID: -3471540388742628207, guid: 4c3d6b8b8147cd84fbdb7a7a814fa4f7,

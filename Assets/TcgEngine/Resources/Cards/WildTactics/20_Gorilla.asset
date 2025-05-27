@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 20_Gorilla
   m_EditorClassIdentifier: 
   id: 20
-  title: Gorilla
+  title: Brutus
   art_full: {fileID: -4806761911659874042, guid: 66c7ccc4312466147bff9d84f0af4c55,
     type: 3}
   art_board: {fileID: 2936909482203911150, guid: bbe1ad3126ba6514789d2f6c42061b58,

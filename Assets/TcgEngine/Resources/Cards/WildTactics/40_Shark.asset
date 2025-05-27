@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 40_Shark
   m_EditorClassIdentifier: 
   id: 40
-  title: Shark
+  title: Marek
   art_full: {fileID: 4477720621884349606, guid: 6ab342b198141904aa2c8c0670772921,
     type: 3}
   art_board: {fileID: 3279582876906366542, guid: cf8d24421e080e14db6a54c9bb4b92ce,

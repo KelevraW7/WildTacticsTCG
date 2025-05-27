@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3_Owl
   m_EditorClassIdentifier: 
   id: 3
-  title: Owl
+  title: Cassiopea
   art_full: {fileID: -8258267014092021047, guid: f2ee2e316e8488c4abfbb4c706f8073a,
     type: 3}
   art_board: {fileID: 5387121178053429513, guid: f0478f275fb63c84ab2d7949ce4c280b,

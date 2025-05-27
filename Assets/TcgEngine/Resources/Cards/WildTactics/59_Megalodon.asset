@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 59_Megalodon
   m_EditorClassIdentifier: 
   id: 59
-  title: Megalodon
+  title: Voranth
   art_full: {fileID: 806946233008793545, guid: 080773ee6ba363c4295443af633084c2, type: 3}
   art_board: {fileID: 6984558280708808962, guid: 2581566f77cd8a349a60084b2abfd90f,
     type: 3}

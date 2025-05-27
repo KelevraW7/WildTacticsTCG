@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 27_Kangaroo
   m_EditorClassIdentifier: 
   id: 27
-  title: Kangaroo
+  title: Quinn
   art_full: {fileID: 4402271509959000699, guid: 6d7c9aabb198fbc40bc718f5671fbb0b,
     type: 3}
   art_board: {fileID: 4166372389963851473, guid: 5aba241d118933e4897df641f34f4b70,

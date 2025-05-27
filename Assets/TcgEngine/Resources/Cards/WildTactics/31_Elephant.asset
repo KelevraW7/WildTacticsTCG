@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 31_Elephant
   m_EditorClassIdentifier: 
   id: 31
-  title: Elephant
+  title: Ezekiel
   art_full: {fileID: 8589291045797268807, guid: cb4bc15a47a31a14ea1e83c207059289,
     type: 3}
   art_board: {fileID: -368867324026653080, guid: 9d9ad294a78d0604095b557706ddc5f7,

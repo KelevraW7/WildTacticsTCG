@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 53_Rat
   m_EditorClassIdentifier: 
   id: 53
-  title: Rat
+  title: Judas
   art_full: {fileID: 8170027030859482207, guid: c4939892db853a244a675d407fa5b785,
     type: 3}
   art_board: {fileID: -736405349297983435, guid: cf52b0f007351474b9c2c9968e5a7aaf,

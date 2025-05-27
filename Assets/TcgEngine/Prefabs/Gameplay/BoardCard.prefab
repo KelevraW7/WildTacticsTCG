@@ -85,6 +85,7 @@ MonoBehaviour:
   card_shadow: {fileID: 2627115110601193755}
   armor_icon: {fileID: 2120772986331203030}
   armor: {fileID: 6745754169036586786}
+  damageTextPrefab: {fileID: 0}
   status_group: {fileID: 7530644308830308252}
   status_text: {fileID: 5515156283686671572}
   equipment: {fileID: 3982280019866088835}
@@ -93,6 +94,7 @@ MonoBehaviour:
   - {fileID: 6539638598109738867}
   glow_ally: {r: 0.23113209, g: 1, b: 0.9919755, a: 0.8}
   glow_enemy: {r: 0.8962264, g: 0.114142045, b: 0.114142045, a: 0.8}
+  glow_selected: {r: 1, g: 0.84, b: 0, a: 1}
   card_ui: {fileID: 8878157023945928430}
   card_uid: 
 --- !u!114 &7205200960357975702
@@ -109,6 +111,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kill_mat: {fileID: 2100000, guid: 209a312c80670de4ca59892424609079, type: 2}
   kill_mat_fade: noise_fade
+  card:
+    card_id: 
+    revealed: 0
+    uid: 
+    player_id: 0
+    variant_id: 
+    slot:
+      x: 0
+      y: 0
+      p: 0
+    exhausted: 0
+    damage: 0
+    attack: 0
+    hp: 0
+    attack_ongoing: 0
+    hp_ongoing: 0
+    equipped_uid: 
+    traits: []
+    ongoing_traits: []
+    status: []
+    ongoing_status: []
+    abilities: []
+    abilities_ongoing: []
+  icard: {fileID: 0}
 --- !u!114 &8878157023945928430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,7 +620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &490339033912184814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1224,7 +1250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8673426135396100191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1451,7 +1477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8700305807313376589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1995,7 +2021,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 6
@@ -2465,7 +2491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1233663127237433447
 RectTransform:
   m_ObjectHideFlags: 0

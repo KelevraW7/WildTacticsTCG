@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 6_Owl
   m_EditorClassIdentifier: 
   id: 6
-  title: Owl
+  title: Orion
   art_full: {fileID: 3925986092888359880, guid: e0b43520a4b34174cbc8321a0ad0ab4f,
     type: 3}
   art_board: {fileID: -4611711965548268969, guid: 520b2299188151345ac4b266be87c1fe,

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 33_Bull
   m_EditorClassIdentifier: 
   id: 33
-  title: Bull
+  title: Julius
   art_full: {fileID: -3395325542125057871, guid: 2e3a9a2d5348e554ab21c8fdd9a9a8ad,
     type: 3}
   art_board: {fileID: 8248381616486156423, guid: 47766f7e8c819c14d9b400340a9936cd,

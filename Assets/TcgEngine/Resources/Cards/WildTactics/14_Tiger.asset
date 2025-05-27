@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 14_Tiger
   m_EditorClassIdentifier: 
   id: 14
-  title: Tiger
+  title: Kayla
   art_full: {fileID: -8194709713817362612, guid: f6e18da9b3bc98a44afaaa7678790a75,
     type: 3}
   art_board: {fileID: -8641772090959577052, guid: 49b5400cefe2c8341b6879ca93cbf0e8,

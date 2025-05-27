@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 17_Tiger
   m_EditorClassIdentifier: 
   id: 17
-  title: Tiger
+  title: Lyra
   art_full: {fileID: 8381510899401966809, guid: 7e9f8407405f50b4cbbc08f0a27a62d4,
     type: 3}
   art_board: {fileID: 9137793239983804732, guid: a284c83b53e94744fba599ee2f41e402,

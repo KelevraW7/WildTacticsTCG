@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7_Eagle
   m_EditorClassIdentifier: 
   id: 7
-  title: Eagle
+  title: Bastian
   art_full: {fileID: 676576489106219464, guid: 4b33396a1904b054fa4fbe4d332a4928, type: 3}
   art_board: {fileID: -2984814931322382033, guid: b26b4f36fbecbe84b9a9d212059e8a7f,
     type: 3}

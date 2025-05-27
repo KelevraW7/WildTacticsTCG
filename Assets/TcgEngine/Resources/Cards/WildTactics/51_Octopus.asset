@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 51_Octopus
   m_EditorClassIdentifier: 
   id: 51
-  title: Octopus
+  title: Thais
   art_full: {fileID: -2342070302095779641, guid: 84a3f7beb8f210c4ead5b6cf2364cf31,
     type: 3}
   art_board: {fileID: -8376459045306160458, guid: b5d390a76b802774ca3aae28e8e51a78,

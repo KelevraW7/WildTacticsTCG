@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 60_Cthulhu
   m_EditorClassIdentifier: 
   id: 60
-  title: Cthulhu
+  title: Nekrolord
   art_full: {fileID: -6868990970202700317, guid: 767d1f59efe4f924bb1cb411a32a2f2a,
     type: 3}
   art_board: {fileID: -3975130022700150091, guid: 08d60724e35442343a5026ff5723fd67,

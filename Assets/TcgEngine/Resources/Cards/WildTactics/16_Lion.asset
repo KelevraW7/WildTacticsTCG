@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 16_Lion
   m_EditorClassIdentifier: 
   id: 16
-  title: Lion
+  title: Dorian
   art_full: {fileID: 7626395336468247215, guid: 27d7f3ea69467ad4981cea79198401a8,
     type: 3}
   art_board: {fileID: -448768667091477446, guid: 16266047fcaeddc4d801d0cd9319dccb,

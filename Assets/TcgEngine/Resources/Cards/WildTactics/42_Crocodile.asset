@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 42_Crocodile
   m_EditorClassIdentifier: 
   id: 42
-  title: Crocodile
+  title: Kenzo
   art_full: {fileID: -7998944681900490370, guid: c908675eb016fc44f9fd0c6d273728e0,
     type: 3}
   art_board: {fileID: -70467516154499374, guid: d1068c3dba501184d8c4b3ca26eb78ba,

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 41_Whale
   m_EditorClassIdentifier: 
   id: 41
-  title: Whale
+  title: Nadine
   art_full: {fileID: 2473120385651665465, guid: 970b5450a6b09834b8381a2859f1ab38,
     type: 3}
   art_board: {fileID: -6967641178289644281, guid: 55be912312d7cdb4185a038f538326ad,

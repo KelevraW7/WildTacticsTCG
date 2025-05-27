@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 19_Bear
   m_EditorClassIdentifier: 
   id: 19
-  title: Bear
+  title: Otto
   art_full: {fileID: -9012708559994442150, guid: 161abf00d3f4ce34492fdf50b5f7b849,
     type: 3}
   art_board: {fileID: 7233620666430797579, guid: e3277996b831f634b9abc0b0614b5a73,

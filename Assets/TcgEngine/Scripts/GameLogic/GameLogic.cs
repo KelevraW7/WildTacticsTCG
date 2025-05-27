@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Profiling;
+using TcgEngine.UI;
+using TcgEngine.Client;
 
 namespace TcgEngine.Gameplay
 {
@@ -112,6 +114,7 @@ namespace TcgEngine.Gameplay
                 return;
 
             ClearTurnData();
+            game_data.has_attacked_this_turn = false;
             game_data.phase = GamePhase.StartTurn;
             RefreshData();
             onTurnStart?.Invoke();
@@ -143,7 +146,9 @@ namespace TcgEngine.Gameplay
                     card.Refresh();
 
                 if (card.HasStatus(StatusType.Poisoned))
+                {
                     DamageCard(card, card.GetStatusValue(StatusType.Poisoned));
+                }
             }
 
             // Habilidades continuas y de inicio de turno
@@ -492,11 +497,14 @@ namespace TcgEngine.Gameplay
 
             //Counter Damage
             //if (!attacker.HasStatus(StatusType.Intimidate))
-                //DamageCard(target, attacker, datt2);
+            //DamageCard(target, attacker, datt2);
 
             //Save attack and exhaust
             if (!skip_cost)
                 ExhaustBattle(attacker);
+
+            game_data.has_attacked_this_turn = true;
+            EndTurn();
 
             //Recalculate bonus
             UpdateOngoing();
@@ -764,6 +772,13 @@ namespace TcgEngine.Gameplay
             int damage_max = Mathf.Min(value, target.GetHP());
             int extra = value - target.GetHP();
             target.damage += value;
+
+            // Mostrar texto flotante del daño recibido
+            // {
+            //   BoardCard board = BoardCard.Get(target.uid);
+            //   if (board != null)
+            //     board.ShowDamage(value);
+            //}
 
             //Remove sleep on damage
             target.RemoveStatus(StatusType.Sleep);

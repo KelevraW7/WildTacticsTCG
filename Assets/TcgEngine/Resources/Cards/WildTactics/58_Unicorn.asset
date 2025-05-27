@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 58_Unicorn
   m_EditorClassIdentifier: 
   id: 58
-  title: Unicorn
+  title: Auralis
   art_full: {fileID: -791793500224108431, guid: 87462bb1f31cb82458ad2dba4ef96434,
     type: 3}
   art_board: {fileID: 3055830378453168769, guid: 52203d75e81aa2a44b2f7aaa68e21ecc,

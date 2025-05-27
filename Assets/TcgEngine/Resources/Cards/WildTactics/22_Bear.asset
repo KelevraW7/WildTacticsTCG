@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 22_Bear
   m_EditorClassIdentifier: 
   id: 22
-  title: Bear
+  title: Marko
   art_full: {fileID: 6753912975130317225, guid: be956556d699a754a9e38aa1f0f64205,
     type: 3}
   art_board: {fileID: 323908988255993588, guid: 4d935c2d8dc1d4445868321accd1d2c4,
