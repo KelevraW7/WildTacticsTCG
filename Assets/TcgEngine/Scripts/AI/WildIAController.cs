@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TcgEngine.Gameplay;
 using TcgEngine.Client;
+using TcgEngine.FX;
 
 namespace TcgEngine.AI
 {
@@ -31,33 +32,44 @@ namespace TcgEngine.AI
             StartCoroutine(PlayTurnCoroutine());
         }
 
-        private IEnumerator PlayTurnCoroutine()
+private IEnumerator PlayTurnCoroutine()
+{
+    yield return new WaitForSeconds(1f); // Delay inicial
+
+    List<BoardCard> iaCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == IA_ID);
+    List<BoardCard> playerCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == PLAYER_ID);
+
+    foreach (BoardCard attacker in iaCards)
+    {
+        BoardCard target = ElegirObjetivo(attacker, playerCards);
+
+        if (target != null)
         {
-            yield return new WaitForSeconds(1f); // Delay para que el jugador vea las acciones
+            Debug.Log($"🤖 IA ataca con {attacker.GetCard().card_id} a {target.GetCard().card_id}");
 
-            List<BoardCard> iaCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == IA_ID);
-            List<BoardCard> playerCards = BoardCard.GetAll().FindAll(c => !c.IsDead() && c.GetCard().player_id == PLAYER_ID);
+            // Selecciona la carta (esto activa el glow y la línea automáticamente)
+            PlayerControls.Get().SelectCard(attacker);
 
-            foreach (BoardCard attacker in iaCards)
-            {
-                BoardCard target = ElegirObjetivo(attacker, playerCards);
+            yield return new WaitForSeconds(0.5f); // Deja que se vea la línea
 
-                if (target != null)
-                {
-                    Debug.Log($"🤖 IA ataca con {attacker.GetCard().card_id} a {target.GetCard().card_id}");
+            // Ejecuta el ataque como el jugador humano
+            GameClient.Get().ApplyAttack(attacker.GetCard(), target.GetCard());
 
-                    // Llamamos a AttackTarget usando las cartas reales
-                    GameManager.instance.GameData.AttackTarget(attacker.GetCard(), target.GetCard());
+            yield return new WaitForSeconds(1.2f); // Tiempo para ver el daño
 
-                    yield return new WaitForSeconds(1.2f); // Delay entre ataques
-                }
-            }
+            // Oculta efectos visuales
+            Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
+            PlayerControls.Get().UnselectAll();
 
-            yield return new WaitForSeconds(0.5f);
-
-            // Finalizar turno de IA
-            GameManager.instance.GameData.EndTurn();
+            yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    yield return new WaitForSeconds(0.5f);
+
+    // Finaliza turno (esto activa el cambio de turno visual y lógico)
+    GameClient.Get().EndTurn();
+}
 
         private BoardCard ElegirObjetivo(BoardCard atacante, List<BoardCard> posibles)
         {

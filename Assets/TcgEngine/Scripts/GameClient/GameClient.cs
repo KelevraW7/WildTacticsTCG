@@ -373,6 +373,14 @@ namespace TcgEngine.Client
         public void EndTurn()
         {
             SendAction(GameAction.EndTurn);
+
+            // 👇 Añadido: si estamos en modo local u offline, avanzar turno manualmente
+            if (game_settings.IsOffline() || game_settings.IsHost())
+            {
+                GameLogic local_logic = new GameLogic(GetGameData());
+                local_logic.StartNextTurn();
+                onNewTurn?.Invoke(GetGameData().current_player);
+            }
         }
 
         public void Resign()
