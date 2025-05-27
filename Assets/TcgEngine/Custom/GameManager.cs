@@ -4,6 +4,7 @@ using TcgEngine.Client;
 using TcgEngine.Gameplay;
 using System.Collections;
 using System.Collections.Generic;
+using TcgEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,6 +43,18 @@ public class GameManager : MonoBehaviour
         logic.StartGame();
 
         Debug.Log("✅ GameManager: partida iniciada correctamente");
+
+        if (game.current_player == 1)
+        {
+            WildIAController.instance.PlayTurn();
+        }
+    }
+
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        instance = this;
     }
 
     private void AssignDecks(Game game)
@@ -112,4 +125,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public GameLogic GameData => logic;
+
 }

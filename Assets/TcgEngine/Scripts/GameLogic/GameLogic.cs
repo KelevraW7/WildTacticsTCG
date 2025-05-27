@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.Profiling;
 using TcgEngine.UI;
 using TcgEngine.Client;
+using TcgEngine.AI;
 
 namespace TcgEngine.Gameplay
 {
@@ -184,6 +185,12 @@ namespace TcgEngine.Gameplay
             game_data.phase = GamePhase.Main;
             onTurnPlay?.Invoke();
             RefreshData();
+
+            // Si es turno de la IA, lanzar IA
+            if (game_data.current_player == 1)
+            {
+                WildIAController.instance.PlayTurn();
+            }
         }
 
         public virtual void EndTurn()
@@ -486,39 +493,29 @@ namespace TcgEngine.Gameplay
 
         protected virtual void ResolveAttackHit(Card attacker, Card target, bool skip_cost)
         {
-            //Count attack damage
-            int datt1 = attacker.GetAttack();
-            int datt2 = target.GetAttack();
+            int datt1 = CalcularDañoTipo(attacker, target);
+            int datt2 = CalcularDañoTipo(target, attacker);
 
             Debug.Log($"🧮 Daño calculado: attacker {attacker.card_id} ({datt1}) → target {target.card_id} ({target.GetHP()} HP)");
 
-            //Damage Cards
             DamageCard(attacker, target, datt1);
 
-            //Counter Damage
-            //if (!attacker.HasStatus(StatusType.Intimidate))
-            //DamageCard(target, attacker, datt2);
-
-            //Save attack and exhaust
             if (!skip_cost)
                 ExhaustBattle(attacker);
 
             game_data.has_attacked_this_turn = true;
             EndTurn();
 
-            //Recalculate bonus
             UpdateOngoing();
 
-            //Abilities
-            bool att_board = game_data.IsOnBoard(attacker);
-            bool def_board = game_data.IsOnBoard(target);
-            if (att_board)
+            if (game_data.IsOnBoard(attacker))
                 TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
-            if (def_board)
+            if (game_data.IsOnBoard(target))
                 TriggerCardAbilityType(AbilityTrigger.OnAfterDefend, target, attacker);
-            if (att_board)
+
+            if (game_data.IsOnBoard(attacker))
                 TriggerSecrets(AbilityTrigger.OnAfterAttack, attacker);
-            if (def_board)
+            if (game_data.IsOnBoard(target))
                 TriggerSecrets(AbilityTrigger.OnAfterDefend, target);
 
             onAttackEnd?.Invoke(attacker, target);
@@ -526,6 +523,31 @@ namespace TcgEngine.Gameplay
             CheckForWinner();
 
             resolve_queue.ResolveAll(0.2f);
+        }
+
+        private int CalcularDañoTipo(Card atacante, Card objetivo)
+        {
+            int base_dano = atacante.GetAttack();
+            string tipo_atacante = atacante.CardData.team?.id;
+            string tipo_objetivo = objetivo.CardData.team?.id;
+
+            if (string.IsNullOrEmpty(tipo_atacante) || string.IsNullOrEmpty(tipo_objetivo))
+                return base_dano;
+
+            if (TieneVentajaDeTipo(tipo_atacante, tipo_objetivo))
+                return base_dano + 1;
+
+            if (TieneVentajaDeTipo(tipo_objetivo, tipo_atacante))
+                return Mathf.Max(base_dano - 1, 0);
+
+            return base_dano;
+        }
+
+        private bool TieneVentajaDeTipo(string atacante, string objetivo)
+        {
+            return (atacante == "fire" && objetivo == "plant") ||
+                   (atacante == "plant" && objetivo == "water") ||
+                   (atacante == "water" && objetivo == "fire");
         }
 
         //Exhaust after battle

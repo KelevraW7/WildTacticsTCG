@@ -125,6 +125,8 @@ namespace TcgEngine.Client
                         GameClient.Get().ApplyAttack(card, target);  // Ataca directamente en local
                         Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
 
+                        GameManager.instance.GameData.EndTurn(); // Avanza turno tras el ataque
+
                         Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
                         UnselectAll();               // ✅ Limpia selección visual
                     }
