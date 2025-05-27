@@ -46,25 +46,18 @@ namespace TcgEngine.AI
             {
                 Debug.Log($"🤖 IA ataca con {attacker.GetCard().card_id} a {target.GetCard().card_id}");
 
-                // Mostrar glow
+                // Glow visual y parpadeo anticipado
                 PlayerControls.Get().SelectCard(attacker);
-
-                yield return new WaitForSeconds(0.5f); // Deja que se vea la selección
-
-                // Mostrar línea de ataque
-                Object.FindFirstObjectByType<MouseLineFX>()?.SetLine(attacker.transform.position, target.transform.position);
-
-                yield return new WaitForSeconds(0.4f); // Tiempo para ver la línea
+                attacker.SetSelectedVisual(true);
+                yield return new WaitForSeconds(0.8f);
+                attacker.SetSelectedVisual(false);
 
                 // Ejecutar ataque real
                 GameClient.Get().ApplyAttack(attacker.GetCard(), target.GetCard());
+                yield return new WaitForSeconds(1.2f);
 
-                yield return new WaitForSeconds(1.2f); // Tiempo para visualizar daño
-
-                // Ocultar visuales
-                Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
+                // Quitar selección
                 PlayerControls.Get().UnselectAll();
-
                 yield return new WaitForSeconds(0.3f);
             }
 
