@@ -96,6 +96,8 @@ MonoBehaviour:
   glow_enemy: {r: 0.8962264, g: 0.114142045, b: 0.114142045, a: 0.8}
   glow_selected: {r: 1, g: 0.84, b: 0, a: 1}
   card_ui: {fileID: 8878157023945928430}
+  damageFXPrefab: {fileID: 487660224621930042, guid: d96d11f9cc5454a42bc0b5ed454e3320,
+    type: 3}
   card_uid: 
 --- !u!114 &7205200960357975702
 MonoBehaviour:

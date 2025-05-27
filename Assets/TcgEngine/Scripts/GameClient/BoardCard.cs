@@ -19,6 +19,7 @@ namespace TcgEngine.Client
         public GameObject TeamIcon;
         public GameObject AttackIcon;
         public GameObject HpIcon;
+
         public CanvasGroup StatusPanel;
         public Text StatusText;
         public SpriteRenderer card_sprite;
@@ -47,6 +48,7 @@ namespace TcgEngine.Client
 
         [SerializeField]
         private CardUI card_ui;
+        public GameObject damageFXPrefab;  // Arrástralo en el inspector
 
         private BoardCardFX card_fx;
         private bool hasPlayedSpawnFX = false;
@@ -349,6 +351,26 @@ namespace TcgEngine.Client
         public void ShowDamage(int amount)
         {
 
+        }
+
+        public void ShowDamageFX(int amount)
+        {
+            if (damageFXPrefab == null)
+                return;
+
+            GameObject fx = Instantiate(damageFXPrefab, transform);
+            fx.transform.position = card_ui.hp.transform.position;
+
+            DamageFX dmg = fx.GetComponent<DamageFX>();
+            if (dmg != null)
+                dmg.SetValue("-" + amount);
+        }
+
+        public void PlayHitFX()
+        {
+            GameObject fx = Resources.Load<GameObject>("FX/HitFX");
+            if (fx != null)
+                Instantiate(fx, transform.position, Quaternion.identity);
         }
 
         public void Destroy()

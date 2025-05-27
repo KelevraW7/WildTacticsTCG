@@ -738,6 +738,13 @@ namespace TcgEngine.Gameplay
 
             target.damage += value;
 
+            BoardCard board = BoardCard.Get(target.uid);
+            if (board != null)
+            {
+                board.ShowDamageFX(value);
+                board.PlayHitFX();
+            }
+
             onCardDamaged?.Invoke(target, value);
 
             if (target.GetHP() <= 0)
@@ -773,13 +780,12 @@ namespace TcgEngine.Gameplay
             int extra = value - target.GetHP();
             target.damage += value;
 
-            // Mostrar texto flotante del daño recibido
-            // {
-            //   BoardCard board = BoardCard.Get(target.uid);
-            //   if (board != null)
-            //     board.ShowDamage(value);
-            //}
-
+            BoardCard board = BoardCard.Get(target.uid);
+            if (board != null)
+            {
+                board.ShowDamageFX(value);
+                board.PlayHitFX();
+            }
             //Remove sleep on damage
             target.RemoveStatus(StatusType.Sleep);
 
