@@ -20,6 +20,10 @@ namespace TcgEngine
 
         public bool has_attacked_this_turn = false;
 
+        // GOLPEAR: two-attack sequence tracking
+        public string golpear_pending_uid = "";      // UID of GOLPEAR attacker on first attack
+        public string golpear_first_target_uid = ""; // UID of the first GOLPEAR target
+
         public GameState state = GameState.Connecting;
         public GamePhase phase = GamePhase.None;
 
@@ -41,7 +45,11 @@ namespace TcgEngine
         public int rolled_value;
         public int selected_value;
 
-        //Other reference arrays 
+        // Escenario activo: card_id de la CardData de escenario que está en juego.
+        // Vacío = ningún escenario activo. Solo puede haber uno a la vez.
+        public string active_scenario_id = "";
+
+        //Other reference arrays
         public HashSet<string> ability_played = new HashSet<string>();
         public HashSet<string> cards_attacked = new HashSet<string>();
 
@@ -106,6 +114,20 @@ namespace TcgEngine
                 return false;
 
             Player player = GetPlayer(card.player_id);
+
+            // ── Evento ───────────────────────────────────────────────────────────────
+            // Las cartas de evento viven en cards_event_hand (zona face-up separada).
+            // Solo se pueden jugar ANTES de atacar en el propio turno.
+            if (card.CardData != null && card.CardData.IsEvent())
+            {
+                if (!player.HasCard(player.cards_event_hand, card))
+                    return false; // No está en la mano de eventos
+                if (has_attacked_this_turn)
+                    return false; // Solo antes de atacar
+                return true;
+            }
+            // ─────────────────────────────────────────────────────────────────────────
+
             if (!player.HasCard(player.cards_hand, card))
                 return false; // Card not in hand
 
@@ -208,6 +230,12 @@ namespace TcgEngine
 
             if (target.HasStatus(StatusType.Protected) && !attacker.HasStatus(StatusType.Flying))
                 return false; //Protected by adjacent card
+
+            // GOLPEAR: second attack must target a DIFFERENT card than the first
+            if (!string.IsNullOrEmpty(golpear_pending_uid)
+                && golpear_pending_uid == attacker.uid
+                && golpear_first_target_uid == target.uid)
+                return false;
 
             return true;
         }
@@ -330,6 +358,16 @@ namespace TcgEngine
             int oid = id == 0 ? 1 : 0;
             return GetPlayer(oid);
         }
+
+        /// <summary>Devuelve la CardData del escenario activo, o null si no hay ninguno.</summary>
+        public CardData GetScenarioData()
+        {
+            if (string.IsNullOrEmpty(active_scenario_id))
+                return null;
+            return CardData.Get(active_scenario_id);
+        }
+
+        public bool HasActiveScenario() => !string.IsNullOrEmpty(active_scenario_id);
 
         public Card GetCard(string card_uid)
         {
@@ -560,6 +598,9 @@ namespace TcgEngine
 
             CloneHash(source.ability_played, dest.ability_played);
             CloneHash(source.cards_attacked, dest.cards_attacked);
+
+            dest.golpear_pending_uid = source.golpear_pending_uid;
+            dest.golpear_first_target_uid = source.golpear_first_target_uid;
         }
 
         public static void CloneHash(HashSet<string> source, HashSet<string> dest)

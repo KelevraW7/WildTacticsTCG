@@ -153,8 +153,9 @@ namespace TcgEngine.AI
                 }
             }
 
-            //End Turn (dont add action if ai can still attack)
-            bool can_end = data.selector == SelectorType.None;
+            // En WildTacticsTCG el combate es la acción principal:
+            // solo se considera EndTurn si no quedan ataques disponibles.
+            bool can_end = data.selector == SelectorType.None && !HasAction(action_list, GameAction.Attack);
 
             if (action_list.Count == 0 || can_end)
             {
@@ -239,7 +240,11 @@ namespace TcgEngine.AI
             Profiler.EndSample();
 
             //Update depth
-            bool new_turn = action.type == GameAction.EndTurn;
+            // In WildTacticsTCG every attack (except GOLPEAR first hit) ends the turn immediately
+            // (EndTurn is called inside ResolveAttackHit). Detect this by checking whether the
+            // current player changed after the action — a clean proxy for "a new turn started".
+            bool new_turn = action.type == GameAction.EndTurn
+                            || ndata.current_player != player_id;
             int next_tdepth = parent.tdepth;
             int next_taction = parent.taction + 1;
 
@@ -392,8 +397,17 @@ namespace TcgEngine.AI
 
             if (type == GameAction.Attack)
             {
+                // GOLPEAR pending: while waiting for the second attack, only the GOLPEAR card
+                // may attack — all other cards are blocked until the second hit is resolved.
+                bool golpearWaiting = !string.IsNullOrEmpty(data.golpear_pending_uid);
+                if (golpearWaiting && data.golpear_pending_uid != card.uid)
+                    return;
+
                 if (card.CanAttack())
                 {
+                    // GOLPEAR: if this card is pending a second attack, it must pick a different target
+                    bool isGolpearPending = golpearWaiting && data.golpear_pending_uid == card.uid;
+
                     for (int p = 0; p < data.players.Length; p++)
                     {
                         if (p != player.player_id)
@@ -402,6 +416,11 @@ namespace TcgEngine.AI
                             for (int tc = 0; tc < oplayer.cards_board.Count; tc++)
                             {
                                 Card target = oplayer.cards_board[tc];
+
+                                // GOLPEAR second attack: skip the first attack's target
+                                if (isGolpearPending && target.uid == data.golpear_first_target_uid)
+                                    continue;
+
                                 if (data.CanAttackTarget(card, target))
                                 {
                                     AIAction action = CreateAction(type, card);

@@ -14,10 +14,16 @@ namespace TcgEngine
     {
         public TraitData bonus_damage;
 
+        [Tooltip("When true, damage bypasses Shell entirely (no break, no absorption). Used for ability damage like INTOXICAR.")]
+        public bool bypass_shell = false;
+
         public override void DoEffect(GameLogic logic, AbilityData ability, Card caster, Card target)
         {
             int damage = GetDamage(logic.GameData, caster, ability.value);
-            logic.DamageCard(caster, target, damage, true);
+            if (bypass_shell)
+                logic.DamageCard(target, damage);   // no Shell check — ability damage pierces Shell
+            else
+                logic.DamageCard(caster, target, damage, true);
         }
 
         private int GetDamage(Game data, Card caster, int value)

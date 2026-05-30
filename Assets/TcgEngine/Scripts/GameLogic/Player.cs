@@ -25,13 +25,15 @@ namespace TcgEngine
 
         public Dictionary<string, Card> cards_all = new Dictionary<string, Card>(); //Dictionnary for quick access to any card by UID
 
-        public List<Card> cards_deck = new List<Card>();    //Cards in the player's deck
-        public List<Card> cards_hand = new List<Card>();    //Cards in the player's hand
-        public List<Card> cards_board = new List<Card>();   //Cards on the board
-        public List<Card> cards_equip = new List<Card>();   //Cards equipped by characters
-        public List<Card> cards_discard = new List<Card>(); //Cards in the player's discard
-        public List<Card> cards_secret = new List<Card>();  //Cards in the player's secret area
-        public List<Card> cards_temp = new List<Card>();    //Temporary cards that have just been created, not assigned to any zone yet
+        public List<Card> cards_deck = new List<Card>();           //Cards in the player's deck
+        public List<Card> cards_hand = new List<Card>();           //Cards in the player's hand
+        public List<Card> cards_board = new List<Card>();          //Cards on the board
+        public List<Card> cards_equip = new List<Card>();          //Cards equipped by characters
+        public List<Card> cards_discard = new List<Card>();        //Cards in the player's discard
+        public List<Card> cards_secret = new List<Card>();         //Cards in the player's secret area
+        public List<Card> cards_temp = new List<Card>();           //Temporary cards that have just been created, not assigned to any zone yet
+        public List<Card> cards_event_deck = new List<Card>();     //Event cards not yet drawn (hidden pool)
+        public List<Card> cards_event_hand = new List<Card>();     //Event cards available to play (face-up zone)
 
         public List<CardTrait> traits = new List<CardTrait>();              //Current persistant traits the cards has
         public List<CardTrait> ongoing_traits = new List<CardTrait>();      //Current ongoing traits the cards has
@@ -43,7 +45,7 @@ namespace TcgEngine
 
         public Player(int id) { this.player_id = id; }
 
-        public bool IsReady() { return ready && cards_all.Count > 0; }
+        public bool IsReady() { return ready; }
         public bool IsConnected() { return connected || is_ai; }
 
         public virtual void ClearOngoing() { ongoing_status.Clear(); ongoing_traits.Clear(); }
@@ -69,6 +71,8 @@ namespace TcgEngine
             cards_discard.Remove(card);
             cards_secret.Remove(card);
             cards_temp.Remove(card);
+            cards_event_deck.Remove(card);
+            cards_event_hand.Remove(card);
             UnequipFromAllCards(card);
         }
 
@@ -136,6 +140,16 @@ namespace TcgEngine
         public Card GetDiscardCard(string uid)
         {
             foreach (Card card in cards_discard)
+            {
+                if (card.uid == uid)
+                    return card;
+            }
+            return null;
+        }
+
+        public Card GetEventHandCard(string uid)
+        {
+            foreach (Card card in cards_event_hand)
             {
                 if (card.uid == uid)
                     return card;
@@ -546,13 +560,15 @@ namespace TcgEngine
             dest.kill_count = source.kill_count;
 
             Card.CloneDict(source.cards_all, dest.cards_all);
-            Card.CloneListRef(dest.cards_all, source.cards_board, dest.cards_board);  
-            Card.CloneListRef(dest.cards_all, source.cards_equip, dest.cards_equip);  
+            Card.CloneListRef(dest.cards_all, source.cards_board, dest.cards_board);
+            Card.CloneListRef(dest.cards_all, source.cards_equip, dest.cards_equip);
             Card.CloneListRef(dest.cards_all, source.cards_hand, dest.cards_hand);
             Card.CloneListRef(dest.cards_all, source.cards_deck, dest.cards_deck);
             Card.CloneListRef(dest.cards_all, source.cards_discard, dest.cards_discard);
             Card.CloneListRef(dest.cards_all, source.cards_secret, dest.cards_secret);
             Card.CloneListRef(dest.cards_all, source.cards_temp, dest.cards_temp);
+            Card.CloneListRef(dest.cards_all, source.cards_event_deck, dest.cards_event_deck);
+            Card.CloneListRef(dest.cards_all, source.cards_event_hand, dest.cards_event_hand);
 
             CardStatus.CloneList(source.status, dest.status);
             CardStatus.CloneList(source.ongoing_status, dest.ongoing_status);

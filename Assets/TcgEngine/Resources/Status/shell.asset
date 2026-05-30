@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: shell
   m_EditorClassIdentifier: 
   effect: 13
-  title: Shell
+  title: Escudo
   icon: {fileID: 0}
-  desc: On the first hit, takes no damage.
-  status_fx: {fileID: 8041625327064058042, guid: 364d6092a8e082740990d503ddee9024,
+  desc: Sin daño en el primer ataque recibido.
+  status_fx: {fileID: 8041625327064058042, guid: 3d12108228a83c44f864468b6ae774fd,
     type: 3}
   hvalue: 1

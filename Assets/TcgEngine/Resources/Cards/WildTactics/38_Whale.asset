@@ -26,8 +26,9 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: 03d2d953c9f652f45aaa4c2ed027eda0, type: 2}
   stats: []
-  abilities: []
-  text: 
+  abilities:
+  - {fileID: 11400000, guid: b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7, type: 2}
+  text: 'SUMERGIR: Al entrar en juego, obtiene un escudo que bloquea el primer daño recibido.'
   desc: 
   spawn_fx: {fileID: 9125387663047351618, guid: bac685160af4aff46ae561a51da6f5f4,
     type: 3}

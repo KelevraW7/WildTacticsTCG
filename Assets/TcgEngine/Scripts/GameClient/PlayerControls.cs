@@ -64,6 +64,22 @@ namespace TcgEngine.Client
             }
             else if (gdata.IsPlayerActionTurn(player) && card.player_id == player.player_id)
             {
+                // EMBESTIR: paralyzed cards cannot be selected or attack
+                if (card.HasStatus(StatusType.Paralysed))
+                {
+                    WarningText.ShowText("Esta criatura está paralizada");
+                    return;
+                }
+
+                // WildTacticsTCG: si hay cartas boca abajo sin revelar, el jugador
+                // debe darles la vuelta antes de poder atacar con cualquier criatura.
+                bool hasUnrevealed = player.cards_board.Exists(c => !c.revealed);
+                if (hasUnrevealed)
+                {
+                    WarningText.ShowText("Revela tus criaturas antes de atacar");
+                    return;
+                }
+
                 UnselectAll(); // Limpia cualquier selección anterior
                 selected_card = bcard;
                 selected_card.SetSelectedVisual(true); // Aplica glow dorado
@@ -108,9 +124,20 @@ namespace TcgEngine.Client
                 {
                     Debug.Log("🛡️ target.player_id: " + target.player_id + " vs card.player_id: " + card.player_id);
 
-                    if (GameClient.Get().GetGameData().has_attacked_this_turn)
+                    Game gdata = GameClient.Get().GetGameData();
+
+                    if (gdata.has_attacked_this_turn)
                     {
                         WarningText.ShowText("⚠️ Ya has atacado este turno");
+                        return;
+                    }
+
+                    // GOLPEAR: second attack must be a different target
+                    bool isGolpearPending = !string.IsNullOrEmpty(gdata.golpear_pending_uid)
+                                           && gdata.golpear_pending_uid == card.uid;
+                    if (isGolpearPending && target.uid == gdata.golpear_first_target_uid)
+                    {
+                        WarningText.ShowText("GOLPEAR: Debes atacar a una criatura diferente");
                         return;
                     }
 
@@ -122,13 +149,25 @@ namespace TcgEngine.Client
                     else
                     {
                         Debug.Log("🗡️ Enviando ataque a GameClient");
-                        GameClient.Get().ApplyAttack(card, target);  // Ataca directamente en local
+                        GameClient.Get().ApplyAttack(card, target);
                         Debug.Log($"🗡️ Intentando atacar: {card.card_id} → {target.card_id}");
 
-                        GameClient.Get().EndTurn();  // ✅ CORRECTO
-
                         Object.FindFirstObjectByType<MouseLineFX>()?.Hide();
-                        UnselectAll();               // ✅ Limpia selección visual
+
+                        // GOLPEAR first attack: don't end turn, keep card selected for second attack
+                        Game gdataAfter = GameClient.Get().GetGameData();
+                        bool golpearFirstDone = !string.IsNullOrEmpty(gdataAfter.golpear_pending_uid)
+                                               && gdataAfter.golpear_pending_uid == card.uid;
+                        if (golpearFirstDone)
+                        {
+                            Debug.Log("⚔️ GOLPEAR: primer ataque completado, esperando segundo objetivo");
+                            // Keep the card selected so player can attack again
+                        }
+                        else
+                        {
+                            GameClient.Get().EndTurn();
+                            UnselectAll();
+                        }
                     }
                 }
                 else if (tslot != null && tslot is BoardSlot)

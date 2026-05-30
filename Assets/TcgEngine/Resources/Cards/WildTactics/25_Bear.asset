@@ -26,8 +26,9 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: 7510aa80bf08767458fc176577679cd1, type: 2}
   stats: []
-  abilities: []
-  text: 
+  abilities:
+  - {fileID: 11400000, guid: f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1, type: 2}
+  text: 'GOLPEAR: Puede atacar a dos criaturas diferentes en el mismo turno.'
   desc: 
   spawn_fx: {fileID: 5791330189299518109, guid: 1fa8fa11b2c6b9b4d976743e5bbb3956,
     type: 3}

@@ -60,6 +60,11 @@ namespace TcgEngine.Gameplay
         private ListSwap<CardData> card_data_array = new ListSwap<CardData>();
         private List<Card> cards_to_clear = new List<Card>();
 
+        // GOLPEAR: deferred card draws — cards killed during the 1st GOLPEAR attack are drawn at
+        // the START of that player's next turn, so the new card cannot be targeted by the 2nd attack
+        private bool is_golpear_first_hit = false;
+        private List<(int playerId, Slot slot)> pending_card_draws = new List<(int, Slot)>();
+
         public GameLogic(bool is_ai)
         {
             //is_instant ignores all gameplay delays and process everything immediately, needed for AI prediction
@@ -91,17 +96,14 @@ namespace TcgEngine.Gameplay
             if (game_data.state == GameState.GameEnded)
                 return;
 
-            // Elegir jugador inicial
             game_data.state = GameState.Play;
-            game_data.first_player = 0; // Fuerza que el jugador humano empiece
+            game_data.first_player = 0;
             game_data.current_player = game_data.first_player;
             game_data.turn_count = 1;
 
-            // Inicializar jugadores (no se roba cartas aquí)
-            foreach (Player player in game_data.players)
-            {
-                // Nada que hacer por ahora: ya hemos asignado el mazo desde GameManager
-            }
+            WildAssignDecks();
+            WildActivateScenario();
+            WildPlaceInitialCards();
 
             RefreshData();
             onGameStart?.Invoke();
@@ -109,10 +111,187 @@ namespace TcgEngine.Gameplay
             StartTurn();
         }
 
+        private void WildAssignDecks()
+        {
+            List<CardData> allCards = new List<CardData>(CardData.GetAll());
+            Debug.Log($"🃏 [WildAssignDecks] Cartas disponibles: {allCards.Count}");
+
+            // ── Separar el pool de eventos del pool de criaturas ─────────────────────
+            // Separar por tipo para que solo las criaturas entren en el mazo de criaturas
+            List<CardData> eventPool    = allCards.FindAll(c => c.type == CardType.Event);
+            List<CardData> scenarioPool = allCards.FindAll(c => c.type == CardType.Scenario);
+
+            // Las cartas "doradas" se identifican por team.id == "gold"
+            // (excluir eventos y escenarios aunque tengan equipo gold)
+            List<CardData> goldPool   = allCards.FindAll(c => c.type != CardType.Event
+                                                           && c.type != CardType.Scenario
+                                                           && c.team != null
+                                                           && c.team.id.ToLower() == "gold");
+            List<CardData> commonPool = allCards.FindAll(c => c.type != CardType.Event
+                                                           && c.type != CardType.Scenario
+                                                           && (c.team == null || c.team.id.ToLower() != "gold"));
+
+            // Barajar los tres pools con Fisher-Yates usando el random de clase
+            ShuffleCardDataList(goldPool);
+            ShuffleCardDataList(commonPool);
+            ShuffleCardDataList(eventPool);
+
+            Debug.Log($"🃏 Pool doradas: {goldPool.Count} | Pool comunes: {commonPool.Count} | Pool eventos: {eventPool.Count}");
+
+            foreach (Player player in game_data.players)
+            {
+                // ── Mazo de criaturas (11 cartas: 1 dorada + 10 comunes) ─────────────
+                List<CardData> selected = new List<CardData>();
+
+                // Exactamente 1 carta dorada por jugador
+                if (goldPool.Count > 0)
+                {
+                    selected.Add(goldPool[0]);
+                    goldPool.RemoveAt(0);
+                }
+                else
+                {
+                    Debug.LogWarning($"⚠️ Sin cartas doradas disponibles para el jugador {player.player_id}");
+                }
+
+                // Rellenar hasta 11 con cartas comunes (sin repetición entre jugadores)
+                while (selected.Count < 11 && commonPool.Count > 0)
+                {
+                    selected.Add(commonPool[0]);
+                    commonPool.RemoveAt(0);
+                }
+
+                // Barajar las 11 cartas seleccionadas
+                ShuffleCardDataList(selected);
+
+                foreach (CardData data in selected)
+                {
+                    Card card = Card.Create(data, VariantData.GetDefault(), player);
+                    player.cards_deck.Add(card);
+                }
+
+                int goldCount = selected.FindAll(c => c.team != null && c.team.id.ToLower() == "gold").Count;
+                Debug.Log($"🃏 Jugador {player.player_id}: {player.cards_deck.Count} criaturas ({goldCount} dorada/s)");
+
+                // ── Mazo de eventos: 10 cartas únicas por jugador ────────────────────
+                // Cada jugador obtiene su propia selección aleatoria del pool de 50 eventos.
+                // Un mismo jugador no puede tener dos copias de la misma carta,
+                // pero dos jugadores SÍ pueden compartir la misma carta de evento.
+                List<CardData> availableEvents = new List<CardData>(eventPool);
+                ShuffleCardDataList(availableEvents);
+
+                int eventCount = Mathf.Min(10, availableEvents.Count);
+                for (int i = 0; i < eventCount; i++)
+                {
+                    Card ecard = Card.Create(availableEvents[i], VariantData.GetDefault(), player);
+                    player.cards_event_deck.Add(ecard);
+                }
+
+                Debug.Log($"🎴 Jugador {player.player_id}: {player.cards_event_deck.Count} cartas de evento en el mazo");
+            }
+        }
+
+        /// <summary>
+        /// Selecciona al azar una carta de escenario del pool y la activa para la partida.
+        /// Si no hay cartas de escenario en Resources, la partida sigue sin escenario.
+        /// </summary>
+        private void WildActivateScenario()
+        {
+            List<CardData> pool = CardData.GetAll().FindAll(c => c.type == CardType.Scenario);
+            if (pool.Count == 0)
+            {
+                Debug.Log("🗺️ [Scenario] No hay cartas de escenario en el proyecto — partida sin escenario.");
+                return;
+            }
+
+            CardData chosen = pool[random.Next(pool.Count)];
+            game_data.active_scenario_id = chosen.id;
+
+            Debug.Log($"🗺️ [Scenario] Escenario activo: {chosen.title}");
+
+            // Disparar habilidades OnPlay del escenario (afectan a ambos jugadores)
+            TriggerScenarioAbility(AbilityTrigger.OnPlay);
+        }
+
+        /// <summary>
+        /// Dispara las habilidades del escenario activo para el trigger dado.
+        /// Extiende GameLogic en subclases para implementar los efectos de cada escenario.
+        /// </summary>
+        protected virtual void TriggerScenarioAbility(AbilityTrigger trigger)
+        {
+            CardData scenario = game_data.GetScenarioData();
+            if (scenario == null) return;
+
+            // Cada habilidad con el trigger correspondiente se procesa aquí.
+            // En esta versión base solo se hace log; los efectos concretos se implementarán
+            // carta a carta cuando el diseño de cada escenario esté finalizado.
+            foreach (AbilityData ability in scenario.abilities)
+            {
+                if (ability == null || ability.trigger != trigger) continue;
+                Debug.Log($"🗺️ [Scenario] Trigger {trigger} → {ability.id}  (pendiente de implementación por escenario)");
+                // TODO: ResolveScenarioAbility(ability, scenario);
+            }
+        }
+
+        private void ShuffleCardDataList(List<CardData> list)
+        {
+            for (int i = list.Count - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                CardData tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
+            }
+        }
+
+        private void WildPlaceInitialCards()
+        {
+            foreach (Player player in game_data.players)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (player.cards_deck.Count == 0)
+                        break;
+
+                    Card card = player.cards_deck[0];
+                    player.cards_deck.RemoveAt(0);
+
+                    card.slot = new Slot(i + 1, 1, player.player_id);
+                    card.revealed = player.player_id != 0; // player 0 (humano): boca abajo; player 1 (IA): boca arriba
+                    player.cards_board.Add(card);
+
+                    // Apply OnPlay status effects directly (resolve queue isn't running at game start)
+                    // This handles SUMERGIR (gives Shell) and any other OnPlay-Self-Status abilities
+                    foreach (AbilityData ability in card.GetAbilities())
+                    {
+                        if (ability != null && ability.trigger == AbilityTrigger.OnPlay)
+                        {
+                            foreach (StatusData stat in ability.status)
+                                card.AddStatus(stat, ability.value, ability.duration);
+                        }
+                    }
+
+                    Debug.Log($"📍 [Server] Carta {card.card_id} colocada en slot {i + 1} del jugador {player.player_id}");
+                }
+            }
+        }
+
         public virtual void StartTurn()
         {
             if (game_data.state == GameState.GameEnded)
                 return;
+
+            // Reduce status durations at turn START so timed effects (e.g. Paralysed from EMBESTIR)
+            // expire exactly when the next player's turn begins — after all attack animations finish —
+            // rather than instantly when EndTurn is called mid-animation.
+            foreach (Player aplayer in game_data.players)
+            {
+                aplayer.ReduceStatusDurations();
+                foreach (Card card in aplayer.cards_board)
+                    card.ReduceStatusDurations();
+                foreach (Card card in aplayer.cards_equip)
+                    card.ReduceStatusDurations();
+            }
 
             ClearTurnData();
             game_data.has_attacked_this_turn = false;
@@ -152,10 +331,24 @@ namespace TcgEngine.Gameplay
                 }
             }
 
+            // Deferred GOLPEAR replacement draws: fill any empty slots left by the previous turn's
+            // first GOLPEAR attack before this player's StartOfTurn abilities fire
+            for (int i = pending_card_draws.Count - 1; i >= 0; i--)
+            {
+                if (pending_card_draws[i].playerId == player.player_id)
+                {
+                    int pid = pending_card_draws[i].playerId;
+                    Slot refillSlot = pending_card_draws[i].slot;
+                    pending_card_draws.RemoveAt(i);
+                    resolve_queue.AddCallback(() => DrawCardToBoard(game_data.GetPlayer(pid), refillSlot));
+                }
+            }
+
             // Habilidades continuas y de inicio de turno
             UpdateOngoing();
             TriggerPlayerCardsAbilityType(player, AbilityTrigger.StartOfTurn);
             TriggerPlayerSecrets(player, AbilityTrigger.StartOfTurn);
+            TriggerScenarioAbility(AbilityTrigger.StartOfTurn);  // Efectos de escenario cada turno
 
             resolve_queue.AddCallback(StartMainPhase);
             resolve_queue.ResolveAll(0.2f);
@@ -181,16 +374,66 @@ namespace TcgEngine.Gameplay
         {
             if (game_data.state == GameState.GameEnded)
                 return;
+            if (game_data.phase == GamePhase.Main)
+                return; // ya está en Main (llamada directa llegó primero), ignorar la cola
 
             game_data.phase = GamePhase.Main;
             onTurnPlay?.Invoke();
             RefreshData();
 
-            // Si es turno de la IA, lanzar IA
-            if (game_data.current_player == 1)
+            // Auto-pass: si el jugador activo no tiene ninguna acción legal disponible
+            // (todas sus criaturas están paralizadas/agotadas y no puede jugar cartas),
+            // terminamos el turno automáticamente para que el juego no se quede bloqueado.
+            Player activePlayer = game_data.GetActivePlayer();
+            if (activePlayer != null && !HasAnyLegalAction(activePlayer))
             {
-                WildIAController.instance.PlayTurn();
+                resolve_queue.AddCallback(EndTurn);
+                resolve_queue.ResolveAll(0.8f); // pausa breve para que el jugador vea el estado
             }
+        }
+
+        /// <summary>
+        /// Devuelve true si el jugador tiene al menos una acción legal disponible:
+        /// atacar con una criatura, jugar una carta de la mano, o jugar una carta de evento (solo humanos).
+        /// </summary>
+        protected virtual bool HasAnyLegalAction(Player player)
+        {
+            Player opponent = game_data.GetOpponentPlayer(player.player_id);
+
+            // ¿Puede alguna criatura atacar a algún objetivo?
+            foreach (Card attacker in player.cards_board)
+            {
+                foreach (Card target in opponent.cards_board)
+                {
+                    if (game_data.CanAttackTarget(attacker, target))
+                        return true;
+                }
+                // ¿Puede atacar al jugador rival directamente?
+                if (game_data.CanAttackTarget(attacker, opponent))
+                    return true;
+            }
+
+            // ¿Puede jugar alguna carta de la mano a algún slot válido?
+            foreach (Card card in player.cards_hand)
+            {
+                int p = Slot.GetP(player.player_id);
+                for (int x = Slot.x_min; x <= Slot.x_max; x++)
+                {
+                    for (int y = Slot.y_min; y <= Slot.y_max; y++)
+                    {
+                        Slot slot = new Slot(x, y, p);
+                        if (game_data.CanPlayCard(card, slot))
+                            return true;
+                    }
+                }
+            }
+
+            // ¿El jugador humano tiene cartas de evento disponibles?
+            // La IA no sabe jugar cartas de evento todavía, así que se excluye.
+            if (!player.is_ai && player.cards_event_hand.Count > 0)
+                return true;
+
+            return false;
         }
 
         public virtual void EndTurn()
@@ -200,22 +443,27 @@ namespace TcgEngine.Gameplay
             if (game_data.phase != GamePhase.Main)
                 return;
 
+            // Revelar todas las cartas boca-abajo del jugador activo antes de ceder el turno.
+            // Esto cubre tanto el caso normal (el jugador pulsa "Fin de turno") como el caso
+            // en que el juego llama EndTurn directamente (ej: INTOXICAR mata al atacante).
+            // Sin esto, las cartas de reemplazo del humano llegan boca-abajo al turno de la IA.
+            Player active_player = game_data.GetActivePlayer();
+            if (active_player != null)
+            {
+                foreach (Card c in active_player.cards_board)
+                {
+                    if (!c.revealed)
+                        c.revealed = true;
+                }
+            }
+
             game_data.selector = SelectorType.None;
             game_data.phase = GamePhase.EndTurn;
-
-            //Reduce status effects with duration
-            foreach (Player aplayer in game_data.players)
-            {
-                aplayer.ReduceStatusDurations();
-                foreach (Card card in aplayer.cards_board)
-                    card.ReduceStatusDurations();
-                foreach (Card card in aplayer.cards_equip)
-                    card.ReduceStatusDurations();
-            }
 
             //End of turn abilities
             Player player = game_data.GetActivePlayer();
             TriggerPlayerCardsAbilityType(player, AbilityTrigger.EndOfTurn);
+            TriggerScenarioAbility(AbilityTrigger.EndOfTurn);  // Efectos de escenario al fin de turno
 
             onTurnEnd?.Invoke();
             RefreshData();
@@ -240,7 +488,7 @@ namespace TcgEngine.Gameplay
             }
         }
 
-        //Progress to the next step/phase 
+        //Progress to the next step/phase
         public virtual void NextStep()
         {
             if (game_data.state == GameState.GameEnded)
@@ -248,19 +496,32 @@ namespace TcgEngine.Gameplay
 
             CancelSelection();
 
+            // WildTactics: reveal all face-down player cards before ending the turn by timer
+            Player active = game_data.GetActivePlayer();
+            if (active != null)
+            {
+                foreach (Card card in active.cards_board)
+                {
+                    if (!card.revealed)
+                        card.revealed = true;
+                }
+            }
+
             //Add to resolve queue in case its still resolving
             resolve_queue.AddCallback(EndTurn);
             resolve_queue.ResolveAll();
         }
 
         //Check if a player is winning the game, if so end the game
-        //Change or edit this function for a new win condition
+        //WildTactics: a player is eliminated when they have no cards on the board and no cards left in the deck
         protected virtual void CheckForWinner()
         {
             int count_alive = 0;
             Player alive = null;
             foreach (Player player in game_data.players)
             {
+                bool isEliminated = player.cards_board.Count == 0 && player.cards_deck.Count == 0;
+                if (!isEliminated)
                 {
                     alive = player;
                     count_alive++;
@@ -269,11 +530,11 @@ namespace TcgEngine.Gameplay
 
             if (count_alive == 0)
             {
-                EndGame(-1); //Everyone is dead, Draw
+                EndGame(-1); //Draw
             }
             else if (count_alive == 1)
             {
-                EndGame(alive.player_id); //Player win
+                EndGame(alive.player_id); //Winner
             }
         }
 
@@ -293,6 +554,8 @@ namespace TcgEngine.Gameplay
             game_data.selected_value = 0;
             game_data.ability_played.Clear();
             game_data.cards_attacked.Clear();
+            game_data.golpear_pending_uid = "";
+            game_data.golpear_first_target_uid = "";
         }
 
         //--- Setup ------
@@ -476,19 +739,52 @@ namespace TcgEngine.Gameplay
 
         protected virtual void ResolveAttack(Card attacker, Card target, bool skip_cost)
         {
-            if (!game_data.IsOnBoard(attacker) || !game_data.IsOnBoard(target))
+            // ── Caso 1: el objetivo abandonó el tablero ─────────────────────────────
+            // No hay nada a lo que golpear — simplemente terminamos el turno.
+            if (!game_data.IsOnBoard(target))
+            {
+                if (game_data.phase == GamePhase.Main)
+                {
+                    game_data.has_attacked_this_turn = true;
+                    game_data.golpear_pending_uid = "";
+                    game_data.golpear_first_target_uid = "";
+                    EndTurn();
+                }
                 return;
+            }
 
+            // ── Caso 2: el atacante murió por OnBeforeDefend (INTOXICAR) ─────────────
+            // El combate es simultáneo: el ataque ya estaba comprometido, así que el
+            // atacante AÚN inflige su daño al objetivo aunque haya muerto del veneno.
+            // No lanzamos onAttackStart (la carta ya desapareció visualmente), pero
+            // sí encolamos ResolveAttackHit y después terminamos el turno.
+            if (!game_data.IsOnBoard(attacker))
+            {
+                UpdateOngoing();
+                resolve_queue.AddAttack(attacker, target, ResolveAttackHit, skip_cost);
+                resolve_queue.AddCallback(() =>
+                {
+                    if (game_data.phase == GamePhase.Main)
+                    {
+                        game_data.has_attacked_this_turn = true;
+                        game_data.golpear_pending_uid = "";
+                        game_data.golpear_first_target_uid = "";
+                        EndTurn();
+                    }
+                });
+                resolve_queue.SetDelay(0f);
+                resolve_queue.ResolveAll();
+                return;
+            }
+
+            // ── Caso 3: ambas cartas siguen en el tablero — flujo normal ─────────────
             onAttackStart?.Invoke(attacker, target);
-
             attacker.RemoveStatus(StatusType.Stealth);
             UpdateOngoing();
 
-            // Aquí estaba el error 👇
             resolve_queue.AddAttack(attacker, target, ResolveAttackHit, skip_cost);
             resolve_queue.SetDelay(0f);
             resolve_queue.ResolveAll();
-
         }
 
         protected virtual void ResolveAttackHit(Card attacker, Card target, bool skip_cost)
@@ -498,13 +794,55 @@ namespace TcgEngine.Gameplay
 
             Debug.Log($"🧮 Daño calculado: attacker {attacker.card_id} ({datt1}) → target {target.card_id} ({target.GetHP()} HP)");
 
-            DamageCard(attacker, target, datt1);
-
             if (!skip_cost)
                 ExhaustBattle(attacker);
 
-            game_data.has_attacked_this_turn = true;
-            EndTurn();
+            // GOLPEAR: two-attack sequence
+            bool hasGolpear = attacker.abilities.Contains("wild_golpear");
+            bool isGolpearSecond = !string.IsNullOrEmpty(game_data.golpear_pending_uid)
+                                   && game_data.golpear_pending_uid == attacker.uid;
+            bool isGolpearFirst = hasGolpear && !isGolpearSecond;
+
+            // Pre-signal that a GOLPEAR first hit is in progress so DiscardCard can defer the
+            // opponent's replacement draw — the flag is cleared after DamageCard returns
+            if (isGolpearFirst)
+                is_golpear_first_hit = true;
+
+            DamageCard(attacker, target, datt1);
+
+            is_golpear_first_hit = false;
+
+            // After damage, check if there is a valid second target (must be different from the first)
+            Player opponent = game_data.GetOpponentPlayer(attacker.player_id);
+            bool hasTargetsForSecondAttack = false;
+            if (isGolpearFirst && opponent != null)
+            {
+                foreach (Card c in opponent.cards_board)
+                {
+                    if (c.uid != target.uid) // second attack must hit a different creature
+                    {
+                        hasTargetsForSecondAttack = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isGolpearFirst && hasTargetsForSecondAttack)
+            {
+                // First GOLPEAR attack: save state, skip EndTurn, unexhaust so it can attack again
+                game_data.golpear_pending_uid = attacker.uid;
+                game_data.golpear_first_target_uid = target.uid;
+                // has_attacked_this_turn stays false so the 2nd-attack check in client doesn't block it
+                attacker.exhausted = false;
+            }
+            else
+            {
+                // Normal attack OR second GOLPEAR attack OR no targets left: end the turn
+                game_data.has_attacked_this_turn = true;
+                game_data.golpear_pending_uid = "";
+                game_data.golpear_first_target_uid = "";
+                EndTurn();
+            }
 
             UpdateOngoing();
 
@@ -512,6 +850,17 @@ namespace TcgEngine.Gameplay
                 TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
             if (game_data.IsOnBoard(target))
                 TriggerCardAbilityType(AbilityTrigger.OnAfterDefend, target, attacker);
+
+            // GOLPEAR safety: if the attacker died during OnAfterDefend (e.g. INTOXICAR) while
+            // waiting for a second attack, the turn would never end — force EndTurn here.
+            if (!string.IsNullOrEmpty(game_data.golpear_pending_uid)
+                && !game_data.IsOnBoard(attacker))
+            {
+                game_data.has_attacked_this_turn = true;
+                game_data.golpear_pending_uid = "";
+                game_data.golpear_first_target_uid = "";
+                EndTurn();
+            }
 
             if (game_data.IsOnBoard(attacker))
                 TriggerSecrets(AbilityTrigger.OnAfterAttack, attacker);
@@ -538,7 +887,7 @@ namespace TcgEngine.Gameplay
                 return base_dano + 1;
 
             if (TieneVentajaDeTipo(tipo_objetivo, tipo_atacante))
-                return Mathf.Max(base_dano - 1, 0);
+                return base_dano > 1 ? base_dano - 1 : base_dano; // mínimo 1 si el ataque base es >= 1
 
             return base_dano;
         }
@@ -740,10 +1089,14 @@ namespace TcgEngine.Gameplay
             if (target.HasStatus(StatusType.Invincibility))
                 return;
 
+            // Only apply and broadcast healing if the card actually has damage to recover
+            int prev_damage = target.damage;
             target.damage -= value;
             target.damage = Mathf.Max(target.damage, 0);
+            int actual_heal = prev_damage - target.damage;
 
-            onCardHealed?.Invoke(target, value);
+            if (actual_heal > 0)
+                onCardHealed?.Invoke(target, actual_heal);
         }
 
         //Generic damage that doesnt come from another card
@@ -759,13 +1112,6 @@ namespace TcgEngine.Gameplay
                 return; //Spell immunity
 
             target.damage += value;
-
-            BoardCard board = BoardCard.Get(target.uid);
-            if (board != null)
-            {
-                board.ShowDamageFX(value);
-                board.PlayHitFX();
-            }
 
             onCardDamaged?.Invoke(target, value);
 
@@ -802,12 +1148,6 @@ namespace TcgEngine.Gameplay
             int extra = value - target.GetHP();
             target.damage += value;
 
-            BoardCard board = BoardCard.Get(target.uid);
-            if (board != null)
-            {
-                board.ShowDamageFX(value);
-                board.PlayHitFX();
-            }
             //Remove sleep on damage
             target.RemoveStatus(StatusType.Sleep);
 
@@ -837,11 +1177,36 @@ namespace TcgEngine.Gameplay
 
             Player pattacker = game_data.GetPlayer(attacker.player_id);
             if (attacker.player_id != target.player_id)
+            {
                 pattacker.kill_count++;
+
+                // WildTactics: al derrotar una criatura rival, el atacante roba
+                // 1 carta de evento de su propio mazo de eventos.
+                if (pattacker.cards_event_deck.Count > 0)
+                    resolve_queue.AddCallback(() => DrawEventCard(pattacker));
+            }
 
             DiscardCard(target);
 
             TriggerCardAbilityType(AbilityTrigger.OnKill, attacker, target);
+        }
+
+        /// <summary>
+        /// Mueve la carta del tope del mazo de eventos del jugador a su mano de eventos.
+        /// </summary>
+        protected virtual void DrawEventCard(Player player)
+        {
+            if (player == null || player.cards_event_deck.Count == 0)
+                return;
+
+            Card ecard = player.cards_event_deck[0];
+            player.cards_event_deck.RemoveAt(0);
+            player.cards_event_hand.Add(ecard);
+
+            Debug.Log($"🎴 Jugador {player.player_id} roba carta de evento: {ecard.card_id}  " +
+                      $"(quedan {player.cards_event_deck.Count} en mazo)");
+
+            RefreshData();
         }
 
         //Send card into discard
@@ -856,6 +1221,7 @@ namespace TcgEngine.Gameplay
             CardData icard = card.CardData;
             Player player = game_data.GetPlayer(card.player_id);
             bool was_on_board = game_data.IsOnBoard(card) || game_data.IsEquipped(card);
+            Slot freed_slot = card.slot; // capturar slot antes de eliminar la carta del tablero
 
             //Unequip card
             UnequipAll(card);
@@ -877,10 +1243,57 @@ namespace TcgEngine.Gameplay
                 TriggerOtherCardsAbilityType(AbilityTrigger.OnDeathOther, card);
                 TriggerSecrets(AbilityTrigger.OnDeathOther, card);
                 UpdateOngoingCards(); //Not UpdateOngoing() here to avoid recursive calls in UpdateOngoingKills
+
+                // WildTactics: reemplazar la carta derrotada con una del mazo.
+                // During a GOLPEAR first attack, defer the opponent's replacement draw so the new
+                // card cannot be selected as the target for the second GOLPEAR attack this turn.
+                if (is_golpear_first_hit)
+                    pending_card_draws.Add((player.player_id, freed_slot));
+                else
+                    resolve_queue.AddCallback(() => DrawCardToBoard(player, freed_slot));
             }
 
             cards_to_clear.Add(card); //Will be Clear() in the next UpdateOngoing, so that simultaneous damage effects work
             onCardDiscarded?.Invoke(card);
+        }
+
+        // WildTactics: invocar la siguiente carta del mazo al slot que quedó libre
+        public virtual void DrawCardToBoard(Player player, Slot slot)
+        {
+            if (game_data.state == GameState.GameEnded)
+                return;
+            if (player.cards_deck.Count == 0)
+            {
+                CheckForWinner();
+                return;
+            }
+
+            Card card = player.cards_deck[0];
+            player.cards_deck.RemoveAt(0);
+
+            card.slot = slot;
+            // Cartas de reemplazo: la IA siempre entra boca-arriba (igual que WildPlaceInitialCards).
+            // Las cartas del humano también entran boca-arriba en sustituciones mid-game para que el jugador
+            // sepa qué carta recibió antes de que la IA actúe en el siguiente turno.
+            card.revealed = true;
+            player.cards_board.Add(card);
+
+            // Apply OnPlay statuses (e.g. Shell from SUMERGIR) so mid-game drawn cards get their
+            // passive statuses just like cards placed at game start via OnPlay triggers
+            foreach (AbilityData iability in card.GetAbilities())
+            {
+                if (iability != null && iability.trigger == AbilityTrigger.OnPlay)
+                {
+                    foreach (StatusData stat in iability.status)
+                        card.AddStatus(stat, iability.value, iability.duration);
+                }
+            }
+
+            UpdateOngoing();
+            RefreshData();
+
+            onCardSummoned?.Invoke(card, slot);
+            resolve_queue.ResolveAll(0.3f);
         }
 
         public int RollRandomValue(int dice)
@@ -925,9 +1338,13 @@ namespace TcgEngine.Gameplay
 
         public virtual void TriggerPlayerCardsAbilityType(Player player, AbilityTrigger type)
         {
-
             foreach (Card card in player.cards_board)
+            {
+                // All cards trigger their abilities regardless of face-down state.
+                // VOLAR heal applies to the local player's own face-down cards too.
+                // Visual FX for face-down cards are suppressed client-side (OnCardHealedEvent).
                 TriggerCardAbilityType(type, card, card);
+            }
         }
 
         public virtual void TriggerCardAbility(AbilityData iability, Card caster)
@@ -940,6 +1357,15 @@ namespace TcgEngine.Gameplay
             Card trigger_card = triggerer != null ? triggerer : caster; //Triggerer is the caster if not set
             if (!caster.HasStatus(StatusType.Silenced) && iability.AreTriggerConditionsMet(game_data, caster, trigger_card))
             {
+                // VOLAR heal: pausa la cola 1 segundo para que el efecto de curación sea visible.
+                // Solo cuando la carta está dañada (la curación tiene efecto real).
+                // La cola de la IA tiene skip_delay=true, así que no se ve afectada.
+                bool isStartOfTurnSelfHeal = iability.trigger == AbilityTrigger.StartOfTurn
+                                             && iability.target == AbilityTarget.Self
+                                             && caster.damage > 0;
+                if (isStartOfTurnSelfHeal)
+                    resolve_queue.SetDelay(1f);
+
                 resolve_queue.AddAbility(iability, caster, trigger_card, ResolveCardAbility);
             }
         }

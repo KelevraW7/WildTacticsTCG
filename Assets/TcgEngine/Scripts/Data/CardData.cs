@@ -12,6 +12,8 @@ namespace TcgEngine
         Artifact = 30,
         Secret = 40,
         Equipment = 50,
+        Event = 60,         // Carta de evento: se juega desde la mano de eventos antes de atacar
+        Scenario = 70,      // Carta de escenario: activa en el slot izquierdo, afecta a ambos jugadores
     }
 
     /// <summary>
@@ -60,6 +62,12 @@ namespace TcgEngine
         public AudioClip death_audio;
         public AudioClip attack_audio;
         public AudioClip damage_audio;
+
+        [Header("Scenario Visual")]
+        [Tooltip("Color del overlay semitransparente que tiñe el tablero (solo para CardType.Scenario).")]
+        public Color scenario_color = Color.white;
+        [Tooltip("Arte de fondo completo opcional (1920x1080 recomendado). Si está vacío se usa solo el tinte de color.")]
+        public Sprite scenario_background;
 
         [Header("Availability")]
         public bool deckbuilding = false;
@@ -119,6 +127,10 @@ namespace TcgEngine
                 return "secret";
             if (type == CardType.Equipment)
                 return "equipment";
+            if (type == CardType.Event)
+                return "event";
+            if (type == CardType.Scenario)
+                return "scenario";
             return "";
         }
 
@@ -129,6 +141,21 @@ namespace TcgEngine
             {
                 if (!string.IsNullOrWhiteSpace(ability.desc))
                     txt += "<b>" + ability.GetTitle() + ":</b> " + ability.GetDesc(this) + "\n";
+            }
+            return txt;
+        }
+
+        // Returns only ability names (one per line, uppercased) for compact card display
+        public string GetAbilitiesNames()
+        {
+            string txt = "";
+            foreach (AbilityData ability in abilities)
+            {
+                if (!string.IsNullOrWhiteSpace(ability.title))
+                {
+                    if (txt.Length > 0) txt += "\n";
+                    txt += ability.GetTitle().ToUpper();
+                }
             }
             return txt;
         }
@@ -161,6 +188,16 @@ namespace TcgEngine
         public bool IsEquipment()
         {
             return type == CardType.Equipment;
+        }
+
+        public bool IsEvent()
+        {
+            return type == CardType.Event;
+        }
+
+        public bool IsScenario()
+        {
+            return type == CardType.Scenario;
         }
 
 

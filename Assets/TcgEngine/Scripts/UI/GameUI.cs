@@ -81,8 +81,9 @@ namespace TcgEngine.UI
             turn_timer.text = Mathf.RoundToInt(data.turn_timer).ToString();
             turn_timer.enabled = data.turn_timer < 999f;
 
-            //Simulate timer
-            if (data.state == GameState.Play && data.turn_timer > 0f)
+            //Simulate timer (pause while waiting for GOLPEAR second attack)
+            bool golpear_waiting = !string.IsNullOrEmpty(data.golpear_pending_uid);
+            if (data.state == GameState.Play && data.turn_timer > 0f && !golpear_waiting)
                 data.turn_timer -= Time.deltaTime;
 
             //Timer warning
@@ -136,6 +137,14 @@ namespace TcgEngine.UI
         {
             CardSelector.Get().Hide();
             SelectTargetUI.Get().Hide();
+
+            // Mostrar cartel de turno
+            TurnBannerUI banner = Object.FindFirstObjectByType<TurnBannerUI>();
+            if (banner != null)
+            {
+                string message = player_id == GameClient.Get().GetPlayerID() ? "Tu turno" : "Turno rival";
+                banner.Show(message, GameClient.Get().GetGameData().turn_count);
+            }
         }
 
         public void OnClickRestart()

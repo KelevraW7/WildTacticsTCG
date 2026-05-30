@@ -26,8 +26,9 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: 875d0967adeb7bc4b97bfa10c566a1f0, type: 2}
   stats: []
-  abilities: []
-  text: 
+  abilities:
+  - {fileID: 11400000, guid: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6, type: 2}
+  text: 'EMBESTIR: Al atacar, paraliza a la criatura rival durante 1 turno.'
   desc: 
   spawn_fx: {fileID: 9125387663047351618, guid: bac685160af4aff46ae561a51da6f5f4,
     type: 3}

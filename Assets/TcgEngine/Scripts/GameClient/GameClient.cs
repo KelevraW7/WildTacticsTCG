@@ -302,16 +302,7 @@ namespace TcgEngine.Client
 
         public void ApplyAttack(Card attacker, Card target)
         {
-            Debug.Log($"⚔️ Ejecutando ataque localmente: {attacker.card_id} → {target.card_id}");
-
-            bool isInBoard = GetGameData().GetPlayer(target.player_id).cards_board.Contains(target);
-            Debug.Log("🎯 ¿Target está en cards_board?: " + isInBoard);
-
-            // Aseguramos que GameLogic use la misma instancia de datos
-            GameLogic logic = new GameLogic(GetGameData());
-            logic.AttackTarget(attacker, target);
-
-            Debug.Log("❤️ HP del objetivo después del ataque: " + target.hp);
+            AttackTarget(attacker, target);
         }
 
         public void Move(Card card, Slot slot)
@@ -373,14 +364,6 @@ namespace TcgEngine.Client
         public void EndTurn()
         {
             SendAction(GameAction.EndTurn);
-
-            // 👇 Añadido: si estamos en modo local u offline, avanzar turno manualmente
-            if (game_settings.IsOffline() || game_settings.IsHost())
-            {
-                GameLogic local_logic = new GameLogic(GetGameData());
-                local_logic.StartNextTurn();
-                onNewTurn?.Invoke(GetGameData().current_player);
-            }
         }
 
         public void Resign()
@@ -456,60 +439,6 @@ namespace TcgEngine.Client
                 onConnectGame.Invoke();
 
             SendGameSettings();
-
-            // --- WILDTACTICS: GENERAR MAZOS PERSONALIZADOS ---
-            if (game_settings.IsOffline())  // Solo si estamos en modo test o local
-            {
-                List<CardData> allCards = new List<CardData>(Resources.LoadAll<CardData>("Cards/WildTactics"));
-                Debug.Log("Total cartas cargadas: " + allCards.Count);
-                foreach (var c in allCards)
-                    Debug.Log("Carta: " + c.title + " - Team: " + (c.team != null ? c.team.id : "NULL"));
-
-                List<CardData> common = allCards.FindAll(c => c.team != null && c.team.id.ToLower() != "gold");
-                List<CardData> gold = allCards.FindAll(c => c.team != null && c.team.id.ToLower() == "gold");
-                Debug.Log("Cartas comunes: " + common.Count);
-                Debug.Log("Cartas doradas: " + gold.Count);
-
-                for (int p = 0; p < game_data.players.Length; p++)
-                {
-                    Player player = game_data.players[p];
-                    System.Random rand = new System.Random(p); // Semilla diferente por jugador
-
-                    List<CardData> selected = new List<CardData>();
-                    selected.AddRange(common.OrderBy(x => rand.Next()).Take(10));
-                    selected.Add(gold[rand.Next(gold.Count)]);
-
-                    // Crear cartas y añadirlas al mazo del jugador
-                    foreach (CardData data in selected)
-                    {
-                        if (data == null)
-                        {
-                            Debug.LogError("⚠️ CardData nulo detectado durante la creación de carta.");
-                            continue;
-                        }
-
-                        Card newCard = new Card(data, player.player_id);
-                        player.cards_all[newCard.uid] = newCard;
-                    }
-
-                    // Colocar automáticamente 3 primeras criaturas en slots 0,1,2
-                    int maxCards = Mathf.Min(3, player.cards_deck.Count);
-
-                    for (int i = 0; i < maxCards; i++)
-                    {
-                        Card toPlay = player.cards_deck[0];
-                        toPlay.slot = new Slot(i + 1, 1, player.player_id);
-                        player.cards_board.Add(toPlay);
-                        player.cards_deck.RemoveAt(0);
-                    }
-
-                    // Marcar el inicio del juego
-                    game_data.state = GameState.Play;
-                    game_data.phase = GamePhase.Main;
-                    game_data.current_player = 0;
-                }
-            }
-
         }
 
         protected virtual void OnPlayerReady(SerializedData sdata)
@@ -678,7 +607,26 @@ namespace TcgEngine.Client
         private void OnRefreshAll(SerializedData sdata)
         {
             MsgRefreshAll msg = sdata.Get<MsgRefreshAll>();
+
+            // Preserve client-side revealed flags before overwriting (server doesn't track these)
+            HashSet<string> prev_revealed = new HashSet<string>();
+            if (game_data != null)
+            {
+                foreach (Player p in game_data.players)
+                    foreach (Card c in p.cards_board)
+                        if (c.revealed) prev_revealed.Add(c.uid);
+            }
+
             game_data = msg.game_data;
+
+            // Restore revealed flags for cards still on the board
+            if (prev_revealed.Count > 0)
+            {
+                foreach (Player p in game_data.players)
+                    foreach (Card c in p.cards_board)
+                        if (prev_revealed.Contains(c.uid)) c.revealed = true;
+            }
+
             onRefreshAll?.Invoke();
         }
 

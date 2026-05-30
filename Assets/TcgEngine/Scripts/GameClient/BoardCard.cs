@@ -6,6 +6,7 @@ using TcgEngine.Client;
 using UnityEngine.Events;
 using TcgEngine.UI;
 using TcgEngine.FX;
+using TcgEngine;
 
 namespace TcgEngine.Client
 {
@@ -63,6 +64,18 @@ namespace TcgEngine.Client
         private float delayed_damage_timer = 0f;
         private int prev_hp = 0;
 
+        // Set in OnAbilityStartBC when an OnBeforeDefend+AbilityTriggerer ability fires.
+        // Consumed in OnCardDamagedEvent to suppress PlayHitFX/ShowDamageFX and delay the HP bar.
+        private static bool next_hit_is_counter_attack = false;
+
+        // Set by BoardCardFX.OnAttack when the attacker has an ability-specific hit FX
+        // (DESTROZAR, GOLPEAR, VOLAR, SUMERGIR, EMBESTIR, INTOXICAR attack).
+        // Consumed in OnCardDamagedEvent to suppress the generic HitFX (arañazo).
+        public static bool suppress_next_hit_fx = false;
+
+        // Tracks last-known revealed state so we can show/hide icons when the server flips it.
+        private bool prev_revealed = false;
+
         private bool back_to_hand;
         private Vector3 back_to_hand_target;
 
@@ -89,6 +102,13 @@ namespace TcgEngine.Client
         void OnDestroy()
         {
             card_list.Remove(this);
+            GameClient client = GameClient.Get();
+            if (client != null)
+            {
+                client.onCardDamaged -= OnCardDamagedEvent;
+                client.onCardHealed -= OnCardHealedEvent;
+                client.onAbilityStart -= OnAbilityStartBC;
+            }
         }
 
         private void Start()
@@ -96,6 +116,87 @@ namespace TcgEngine.Client
             //Random slight rotation
             Vector3 board_rot = GameBoard.Get().GetAngles();
             transform.rotation = Quaternion.Euler(board_rot.x, board_rot.y, board_rot.z + Random.Range(-1f, 1f));
+
+            GameClient client = GameClient.Get();
+            if (client != null)
+            {
+                client.onCardDamaged += OnCardDamagedEvent;
+                client.onCardHealed += OnCardHealedEvent;
+                client.onAbilityStart += OnAbilityStartBC;
+            }
+
+            // Carta de reemplazo del rival: voltear automáticamente tras un breve retraso
+            Card card = GetCard();
+            if (card != null && client != null && card.player_id != client.GetPlayerID() && !card.revealed)
+            {
+                StartCoroutine(AutoRevealAICard(1.0f));
+            }
+        }
+
+        private IEnumerator AutoRevealAICard(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Card card = GetCard();
+            if (card != null && !card.revealed)
+            {
+                card.revealed = true;
+                // Llamar SetCard() de nuevo para que los iconos (TeamIcon, AttackIcon, HpIcon)
+                // se muestren — igual que hace OnMouseDown() al revelar manualmente.
+                SetCard(card);
+                // Lanzar SpawnFX si aún no se ha reproducido.
+                if (card_fx != null && !hasPlayedSpawnFX)
+                {
+                    card_fx.OnSpawn();
+                    hasPlayedSpawnFX = true;
+                }
+            }
+        }
+
+        private void OnAbilityStartBC(AbilityData iability, Card caster)
+        {
+            if (iability == null) return;
+            // Counter-attack abilities (INTOXICAR): OnBeforeDefend + AbilityTriggerer.
+            // This fires synchronously BEFORE onCardDamaged, so the flag is ready.
+            bool isCounterAttack = iability.trigger == AbilityTrigger.OnBeforeDefend
+                                   && iability.target == AbilityTarget.AbilityTriggerer;
+            if (isCounterAttack)
+                next_hit_is_counter_attack = true;
+        }
+
+        private void OnCardDamagedEvent(Card card, int value)
+        {
+            if (card != null && card.uid == card_uid)
+            {
+                if (next_hit_is_counter_attack)
+                {
+                    // INTOXICAR counter-attack: suppress the immediate HitFX and damage number.
+                    // Delay the HP bar drop so it coincides with the poison FX at ~0.75s.
+                    next_hit_is_counter_attack = false;
+                    DelayDamage(value, 0.75f);
+                    return;
+                }
+
+                // Retrasamos el número del corazón ~0.4s para que aparezca cuando el atacante
+                // llega visualmente al objetivo (0.3s retroceso + 0.1s embestida = ~0.4s).
+                TimeTool.WaitFor(0.4f, () => ShowDamageFX(value));
+
+                // Suppress the generic HitFX when an ability-specific hit FX handles the visual.
+                if (suppress_next_hit_fx)
+                {
+                    suppress_next_hit_fx = false;
+                    return;
+                }
+                PlayHitFX();
+            }
+        }
+
+        private void OnCardHealedEvent(Card card, int value)
+        {
+            // Only show heal FX if the card is face-up (revealed)
+            if (card != null && card.uid == card_uid && card.revealed)
+            {
+                ShowHealFX(value);
+            }
         }
 
         void Update()
@@ -122,6 +223,19 @@ namespace TcgEngine.Client
             {
                 card_ui.SetCard(card);
                 card_ui.SetHP(prev_hp);
+
+                // Sync Attack/HP icons when the server flips card.revealed to true
+                // (e.g. NextStep() reveals face-down cards before ending a turn).
+                // BoardCard.SetCard() only runs on spawn/manual reveal, so we must
+                // mirror the icon visibility here whenever the flag changes.
+                if (card.revealed != prev_revealed)
+                {
+                    prev_revealed = card.revealed;
+                    if (AttackIcon != null) AttackIcon.SetActive(card.revealed);
+                    if (HpIcon != null) HpIcon.SetActive(card.revealed);
+                    if (StatusPanel != null) StatusPanel.gameObject.SetActive(card.revealed);
+                    if (StatusText != null) StatusText.enabled = card.revealed;
+                }
             }
 
             if (!IsDamagedDelayed())
@@ -170,7 +284,13 @@ namespace TcgEngine.Client
 
             card_glow.color = new Color(ccolor.r, ccolor.g, ccolor.b, calpha);
             card_shadow.enabled = !destroyed && timer > 0.4f;
-            card_sprite.color = card.HasStatus(StatusType.Stealth) ? Color.gray : Color.white;
+            // Color del sprite según estado: Stealth → gris, Paralizado → gris-azulado apagado, normal → blanco
+            if (card.HasStatus(StatusType.Stealth))
+                card_sprite.color = Color.gray;
+            else if (card.HasStatus(StatusType.Paralysed) && card.revealed)
+                card_sprite.color = new Color(0.45f, 0.45f, 0.50f, 1f);
+            else
+                card_sprite.color = Color.white;
             card_ui.hp.color = (destroyed || card.damage > 0) ? Color.yellow : Color.white;
 
             // Armor
@@ -183,7 +303,7 @@ namespace TcgEngine.Client
             bool isPlayer = card.player_id == GameClient.Get().GetPlayerID();
             bool isRevealed = card.revealed;
 
-            Sprite sprite = (isPlayer && !isRevealed && reverse_sprite != null)
+            Sprite sprite = (!isRevealed && reverse_sprite != null)
                 ? reverse_sprite
                 : card.CardData.GetBoardArt(card.VariantData);
 
@@ -291,16 +411,17 @@ namespace TcgEngine.Client
             }
 
             prev_hp = card.GetHP();
+            prev_revealed = card.revealed; // Keep in sync so Update() doesn't re-trigger on spawn
 
             // Determinar si ocultar la UI
             // 📌 Ocultar info si la carta está boca abajo
             bool isPlayer = card.player_id == GameClient.Get().GetPlayerID();
             bool isRevealed = card.revealed;
-            bool hideUI = isPlayer && !isRevealed;
+            bool hideUI = !isRevealed;
 
-            // Ocultar info visual sensible
+            // El TeamIcon solo aparece en el hover/preview (CardUI), nunca en las cartas de combate
             if (TeamIcon != null)
-                TeamIcon.SetActive(!hideUI);
+                TeamIcon.SetActive(false);
 
             if (AttackIcon != null)
                 AttackIcon.SetActive(!hideUI);
@@ -364,6 +485,19 @@ namespace TcgEngine.Client
             DamageFX dmg = fx.GetComponent<DamageFX>();
             if (dmg != null)
                 dmg.SetValue("-" + amount);
+        }
+
+        public void ShowHealFX(int amount)
+        {
+            if (damageFXPrefab == null)
+                return;
+
+            GameObject fx = Instantiate(damageFXPrefab, transform);
+            fx.transform.position = card_ui.hp.transform.position;
+
+            DamageFX dmg = fx.GetComponent<DamageFX>();
+            if (dmg != null)
+                dmg.SetValue("+" + amount);
         }
 
         public void PlayHitFX()

@@ -1,0 +1,469 @@
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Arrows.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Bomb_01.mat|Vefects/SH_VFX_Bomb_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Bubble_Noise_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Bubble_Out_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Distortion_Donut_New.mat|Vefects/SH_VFX_Vefects_Distortion_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Distortion_Ring_New.mat|Vefects/SH_VFX_Vefects_Distortion_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Distortion_Slash New.mat|Vefects/SH_VFX_Vefects_Distortion_Slash_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flames_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flare_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flare_01_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flare_01_Low_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flat_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flat_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flat_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Flower_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Fresnel_Bomb_Bubble_01.mat|Vefects/SH_VFX_Fresnel_Bomb_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Fresnel_Bomb_First_Explosion_01.mat|Vefects/SH_VFX_Fresnel_Bomb_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Fresnel_Bomb_First_Explosion_02.mat|Vefects/SH_VFX_Fresnel_Bomb_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Impact_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Impact_01_Bright.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Impact_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Light_Strip_01_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Lightning_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Lightning_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_LightStrip_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Pan_Wind_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_01_Bright.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_01_Low_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_02_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_03_Bright.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_03_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_03_Low_DF.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_04.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_05.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_07.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Part_08.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Rainbow_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_01_DS.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_04.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Ring_05.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Rune_Lightning_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Rune_Lightning_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Slash_01.mat|Vefects/SH_VFX_Stylized_Slash_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Slash_02.mat|Vefects/SH_VFX_Stylized_Slash_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Slash_03.mat|Vefects/SH_VFX_Stylized_Slash_01_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Slash_04.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Smoke_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Spike_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Star_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Star_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Star_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Star_04.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Star_04_Bright.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Trail_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Trail_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Trail_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Wind_01.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Wind_02.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Wind_03.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Anime Stylized VFX/Shared/Materials/M_VFX_Wind_04.mat|Vefects/SH_VFX_Stylized_Dissolve_BIRP
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/AquaStorm/M_VFX_FresnelSmokeAqua_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/AquaStorm/M_VFX_SmokeAquaTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/AquaStorm/M_VFX_SmokeAquaTube_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Cursed/M_VFX_FresnelSmokeCursed_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Cursed/M_VFX_FresnelSmokeCursed_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Cursed/M_VFX_FresnelSmokeCursed_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Darkness/M_VFX_SmokeDarknessClouds_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Darkness/M_VFX_SmokeDarknessTransition_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Darkness/M_VFX_SmokeDarknessTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Devil/M_VFX_FresnelSmokeDevil_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Devil/M_VFX_FresnelSmokeDevil_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Devil/M_VFX_FresnelSmokeDevil_Tube_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/FireStorm/M_VFX_FresnelSmokeFire_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/FireStorm/M_VFX_FresnelSmokeFire_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/FireStorm/M_VFX_FresnelSmokeFire_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/FireStorm/M_VFX_SmokeFireTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/FireStorm/M_VFX_SmokeTransitionFire_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_04.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_05.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmoke_06.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeCenter_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeCenter_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeCenter_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeEdge_01.mat|SH_Vefects_VFX_FresnelStep
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeEdge_02.mat|SH_Vefects_VFX_FresnelStep
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_FresnelSmokeEdge_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_SmokeClouds_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_SmokeClouds_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_SmokeTransition_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_SmokeTransition_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GlobalSmokes/M_VFX_SmokeTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GoldenSandStorm/M_VFX_FresnelSmokeGolden_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/GoldenSandStorm/M_VFX_SmokeGoldenTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Flare_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Flare_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Flare_03.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_FlatAdd_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_01_AB.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_02_AB.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_03_AB.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/M_VFX_Glow_04.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_04.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_05.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychic_06.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_FresnelSmokePsychicEdge_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Psychic/M_VFX_SmokeTransitionPsychic_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SandStorm/M_VFX_SmokeSandTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SnowStorm/M_VFX_SmokeSnowTube_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_FresnelSmokeSound_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_FresnelSmokeSound_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_FresnelSmokeSound_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_FresnelSmokeSound_04.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_FresnelSmokeSoundEdge_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/SoundStorm/M_VFX_SmokeTransitionSound_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/ThunderStorm/M_VFX_FresnelSmokeStorm_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/ThunderStorm/M_VFX_FresnelSmokeStorm_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/ThunderStorm/M_VFX_FresnelThunder_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/ThunderStorm/M_VFX_FresnelThunder_02.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/ThunderStorm/M_VFX_SmokeTubeStorm_01.mat|SH_Vefects_VFX_Dissolve
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelSmokeToxic_01.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelSmokeToxic_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelSmokeToxic_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelSmokeToxicEdge_01.mat|SH_Vefects_VFX_FresnelStep
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelToxic_02.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Smoke Bombs VFX/Shared/Materials/Toxic/M_VFX_FresnelToxic_03.mat|SH_Vefects_VFX_Fresnel
+Assets/Vefects/Stylized AoE VFX/Demo/Resources/Materials/M_VFX_Character_Showoff_01.mat|Vefects/SH_Vefects_BIRP_VFX_Character_Showoff
+Assets/Vefects/Stylized AoE VFX/Demo/Scene/Materials/M_Vefects_Grid_01.mat|/_Vefects_/SH_Vefects_Grid_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_01.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_02.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_03.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_04.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_05.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_06.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_07.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_08.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_09.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_10.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_11.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_12.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_13.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Billboard_14.mat|/Vefects/SH_Vefects_Extra_Billboard_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Documentation/_ Extra/Materials/M_Vefects_Extra_Grid_01.mat|/Vefects/SH_Vefects_Extra_Grid_01_BIRP
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Burnt_Decal_01.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Lit_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Directional_Impact_01_GS.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Dust_Wave_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Embers_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Energy_Balls_01.mat|Vefects/SH_Vefects_BIRP_Thin_Smoke_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Glow_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Glow_02.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Impact_Hemisphere_01.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Impact_HP_01_GS.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Impact_HP_01_GS_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Light_Ray_01.mat|Vefects/SH_Vefects_BIRP_Light_Rays_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Lightning_Ball_01.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Rainbow_Lens_Flare_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Rainbow_Lens_Flare_02.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Rainbow_Lens_Flare_03.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Refraction_Shockwave_01.mat|Vefects/SH_Vefects_BIRP_Refraction_Shockwave_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Refraction_Shockwave_02.mat|Vefects/SH_Vefects_BIRP_Refraction_Shockwave_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Ring_Burst_01_GS.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Ring_Burst_01_GS_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Sparkle_Star_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Spike_01.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Sprite_Trails_01.mat|Vefects/SH_Vefects_BIRP_Sprite_Trails_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Thin_Smoke_01.mat|Vefects/SH_Vefects_BIRP_Thin_Smoke_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Windup_Core_01_GS.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Windup_Core_Add_01.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/Shared/Materials/M_VFX_Windup_Core_Add_02_GS.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Area_Indicator_01_Air.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Burst_Dome_02_Air.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Disc_Windup_Air_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Disc_Windup_Air_02.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Impact_Hemisphere_02_Air.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Impact_Hemisphere_02_Air_Inverted.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Impact_Hemisphere_03_Air.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Ring_Burst_02_Air.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Ring_Burst_02_Air_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Air/Materials/M_VFX_Windup_Core_Add_02_Air.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Area_Indicator_01_Blood.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Central_Area_01_Blood.mat|Vefects/SH_Vefects_BIRP_Central_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Coaster_01_Blood.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Cracks_01_Blood.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Decal_Area_01_Blood.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Disc_Windup_Blood_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Dome_01_Blood.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Dome_02_Blood.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Dust_Puffs_01_Blood.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Impact_HP_01_Blood.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Ring_Burst_02_Blood.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Ring_Burst_02_Blood_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Ring_Burst_03_Blood.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Ring_Burst_03_Blood_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Splashes_01_Blood.mat|Vefects/SH_Vefects_BIRP_Splashes_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Splashes_02_Blood.mat|Vefects/SH_Vefects_BIRP_Splashes_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Wave_01_Blood.mat|Vefects/SH_Vefects_BIRP_Wave_01
+Assets/Vefects/Stylized AoE VFX/VFX/Blood/Materials/M_VFX_Windup_Core_Add_02_Blood.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Coaster_01_Crystal.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Coaster_02_Crystal.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Crystal_Decal_01.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Lit_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Impact_HP_01_Crystal.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Pointy_Rock_01_Crystal.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Ring_Burst_02_Crystal_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Rock_01_Crystal.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Crystal/Materials/M_VFX_Windup_Core_Add_02_Crystal.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Area_Indicator_01_Dark.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Cracks_01_Dark.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Decal_Area_01_Dark.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Impact_Hemisphere_02_Dark.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Impact_Hemisphere_02_Dark_Inverted.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Impact_HP_01_Dark.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Ring_Burst_02_Dark.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Ring_Burst_02_Dark_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Dark/Materials/M_VFX_Windup_Core_Add_02_Dark.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Coaster_02_Earth.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Earth_Decal_01.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Lit_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Impact_HP_01_Earth.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Pointy_Rock_01_Earth.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Ring_Burst_02_Earth_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Earth/Materials/M_VFX_Rock_01_Earth.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Electric/Materials/M_VFX_Area_Indicator_01_Electric.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Electric/Materials/M_VFX_Lightning_Bolt_01.mat|Vefects/SH_Vefects_BIRP_Lightning_Bolt_01
+Assets/Vefects/Stylized AoE VFX/VFX/Electric/Materials/M_VFX_Lightning_Bolt_02.mat|Vefects/SH_Vefects_BIRP_Lightning_Bolt_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Area_Indicator_01_Fire.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Coaster_02_Fire.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Disc_Impact_01_Fire.mat|Vefects/SH_Vefects_BIRP_Disc_Impact_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Disc_Windup_Fire_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Disc_Windup_Fire_02.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Dust_Puffs_01_Fire.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Fire_Cracks_01_Fire.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_Fire_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Ring_Burst_02_Fire.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Fire/Materials/M_VFX_Ring_Burst_02_Fire_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Area_Indicator_01_Heal.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Coaster_02_Heal.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Decal_Area_01_Heal.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Disc_Windup_Heal_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Disc_Windup_Heal_01_Add.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Disc_Windup_Heal_02.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Dust_Wave_01_Heal.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Glow_Flare_01.mat|Vefects/SH_Vefects_BIRP_Glow_Flare_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Glow_Flare_02.mat|Vefects/SH_Vefects_BIRP_Glow_Flare_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Heal/Materials/M_VFX_Glow_Flare_02_GS.mat|Vefects/SH_Vefects_BIRP_Glow_Flare_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Area_Indicator_01_Ice.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Burst_Dome_02_Ice.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Ice_Decal_01.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Lit_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Impact_Hemisphere_03_Ice.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Pointy_Rock_01_Ice.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Ring_Burst_02_Ice.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Ring_Burst_02_Ice_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Rock_01_Ice.mat|Vefects/SH_Vefects_BIRP_Rock_01
+Assets/Vefects/Stylized AoE VFX/VFX/Ice/Materials/M_VFX_Windup_Core_Add_02_Ice.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Area_Indicator_01_Light.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Area_Indicator_02_Light.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Coaster_02_Light.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Dome_01_Light.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Dust_Puffs_01_Light.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Energy_Disc_Thin_01_Light.mat|Vefects/SH_Vefects_BIRP_Energy_Disc_Thin_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Light_Cracks_01_Light.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_Light_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Light_Streak_01_Light.mat|Vefects/SH_Vefects_BIRP_Energy_Disc_Thin_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Ring_Burst_02_Light_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Light/Materials/M_VFX_Zone_Indicator_01_Light.mat|Vefects/SH_Vefects_BIRP_Zone_Indicator_Light_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Area_Indicator_01_Magma.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Central_Area_01_Magma.mat|Vefects/SH_Vefects_BIRP_Central_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Coaster_01_Magma.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Coaster_02_Magma.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Decal_Area_01_Magma.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_Whirlpool_Simple_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Dome_01_Magma.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Dome_02_Magma.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Dome_03_Magma.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Dust_Puffs_01_Magma.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Ring_Burst_03_Magma.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Ring_Burst_03_Magma_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Smoke_01_Magma.mat|Vefects/SH_Vefects_BIRP_Thin_Smoke_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Splashes_01_Magma.mat|Vefects/SH_Vefects_BIRP_Splashes_01
+Assets/Vefects/Stylized AoE VFX/VFX/Magma/Materials/M_VFX_Wave_01_Magma.mat|Vefects/SH_Vefects_BIRP_Wave_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Area_Indicator_01_Nature.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Coaster_02_Nature.mat|Vefects/SH_Vefects_BIRP_Unlit_Master_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Disc_Impact_01_Nature.mat|Vefects/SH_Vefects_BIRP_Disc_Impact_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Disc_Windup_Nature_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Disc_Windup_Nature_02.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Leaf_01_Nature.mat|Vefects/SH_Vefects_BIRP_Leaf_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Nature_Decal_01.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Lit_01
+Assets/Vefects/Stylized AoE VFX/VFX/Nature/Materials/M_VFX_Ring_Burst_02_Nature_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Area_Indicator_01_Poison.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Cracks_01_Poison.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Decal_Area_01_Poison.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Disc_Windup_Poison_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Disc_Windup_Poison_02.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Dust_Puffs_01_Poison.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Impact_Hemisphere_02_Poison.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Impact_Hemisphere_02_Poison_Inverted.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Impact_HP_01_Poison.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Ring_Burst_02_Poison.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Ring_Burst_02_Poison_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Poison/Materials/M_VFX_Windup_Core_Add_02_Poison.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Sound/Materials/M_VFX_Area_Indicator_01_Sound.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Sound/Materials/M_VFX_Sound_Trail_01.mat|Vefects/SH_Vefects_BIRP_Sound_Trail_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Area_Indicator_01_Void.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Central_Area_01_Void.mat|Vefects/SH_Vefects_BIRP_Central_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Central_Area_02_Void.mat|Vefects/SH_Vefects_BIRP_Central_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Cracks_01_Void.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Cracks_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Decal_Area_01_Void.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Impact_Hemisphere_02_Void.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Impact_Hemisphere_02_Void_Inverted.mat|Vefects/SH_Vefects_BIRP_Impact_Hemisphere_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Ring_Burst_02_Void.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Ring_Burst_02_Void_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Void/Materials/M_VFX_Windup_Core_Add_02_Void.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Area_Indicator_01_Water.mat|Vefects/SH_Vefects_BIRP_Area_Indicator_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Central_Area_01_Water.mat|Vefects/SH_Vefects_BIRP_Central_Area_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Coaster_01_Water.mat|Vefects/SH_Vefects_BIRP_Coaster_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Decal_Area_01_Water.mat|Vefects/SH_Vefects_BIRP_Fake_Decal_Unlit_Area_Whirlpool_Simple_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Disc_Windup_Water_01.mat|Vefects/SH_Vefects_BIRP_Disc_Windup_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Dome_01_Water.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Dome_02_Water.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Dome_03_Water.mat|Vefects/SH_Vefects_BIRP_Dome_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Dust_Puffs_01_Water.mat|Vefects/SH_Vefects_BIRP_Dust_Puffs_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Impact_HP_01_Water.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Ring_Burst_03_Water.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Ring_Burst_03_Water_Add.mat|Vefects/SH_Vefects_BIRP_Unlit_Simple_LUT_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Splashes_01_Water.mat|Vefects/SH_Vefects_BIRP_Splashes_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Wave_01_Water.mat|Vefects/SH_Vefects_BIRP_Wave_01
+Assets/Vefects/Stylized AoE VFX/VFX/Water/Materials/M_VFX_Windup_Core_Add_02_Water.mat|Vefects/SH_Vefects_BIRP_Windup_Core_Add_01
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_01.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_02.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_03.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_04.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_05.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_06.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_07.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_08.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_09.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_10.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_11.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_12.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_13.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Billboard_14.mat|/Vefects/SH_Vefects_Extra_Billboard_01_Unlit_BIRP
+Assets/Vefects/Stylized VFX/_ Extra/Materials/M_Vefects_Extra_Grid_01.mat|/Vefects/SH_Vefects_Extra_Grid_01
+Assets/Vefects/Stylized VFX/Demo/Scene/Materials/M_Vefects_Grid_01.mat|/_Vefects_/SH_Vefects_Grid_01_BIRP
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Distortion_01.mat|Vefects/SH_VFX_Vefects_Distortion_01_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Distortion_02.mat|Vefects/SH_VFX_Vefects_Distortion_01_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_02.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_03.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_03_AB.mat|Vefects/SH_VFX_Vefects_AB_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_04.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Flare_05.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Impact_Spikes_01.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Projectile_Mesh.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Radial_01.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Radial_01_AB.mat|Vefects/SH_VFX_Vefects_AB_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Radial_02.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Radial_02_AB.mat|Vefects/SH_VFX_Vefects_AB_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Radial_03.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Ring.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Simple_Glow.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Shared/Materials/M_VFX_Trail.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Smoke.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Smoke_Directional.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Smoke_Energy.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Dark/Materials/M_VFX_Dark_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Flare_AB.mat|Vefects/SH_VFX_Vefects_AB_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Rock_Projectile.mat|Vefects/SH_VFX_Vefects_AB_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Rocks.mat|Vefects/SH_VFX_Vefects_AB_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Rocks_Blurred.mat|Vefects/SH_VFX_Vefects_AB_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Smoke.mat|Vefects/SH_VFX_Vefects_AB_Dissolve_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Smoke_Directional.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Earth/Materials/M_VFX_Earth_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Flare_02.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Lightning.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Lightning_Energy.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Electric/Materials/M_VFX_Electric_Magic_Projectile.mat|Vefects/SH_VFX_Vefects_Add_DoubleSided_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Emblem.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Fire_Smoke.mat|Vefects/SH_VFX_Vefects_Add_DissolveEmissive_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Flames.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Flare.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Flare_Ring.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Fire/Materials/M_VFX_Fire_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Flare_02.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Flare_03.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Flare_Chromatic.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Lens.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Projectile.mat|Vefects/SH_VFX_Vefects_Add_DoubleSided_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Smoke.mat|Vefects/SH_VFX_Vefects_Add_Dissolve_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Ice/Materials/M_VFX_Ice_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Butterfly.mat|Vefects/SH_VFX_Vefects_Add_DoubleSided_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Flare_02.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Leaves.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Lens.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Nature/Materials/M_VFX_Nature_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Emblem.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Flare_01.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Flare_02.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Flare_03.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Flare_Black.mat|Vefects/SH_VFX_Vefects_AB_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Notes.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Notes_02.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Projectile.mat|Vefects/SH_VFX_Vefects_Add_DoubleSided_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Rings.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Sound/Materials/M_VFX_Sound_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Dark_Energy.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Emblem.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Flare.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Flare_Ring.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Ring.mat|Vefects/SH_VFX_Vefects_Add_Dissolve_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Spikes.mat|Vefects/SH_VFX_Vefects_Add_DoubleSided_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Void/Materials/M_VFX_Void_Magic_Trail.mat|Vefects/SH_VFX_Vefects_Add_Trail_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Flare.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Flare_Chromatic.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Lens.mat|Vefects/SH_VFX_Vefects_Add_Color_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Pentacle.mat|Vefects/SH_VFX_Vefects_Add_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Splash.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Magic Attacks/Water/Materials/M_VFX_Water_Magic_Splash_Directional.mat|Vefects/SH_VFX_Vefects_Add_DissolveTex_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Dark/Materials/M_VFX_Piercing_Dark.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Dark/Materials/M_VFX_Slash_Circle_Dark.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Dark/Materials/M_VFX_Slash_Dark.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Earth/Materials/M_VFX_Piercing_Earth.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Earth/Materials/M_VFX_Slash_Circle_Earth.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Earth/Materials/M_VFX_Slash_Earth.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Electric/Materials/M_VFX_Piercing_Electric.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Electric/Materials/M_VFX_Slash_Circle_Electric.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Electric/Materials/M_VFX_Slash_Electric.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Fire/Materials/M_VFX_Piercing_Fire.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Fire/Materials/M_VFX_Slash_Circle_Fire.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Fire/Materials/M_VFX_Slash_Fire.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Generic/Materials/M_VFX_Piercing_Generic.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Generic/Materials/M_VFX_Slash_Circle_Generic.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Generic/Materials/M_VFX_Slash_Generic.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Generic/Materials/M_VFX_Slash_Generic_Add.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Ice/Materials/M_VFX_Piercing_Ice.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Ice/Materials/M_VFX_Slash_Circle_Ice.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Ice/Materials/M_VFX_Slash_Ice.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Nature/Materials/M_VFX_Piercing_Nature.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Nature/Materials/M_VFX_Slash_Circle_Nature.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Nature/Materials/M_VFX_Slash_Nature.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Sound/Materials/M_VFX_Piercing_Sound.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Sound/Materials/M_VFX_Slash_Circle_Sound.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Sound/Materials/M_VFX_Slash_Sound.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Void/Materials/M_VFX_Piercing_Void.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Void/Materials/M_VFX_Slash_Circle_Void.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Void/Materials/M_VFX_Slash_Void.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Water/Materials/M_VFX_Piercing_Water.mat|Vefects/SH_VFX_Vefects_Piercing_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Water/Materials/M_VFX_Slash_Circle_Water.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New
+Assets/Vefects/Stylized VFX/Stylized VFX Shuriken/Skills/Slashes Piercing/Water/Materials/M_VFX_Slash_Water.mat|Vefects/SH_VFX_Vefects_Slash_BIRP_New

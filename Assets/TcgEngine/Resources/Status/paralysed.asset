@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: paralysed
   m_EditorClassIdentifier: 
   effect: 32
-  title: Paralysed
+  title: Paralizado
   icon: {fileID: 0}
-  desc: Cannot perform any actions.
-  status_fx: {fileID: 7895921366975009591, guid: c54fbb409d9ffcd4db321c31945eb001,
-    type: 3}
+  desc: No puede atacar.
+  status_fx: {fileID: 0}
   hvalue: -1

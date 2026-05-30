@@ -142,11 +142,16 @@ namespace TcgEngine.Server
             //Timer during game
             if (game_data.state == GameState.Play && !gameplay.IsResolving())
             {
-                game_data.turn_timer -= Time.deltaTime;
-                if (game_data.turn_timer <= 0f)
+                //Pause timer while waiting for GOLPEAR second attack
+                bool golpear_waiting = !string.IsNullOrEmpty(game_data.golpear_pending_uid);
+                if (!golpear_waiting)
                 {
-                    //Time expired during turn
-                    gameplay.NextStep();
+                    game_data.turn_timer -= Time.deltaTime;
+                    if (game_data.turn_timer <= 0f)
+                    {
+                        //Time expired during turn
+                        gameplay.NextStep();
+                    }
                 }
             }
 
@@ -180,14 +185,17 @@ namespace TcgEngine.Server
 
         protected virtual void StartGame()
         {
-            //Setup AI
+            //Setup AI (server-side, runs with correct player identity)
             bool ai_vs_ai = !is_dedicated_server && GameplayData.Get().ai_vs_ai;
             foreach (Player player in game_data.players)
             {
                 if (player.is_ai || ai_vs_ai)
                 {
-                    AIPlayer ai_gameplay = AIPlayer.Create(GameplayData.Get().ai_type, gameplay, player.player_id, player.ai_level);
-                    ai_list.Add(ai_gameplay);
+                    // El tipo de IA se deriva del nivel: 0=Random(Fácil), 1-5=Medium(Intermedio), 6-10=MiniMax(Difícil)
+                    AIType ai_type = AIPlayer.TypeFromLevel(player.ai_level);
+                    AIPlayer ai_gameplay = AIPlayer.Create(ai_type, gameplay, player.player_id, player.ai_level);
+                    if (ai_gameplay != null)
+                        ai_list.Add(ai_gameplay);
                 }
             }
 
@@ -304,6 +312,12 @@ namespace TcgEngine.Server
                 Card target = game_data.GetCard(msg.target_uid);
                 if (attacker != null && target != null && attacker.player_id == player.player_id)
                 {
+                    // GOLPEAR pending: only the card waiting for its second attack may attack.
+                    // Block any other card so the player cannot "escape" the two-hit sequence.
+                    if (!string.IsNullOrEmpty(game_data.golpear_pending_uid)
+                        && msg.attacker_uid != game_data.golpear_pending_uid)
+                        return;
+
                     gameplay.AttackTarget(attacker, target);
                 }
             }
@@ -380,6 +394,13 @@ namespace TcgEngine.Server
             Player player = GetPlayer(iclient);
             if (player != null && game_data.IsPlayerTurn(player))
             {
+                // Ignore end-turn requests while waiting for GOLPEAR second attack.
+                // PlayerControls always sends EndTurn after ApplyAttack because it reads
+                // stale client game_data before the server refresh arrives; block it here
+                // so the turn doesn't end prematurely.
+                if (!string.IsNullOrEmpty(game_data.golpear_pending_uid))
+                    return;
+
                 gameplay.NextStep();
             }
         }

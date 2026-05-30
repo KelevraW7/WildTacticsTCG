@@ -26,8 +26,9 @@ MonoBehaviour:
   traits:
   - {fileID: 11400000, guid: de0a9d36cc1106c42b9ea2c7036385c9, type: 2}
   stats: []
-  abilities: []
-  text: 
+  abilities:
+  - {fileID: 11400000, guid: e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0, type: 2}
+  text: 'VOLAR: Al inicio de tu turno, recupera 1 de vida.'
   desc: 
   spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
     type: 3}

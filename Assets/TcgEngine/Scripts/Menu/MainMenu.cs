@@ -237,7 +237,10 @@ namespace TcgEngine.UI
                 return;
             }
 
-            SoloPanel.Get().Show();
+            // Mostrar el panel de selección de dificultad antes de arrancar la partida.
+            // El panel se encarga de configurar ai_level y llamar a StartGame cuando el
+            // jugador elija Fácil / Intermedio / Difícil.
+            DifficultyPanel.Get()?.Show();
         }
 
         public void OnClickPvP()
