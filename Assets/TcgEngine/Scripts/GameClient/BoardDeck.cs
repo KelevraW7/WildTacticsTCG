@@ -53,16 +53,15 @@ namespace TcgEngine.Client
                 discard_value.text = player.cards_discard.Count.ToString();
         }
 
-        public void ShowDeckCards()
-        {
-            Player player = GameClient.Get().GetPlayer();
-            CardSelector.Get().Show(player.cards_deck, "DECK");
-        }
+        // ShowDeckCards eliminado — el jugador no debe poder ver las cartas
+        // pendientes de su mazo (información privada del orden de robo).
 
-        public void ShowDiscardCards()
+        public void ShowCemeteryCards()
         {
+            // El cementerio es información pública — ambos jugadores pueden verlo.
             Player player = opponent ? GameClient.Get().GetOpponentPlayer() : GameClient.Get().GetPlayer();
-            CardSelector.Get().Show(player.cards_discard, "DISCARD");
+            string label = opponent ? "CEMENTERIO RIVAL" : "CEMENTERIO";
+            CardSelector.Get().Show(player.cards_discard, label);
         }
 
         private void ShowHover(bool hover)
@@ -92,10 +91,10 @@ namespace TcgEngine.Client
 
         private void OnMouseOver()
         {
-            if (!opponent && Input.GetMouseButtonDown(0))
-                ShowDeckCards(); //Cannot see opponent deck
-            else if(Input.GetMouseButtonDown(1))
-                ShowDiscardCards(); //Cant see both player discard
+            // Click izquierdo → cementerio (info pública para ambos jugadores)
+            // El mazo en sí ya NO es clickable — nadie puede ver el orden de robo.
+            if (Input.GetMouseButtonDown(0))
+                ShowCemeteryCards();
         }
     }
 }

@@ -34,15 +34,31 @@ namespace TcgEngine.AI
         {
             if (type == AIType.Random)
                 return new AIPlayerRandom(gameplay, id, level);
+            if (type == AIType.Medium)
+                return new AIPlayerMedium(gameplay, id, level);
             if (type == AIType.MiniMax)
                 return new AIPlayerMM(gameplay, id, level);
             return null;
+        }
+
+        /// <summary>
+        /// Derive AI type from ai_level so the server doesn't need a separate field.
+        ///   level 0        → Random  (Fácil)
+        ///   level 1 – 5   → Medium  (Intermedio)
+        ///   level 6 – 10  → MiniMax (Difícil)
+        /// </summary>
+        public static AIType TypeFromLevel(int level)
+        {
+            if (level <= 0) return AIType.Random;
+            if (level <= 5) return AIType.Medium;
+            return AIType.MiniMax;
         }
     }
 
     public enum AIType
     {
-        Random = 0,      //Dumb AI that just do random moves, useful for testing cards without getting destroyed
-        MiniMax = 10,    //Stronger AI using Minimax algo with alpha-beta pruning
+        Random  = 0,   // IA aleatoria — Fácil
+        Medium  = 5,   // IA con ventaja de tipo — Intermedio
+        MiniMax = 10,  // IA con Minimax + alpha-beta — Difícil
     }
 }
