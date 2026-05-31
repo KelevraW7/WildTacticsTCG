@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: gold
   title: gold
-  icon: {fileID: 0}
+  icon: {fileID: -6099196120594172564, guid: 7afd79ed50c65dc4398e5e3fec480801, type: 3}
   color: {r: 0.6981132, g: 0.54042804, b: 0, a: 0}

@@ -114,33 +114,50 @@ namespace TcgEngine.Gameplay
         private void WildAssignDecks()
         {
             List<CardData> allCards = new List<CardData>(CardData.GetAll());
-            Debug.Log($"🃏 [WildAssignDecks] Cartas disponibles: {allCards.Count}");
 
-            // ── Separar el pool de eventos del pool de criaturas ─────────────────────
-            // Separar por tipo para que solo las criaturas entren en el mazo de criaturas
+            // ── Filtrar criaturas/doradas a las cartas desbloqueadas del jugador ────────
+            // Eventos y Escenarios no tienen sistema de propiedad: se usan todos los disponibles.
+            // Las criaturas sí: solo las que el jugador haya desbloqueado entran al pool.
+            UserData udata      = Authenticator.Get()?.UserData;
+            VariantData defVar  = VariantData.GetDefault();
+            string variant_id   = defVar?.id ?? "";
+
+            List<CardData> creaturePool;
+            if (udata != null)
+            {
+                creaturePool = allCards.FindAll(c =>
+                    c.type != CardType.Event &&
+                    c.type != CardType.Scenario &&
+                    udata.GetCardQuantity(c.id, variant_id, true) > 0);
+
+                if (creaturePool.Count == 0)
+                {
+                    // Fallback: sin cartas desbloqueadas (no debería ocurrir con el pack inicial)
+                    Debug.LogWarning("[WildAssignDecks] Pool de criaturas vacío — usando todas las cartas como fallback.");
+                    creaturePool = allCards.FindAll(c => c.type != CardType.Event && c.type != CardType.Scenario);
+                }
+            }
+            else
+            {
+                creaturePool = allCards.FindAll(c => c.type != CardType.Event && c.type != CardType.Scenario);
+            }
+
+            // ── Separar eventos y escenarios (pool global, sin filtro de propiedad) ────
             List<CardData> eventPool    = allCards.FindAll(c => c.type == CardType.Event);
             List<CardData> scenarioPool = allCards.FindAll(c => c.type == CardType.Scenario);
 
-            // Las cartas "doradas" se identifican por team.id == "gold"
-            // (excluir eventos y escenarios aunque tengan equipo gold)
-            List<CardData> goldPool   = allCards.FindAll(c => c.type != CardType.Event
-                                                           && c.type != CardType.Scenario
-                                                           && c.team != null
-                                                           && c.team.id.ToLower() == "gold");
-            List<CardData> commonPool = allCards.FindAll(c => c.type != CardType.Event
-                                                           && c.type != CardType.Scenario
-                                                           && (c.team == null || c.team.id.ToLower() != "gold"));
+            // ── Separar doradas y comunes dentro del pool desbloqueado ────────────────
+            List<CardData> goldPool   = creaturePool.FindAll(c => c.team != null && c.team.id.ToLower() == "gold");
+            List<CardData> commonPool = creaturePool.FindAll(c => c.team == null || c.team.id.ToLower() != "gold");
 
-            // Barajar los tres pools con Fisher-Yates usando el random de clase
-            ShuffleCardDataList(goldPool);
-            ShuffleCardDataList(commonPool);
-            ShuffleCardDataList(eventPool);
-
-            Debug.Log($"🃏 Pool doradas: {goldPool.Count} | Pool comunes: {commonPool.Count} | Pool eventos: {eventPool.Count}");
+            Debug.Log($"🃏 [WildAssignDecks] Pool desbloqueado — doradas: {goldPool.Count} | comunes: {commonPool.Count} | eventos: {eventPool.Count}");
 
             foreach (Player player in game_data.players)
             {
-                // ── Mazo de criaturas (11 cartas: 1 dorada + 10 comunes) ─────────────
+                // ── Mazo de criaturas (11 cartas: 1 dorada + 10 comunes) ──────────────
+                // Se consume el pool en orden (sin repetición entre jugadores).
+                // El pack inicial tiene 20 comunes + 6 doradas = suficiente para 2 jugadores
+                // sin repetición (10+10 comunes, 1+1 doradas).
                 List<CardData> selected = new List<CardData>();
 
                 // Exactamente 1 carta dorada por jugador
@@ -151,17 +168,17 @@ namespace TcgEngine.Gameplay
                 }
                 else
                 {
-                    Debug.LogWarning($"⚠️ Sin cartas doradas disponibles para el jugador {player.player_id}");
+                    Debug.LogWarning($"⚠️ Sin cartas doradas desbloqueadas para el jugador {player.player_id}");
                 }
 
-                // Rellenar hasta 11 con cartas comunes (sin repetición entre jugadores)
+                // Rellenar hasta 11 con comunes (sin repetición entre jugadores)
                 while (selected.Count < 11 && commonPool.Count > 0)
                 {
                     selected.Add(commonPool[0]);
                     commonPool.RemoveAt(0);
                 }
 
-                // Barajar las 11 cartas seleccionadas
+                // Barajar las cartas seleccionadas antes de añadirlas al mazo
                 ShuffleCardDataList(selected);
 
                 foreach (CardData data in selected)
@@ -173,10 +190,7 @@ namespace TcgEngine.Gameplay
                 int goldCount = selected.FindAll(c => c.team != null && c.team.id.ToLower() == "gold").Count;
                 Debug.Log($"🃏 Jugador {player.player_id}: {player.cards_deck.Count} criaturas ({goldCount} dorada/s)");
 
-                // ── Mazo de eventos: 10 cartas únicas por jugador ────────────────────
-                // Cada jugador obtiene su propia selección aleatoria del pool de 50 eventos.
-                // Un mismo jugador no puede tener dos copias de la misma carta,
-                // pero dos jugadores SÍ pueden compartir la misma carta de evento.
+                // ── Mazo de eventos: 10 cartas por jugador del pool global ──────────
                 List<CardData> availableEvents = new List<CardData>(eventPool);
                 ShuffleCardDataList(availableEvents);
 
@@ -755,11 +769,12 @@ namespace TcgEngine.Gameplay
 
             // ── Caso 2: el atacante murió por OnBeforeDefend (INTOXICAR) ─────────────
             // El combate es simultáneo: el ataque ya estaba comprometido, así que el
-            // atacante AÚN inflige su daño al objetivo aunque haya muerto del veneno.
-            // No lanzamos onAttackStart (la carta ya desapareció visualmente), pero
-            // sí encolamos ResolveAttackHit y después terminamos el turno.
+            // atacante AÚN inflige su daño y dispara sus habilidades OnAfterAttack (ej.
+            // EMBESTIR → paraliza al rival) aunque haya muerto del veneno.
+            // Lanzamos onAttackStart para que el cliente muestre audio/FX del impacto.
             if (!game_data.IsOnBoard(attacker))
             {
+                onAttackStart?.Invoke(attacker, target);
                 UpdateOngoing();
                 resolve_queue.AddAttack(attacker, target, ResolveAttackHit, skip_cost);
                 resolve_queue.AddCallback(() =>
@@ -846,8 +861,10 @@ namespace TcgEngine.Gameplay
 
             UpdateOngoing();
 
-            if (game_data.IsOnBoard(attacker))
-                TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
+            // Fire OnAfterAttack regardless of board status — the attack was committed,
+            // so EMBESTIR → Paralysed applies even if the attacker died simultaneously
+            // from an INTOXICAR counter-attack (simultaneous combat rule).
+            TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
             if (game_data.IsOnBoard(target))
                 TriggerCardAbilityType(AbilityTrigger.OnAfterDefend, target, attacker);
 

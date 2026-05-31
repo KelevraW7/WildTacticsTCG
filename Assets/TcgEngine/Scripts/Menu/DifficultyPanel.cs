@@ -40,6 +40,12 @@ namespace TcgEngine.UI
         public Image bg_casual;
         public Image bg_competitive;
 
+        // ── Iconos decorativos al inicio de cada fila ─────────────────────────────
+        [Header("Iconos de dificultad")]
+        public Image icon_easy;
+        public Image icon_casual;
+        public Image icon_competitive;
+
         // ── Textos descriptivos y de recompensa ───────────────────────────────────
         [Header("Textos descriptivos")]
         public TMP_Text desc_easy;
@@ -84,7 +90,7 @@ namespace TcgEngine.UI
         {
             if (desc_easy        != null) desc_easy.text        = "IA aleatoria. Aprende a jugar sin riesgo.";
             if (desc_casual      != null) desc_casual.text      = "IA con ventaja de tipo. Partida casual.";
-            if (desc_competitive != null) desc_competitive.text = "IA al máximo. Arriesga tus wildcoins.";
+            if (desc_competitive != null) desc_competitive.text = "IA al máximo. Arriesga tus WildCoins.";
 
             if (reward_easy        != null) reward_easy.text        = "+1 WC";
             if (reward_casual      != null) reward_casual.text      = "+10 WC";

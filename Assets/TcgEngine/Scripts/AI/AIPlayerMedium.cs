@@ -71,7 +71,7 @@ namespace TcgEngine.AI
         {
             yield return new WaitForSeconds(1f);
 
-            // Ataque: prioriza ventaja de tipo, pero solo intenta una vez
+            // Una sola criatura ataca por turno, priorizando ventaja de tipo
             AttackWithTypeAdvantage();
 
             yield return new WaitForSeconds(0.5f);
@@ -86,34 +86,38 @@ namespace TcgEngine.AI
         {
             if (!CanPlay()) return;
 
-            Game game_data    = gameplay.GetGameData();
-            Player player     = game_data.GetPlayer(player_id);
-            Player opponent   = game_data.GetOpponentPlayer(player_id);
+            Game game_data  = gameplay.GetGameData();
+            Player player   = game_data.GetPlayer(player_id);
+            Player opponent = game_data.GetOpponentPlayer(player_id);
 
             if (!game_data.IsPlayerActionTurn(player)) return;
-            if (player.cards_board.Count == 0) return;
+            if (player.cards_board.Count == 0)         return;
+            if (opponent.cards_board.Count == 0)       return;
 
-            // Recopilar todos los ataques legales contra criaturas enemigas
-            var all_attacks = new List<(Card attacker, Card target)>();
-            var advantaged  = new List<(Card attacker, Card target)>();
+            // Clasificar todos los ataques legales
+            var adv     = new List<(Card attacker, Card target)>();
+            var neutral = new List<(Card attacker, Card target)>();
+            var disadv  = new List<(Card attacker, Card target)>();
 
             foreach (Card attacker in player.cards_board)
             {
                 foreach (Card target in opponent.cards_board)
                 {
-                    if (game_data.CanAttackTarget(attacker, target))
-                    {
-                        all_attacks.Add((attacker, target));
-                        if (HasTypeAdvantage(attacker, target))
-                            advantaged.Add((attacker, target));
-                    }
+                    if (!game_data.CanAttackTarget(attacker, target)) continue;
+
+                    if      (HasTypeAdvantage(attacker, target)) adv.Add((attacker, target));
+                    else if (HasTypeAdvantage(target, attacker)) disadv.Add((attacker, target));
+                    else                                          neutral.Add((attacker, target));
                 }
             }
 
-            if (all_attacks.Count == 0) return;
+            // Prioridad: ventajoso → neutro (doradas incluidas) → desventajoso
+            var pool = adv.Count > 0     ? adv
+                     : neutral.Count > 0  ? neutral
+                     : disadv;
 
-            // Elegir entre los ataques con ventaja si los hay; si no, al azar entre todos
-            var pool   = advantaged.Count > 0 ? advantaged : all_attacks;
+            if (pool.Count == 0) return;
+
             var chosen = pool[rand.Next(pool.Count)];
             gameplay.AttackTarget(chosen.attacker, chosen.target);
         }

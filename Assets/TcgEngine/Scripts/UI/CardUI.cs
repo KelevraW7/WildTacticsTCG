@@ -119,6 +119,19 @@ namespace TcgEngine.UI
                 hp.text = hp_value.ToString();
         }
 
+        /// <summary>
+        /// Oculta o muestra los indicadores de ataque y HP.
+        /// Útil para vistas compactas como la Pokédex, donde el detalle completo
+        /// se ve en el preview lateral al hacer clic.
+        /// </summary>
+        public void SetStatsVisible(bool visible)
+        {
+            if (attack_icon != null) attack_icon.enabled = visible;
+            if (attack      != null) attack.enabled      = visible;
+            if (hp_icon     != null) hp_icon.enabled     = visible;
+            if (hp          != null) hp.enabled           = visible;
+        }
+
         public void SetMaterial(Material mat)
         {
             if (card_image != null)

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 137187ae111118548b8cdc17eed44c86, type: 3}
-  m_Name: standard
+  m_Name: creatures
   m_EditorClassIdentifier: 
-  id: standard
-  type: 0
+  id: creatures
+  type: 20
   cards: 5
   rarities_1st:
   - rarity: {fileID: 11400000, guid: 72248f07232412e4db2f6864dbb4e271, type: 2}
@@ -36,10 +36,10 @@ MonoBehaviour:
     probability: 96
   - variant: {fileID: 11400000, guid: 3a827aeeaca139641a4b8ad0c3c74f52, type: 2}
     probability: 4
-  title: Standard Pack
-  pack_img: {fileID: 21300000, guid: b2c2a8efa1f7d7b4593a512e2c8cd61a, type: 3}
-  cardback_img: {fileID: 21300000, guid: 0e839bd6251bf9a4697b9cb18c1565a4, type: 3}
-  desc: Standard pack with 5 cards.
+  title: Pack de criaturas
+  pack_img: {fileID: 21300000, guid: 3d98a2fd81ba96f43b0f9a42ab94d3be, type: 3}
+  cardback_img: {fileID: 21300000, guid: b6ffa50d4c5435849a3a8f9fecb3e9af, type: 3}
+  desc: Pack con 5 cartas de criatura.
   sort_order: 0
   available: 1
-  cost: 100
+  cost: 500

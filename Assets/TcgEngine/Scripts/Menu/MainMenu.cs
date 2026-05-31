@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TcgEngine;
 using TcgEngine.Client;
 
 namespace TcgEngine.UI
@@ -61,7 +62,7 @@ namespace TcgEngine.UI
             UserData udata = Authenticator.Get().UserData;
             if (udata != null)
             {
-                credits_txt.text = GameUI.FormatNumber(udata.coins);
+                credits_txt.text = GameUI.FormatNumber(udata.coins) + " WC";
             }
 
             bool matchmaking = GameClientMatchmaker.Get().IsMatchmaking();
@@ -105,10 +106,13 @@ namespace TcgEngine.UI
             if (user != null)
             {
                 username_txt.text = user.username;
-                credits_txt.text = GameUI.FormatNumber(user.coins);
-                
+                credits_txt.text = GameUI.FormatNumber(user.coins) + " WC";
+
                 AvatarData avatar = AvatarData.Get(user.avatar);
                 this.avatar.SetAvatar(avatar);
+
+                // Colección inicial (solo la primera vez)
+                await StarterManager.TryGiveStarter(user);
 
                 //Decks
                 RefreshDeckList();
@@ -237,9 +241,7 @@ namespace TcgEngine.UI
                 return;
             }
 
-            // Mostrar el panel de selección de dificultad antes de arrancar la partida.
-            // El panel se encarga de configurar ai_level y llamar a StartGame cuando el
-            // jugador elija Fácil / Intermedio / Difícil.
+            WipPanel.Get()?.Hide();
             DifficultyPanel.Get()?.Show();
         }
 
@@ -258,9 +260,26 @@ namespace TcgEngine.UI
             StartMathmaking(GameMode.Ranked, "");
         }
 
+        public void OnClickDesafio()
+        {
+            DifficultyPanel.Get()?.Hide();
+            WipPanel.Get()?.ShowMode("DESAFÍO");
+        }
+
+        public void OnClickOnline()
+        {
+            DifficultyPanel.Get()?.Hide();
+            WipPanel.Get()?.ShowMode("ONLINE");
+        }
+
         public void OnClickAdventure()
         {
             AdventurePanel.Get().Show();
+        }
+
+        public void OnClickCollection()
+        {
+            PokedexPanel.Get()?.Show();
         }
 
         public void OnClickPlayCode()

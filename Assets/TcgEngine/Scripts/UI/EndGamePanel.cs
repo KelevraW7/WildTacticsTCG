@@ -29,6 +29,7 @@ namespace TcgEngine.UI
         private int target_xp = 0;
         private float coins = 0;
         private float xp = 0;
+        private int last_winner_id = -1;
 
         private static EndGamePanel _instance;
 
@@ -66,13 +67,19 @@ namespace TcgEngine.UI
                 coins = Mathf.MoveTowards(coins, target_coins, 2000f * Time.deltaTime);
                 xp = Mathf.MoveTowards(xp, target_xp, 500f * Time.deltaTime);
 
-                coins_text.text = "+ " + Mathf.RoundToInt(coins) + " coins";
-                xp_text.text = "+ " + Mathf.RoundToInt(xp) + " xp";
+                int coins_int = Mathf.RoundToInt(coins);
+                bool is_solo  = GameClient.game_settings.game_type == GameType.Solo;
+                string unit   = is_solo ? "WildCoins" : "coins";
 
-                if (Mathf.RoundToInt(coins) == 0)
+                if (coins_int > 0)
+                    coins_text.text = "+ " + coins_int + " " + unit;
+                else if (coins_int < 0)
+                    coins_text.text = "− " + Mathf.Abs(coins_int) + " " + unit;
+                else
                     coins_text.text = "";
-                if (Mathf.RoundToInt(xp) == 0)
-                    xp_text.text = "";
+
+                int xp_int = Mathf.RoundToInt(xp);
+                xp_text.text = xp_int > 0 ? ("+ " + xp_int + " xp") : "";
             }
         }
 
@@ -141,11 +148,26 @@ namespace TcgEngine.UI
                     reward_loaded = true;
                 }
             }
+
+            // Solo wildcoins
+            if (GameClient.game_settings.game_type == GameType.Solo)
+            {
+                Player player   = GameClient.Get().GetPlayer();
+                bool player_won = (player != null && last_winner_id == player.player_id);
+                int  ai_level   = GameClient.ai_settings.ai_level;
+                target_coins    = RewardManager.GetSoloWildcoins(ai_level, player_won);
+                reward_loaded   = true;
+            }
         }
 
         public void ShowEnd(int winner)
         {
-            reward_loaded = false;
+            last_winner_id = winner;
+            reward_loaded  = false;
+            coins          = 0;
+            xp             = 0;
+            target_coins   = 0;
+            target_xp      = 0;
             RefreshPanel(winner);
             RefreshRewards();
             Show();

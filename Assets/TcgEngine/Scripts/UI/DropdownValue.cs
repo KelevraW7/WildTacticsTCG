@@ -28,8 +28,17 @@ namespace TcgEngine.UI
 
         void Awake()
         {
-            dropdown = GetComponent<Dropdown>();
-            dropdown.onValueChanged.AddListener(OnChangeValue);
+            InitDropdown();
+        }
+
+        private void InitDropdown()
+        {
+            if (dropdown == null)
+            {
+                dropdown = GetComponent<Dropdown>();
+                if (dropdown != null)
+                    dropdown.onValueChanged.AddListener(OnChangeValue);
+            }
         }
 
         private void Start()
@@ -39,6 +48,8 @@ namespace TcgEngine.UI
 
         public void AddOption(string id, string text)
         {
+            InitDropdown();
+            if (dropdown == null) return;
             Dropdown.OptionData option = new Dropdown.OptionData(text);
             dropdown.options.Add(option);
             DropdownValueItem item = new DropdownValueItem();
@@ -50,8 +61,10 @@ namespace TcgEngine.UI
 
         public void ClearOptions()
         {
+            InitDropdown();
             values.Clear();
-            dropdown.ClearOptions();
+            if (dropdown != null)
+                dropdown.ClearOptions();
         }
 
         public void SetValue(string value)

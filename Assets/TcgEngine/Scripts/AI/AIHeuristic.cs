@@ -22,6 +22,7 @@ namespace TcgEngine.AI
         public int card_attack_value = 3;       //Score per board card attack
         public int card_hp_value = 2;           //Score per board card hp
         public int card_status_value = 15;       //Score per status on card (multiplied by hvalue of StatusData)
+        public int type_advantage_value = 12;   //Score bonus per favorable type matchup on board (fire>plant, water>fire, plant>water)
 
         //-----------
 
@@ -92,10 +93,37 @@ namespace TcgEngine.AI
                     score -= status.StatusData.hvalue * card_status_value;
             }
 
+            // Bonus por matchups favorables en el tablero (triangulo de tipos)
+            foreach (Card ai_card in aiplayer.cards_board)
+            {
+                foreach (Card op_card in oplayer.cards_board)
+                {
+                    if (HasTypeAdvantage(ai_card, op_card))
+                        score += type_advantage_value;
+                    else if (HasTypeAdvantage(op_card, ai_card))
+                        score -= type_advantage_value;
+                }
+            }
+
             if (heuristic_modifier > 0)
                 score += random_gen.Next(-heuristic_modifier, heuristic_modifier);
 
             return score;
+        }
+
+        // ── Triángulo de tipos ─────────────────────────────────────────────────────
+        // fuego > planta, agua > fuego, planta > agua
+        // Las cartas doradas (team.id == "gold") son neutras: no tienen ventaja ni desventaja.
+
+        private bool HasTypeAdvantage(Card attacker, Card target)
+        {
+            if (attacker?.CardData?.team == null || target?.CardData?.team == null)
+                return false;
+            string atk = attacker.CardData.team.id.ToLower();
+            string def = target.CardData.team.id.ToLower();
+            return (atk == "fire"  && def == "plant") ||
+                   (atk == "water" && def == "fire")  ||
+                   (atk == "plant" && def == "water");
         }
 
         //This calculates the score of an individual action, instead of the board state
@@ -119,8 +147,11 @@ public int CalculateActionScore(Game data, AIAction order)
         Card card = data.GetCard(order.card_uid);
         Card target = data.GetCard(order.target_uid);
         int ascore = card.GetAttack() >= target.GetHP() ? 300 : 100; //Are you killing the card?
-        int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0; //Are you getting killed?
-        return ascore + oscore + target.GetAttack() * 5; //Always better to get rid of high-attack cards
+        int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0;  //Are you getting killed?
+        int tscore = HasTypeAdvantage(card, target)   ?  150          //Ventaja de tipo: atacar favorito
+                   : HasTypeAdvantage(target, card)   ? -100          //Desventaja: evitar si es posible
+                   : 0;
+        return ascore + oscore + tscore + target.GetAttack() * 5;
     }
 
     if (order.type == GameAction.PlayCard)

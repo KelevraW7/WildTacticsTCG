@@ -49,7 +49,7 @@ namespace TcgEngine
             cardbacks = new string[0];
             friends = new string[0];
             permission_level = 1;
-            coins = 10000;
+            coins = 0;
             elo = 1000;
         }
 
@@ -251,6 +251,25 @@ namespace TcgEngine
                 acards.Add(ncard);
                 cards = acards.ToArray();
             }
+        }
+
+        /// <summary>
+        /// Resta <paramref name="quantity"/> copias de una carta (mínimo 0).
+        /// Busca primero por tid+variant exacto; como fallback busca variant vacío
+        /// (compatibilidad con datos guardados en versiones antiguas).
+        /// </summary>
+        public void RemoveCard(string tid, string variant, int quantity)
+        {
+            UserCardData found = null;
+            foreach (UserCardData card in cards)
+            {
+                if (card.tid == tid && card.variant == variant)
+                { found = card; break; }
+                if (card.tid == tid && card.variant == "" && found == null)
+                    found = card; // fallback variant vacío
+            }
+            if (found != null)
+                found.quantity = Mathf.Max(0, found.quantity - quantity);
         }
 
         public void AddReward(string tid)

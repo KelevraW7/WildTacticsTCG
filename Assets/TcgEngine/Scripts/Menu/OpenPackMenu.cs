@@ -24,17 +24,27 @@ namespace TcgEngine.Client
 
         void Update()
         {
-            if (revealing && Input.GetMouseButtonDown(0))
+            if (revealing)
             {
-                bool all_revealed = true;
-                foreach (PackCard card in PackCard.GetAll())
+                // Seguridad: si no hay cartas en escena, desbloquear inmediatamente
+                if (PackCard.GetAll().Count == 0)
                 {
-                    if (!card.IsRevealed())
-                        all_revealed = false;
+                    StopReveal();
+                    return;
                 }
 
-                if (all_revealed && PackCard.GetAll().Count > 0)
-                    StopReveal();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    bool all_revealed = true;
+                    foreach (PackCard card in PackCard.GetAll())
+                    {
+                        if (!card.IsRevealed())
+                            all_revealed = false;
+                    }
+
+                    if (all_revealed)
+                        StopReveal();
+                }
             }
         }
 
@@ -66,7 +76,7 @@ namespace TcgEngine.Client
                 return;
 
             List<UserCardData> cards = new List<UserCardData>();
-            List <CardData> all_cards = CardData.GetAll(pack);
+            List<CardData> all_cards = CardData.GetAll(pack);
 
             if (pack.type == PackType.Random)
             {
@@ -78,8 +88,7 @@ namespace TcgEngine.Client
                     if (vcards.Count > 0)
                     {
                         CardData card = vcards[Random.Range(0, vcards.Count)];
-                        UserCardData ucard = new UserCardData(card, variant);
-                        cards.Add(ucard);
+                        cards.Add(new UserCardData(card, variant));
                     }
                 }
             }
@@ -89,21 +98,42 @@ namespace TcgEngine.Client
                 for (int i = 0; i < Mathf.Min(pack.cards, all_cards.Count); i++)
                 {
                     CardData card = all_cards[i];
-                    VariantData variant = VariantData.GetDefault();
-                    UserCardData ucard = new UserCardData(card, variant);
-                    cards.Add(ucard);
+                    cards.Add(new UserCardData(card, VariantData.GetDefault()));
                 }
             }
 
-            //Reveal cards
+            // ── Pools completos con igual probabilidad ─────────────────────────────
+            if (pack.type == PackType.AllCreatures || pack.type == PackType.AllEvents)
+            {
+                List<CardData> pool;
+                if (pack.type == PackType.AllCreatures)
+                    pool = CardData.GetAll().FindAll(c => c.IsCharacter());
+                else
+                    pool = CardData.GetAll().FindAll(c => c.IsEvent());
+
+                VariantData def = VariantData.GetDefault();
+                for (int i = 0; i < pack.cards; i++)
+                {
+                    if (pool.Count == 0) break;
+                    CardData card = pool[Random.Range(0, pool.Count)];
+                    cards.Add(new UserCardData(card, def));
+                }
+            }
+
+            // Guardia: si no se generaron cartas, no bloquear la UI
+            if (cards.Count == 0)
+            {
+                Debug.LogWarning($"[OpenPack] Pack '{pack.id}' generó 0 cartas. Comprueba el Type y que el pool no esté vacío.");
+                return;
+            }
+
+            // Revelar primero (PackCard.SetCard comprueba is_new ANTES de añadir)
             RevealCards(pack, cards.ToArray());
 
-            //Save cards
+            // Guardar en la colección
             udata.AddPack(pack.id, -1);
             foreach (UserCardData card in cards)
-            {
                 udata.AddCard(card.tid, card.variant, card.quantity);
-            }
 
             await Authenticator.Get().SaveUserData();
             HandPackArea.Get().LoadPacks();

@@ -358,6 +358,21 @@ namespace TcgEngine.FX
                         isGolpear       ? golpear_hit_fx          :
                                           null;
 
+                    // ── Atacante muerto (INTOXICAR counter-attack) ───────────────────────────
+                    // La lógica dispara onAttackStart aunque la carta esté en estado "dying"
+                    // para señalar que el ataque sí se produjo. La animación ChargeInto no es
+                    // posible con la carta muriendo, así que reproducimos solo el audio y el
+                    // hit FX directamente en el objetivo para que el jugador vea el impacto.
+                    if (bcard.IsDead())
+                    {
+                        AudioClip deadAudio = icard?.attack_audio != null ? icard.attack_audio : AssetData.Get().card_attack_audio;
+                        AudioTool.Get().PlaySFX("card_attack", deadAudio);
+                        GameObject directFx = hitFxPrefab ?? AssetData.Get()?.card_damage_fx;
+                        if (directFx != null)
+                            FXTool.DoFX(directFx, btarget.transform.position);
+                        return;
+                    }
+
                     // Signal BoardCard to skip its generic HitFX (arañazo) on the target —
                     // the ability-specific hit FX fired below handles the visual.
                     if (hitFxPrefab != null)

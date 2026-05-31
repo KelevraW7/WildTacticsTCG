@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 137187ae111118548b8cdc17eed44c86, type: 3}
-  m_Name: elite
+  m_Name: events
   m_EditorClassIdentifier: 
-  id: elite
-  type: 0
+  id: events
+  type: 30
   cards: 5
   rarities_1st:
   - rarity: {fileID: 11400000, guid: 15eaa2a0fbd97f149b3aa87387c160d1, type: 2}
@@ -34,10 +34,10 @@ MonoBehaviour:
     probability: 90
   - variant: {fileID: 11400000, guid: 3a827aeeaca139641a4b8ad0c3c74f52, type: 2}
     probability: 10
-  title: Elite Pack
-  pack_img: {fileID: 21300000, guid: e400c282187e5f54dab6aacfd8adae20, type: 3}
-  cardback_img: {fileID: 21300000, guid: 96d8dad709a2729419f19d1d4633a0ef, type: 3}
-  desc: Elite pack with 5 cards. More chance to find rares and mythics.
+  title: Pack de eventos
+  pack_img: {fileID: 21300000, guid: 1810b1ff73016294f900ca27c79eb5fe, type: 3}
+  cardback_img: {fileID: 21300000, guid: 529b9dce3b3d85d47a53fc319ab29f10, type: 3}
+  desc: Pack con 5 cartas de evento.
   sort_order: 1
-  available: 1
-  cost: 250
+  available: 0
+  cost: 500

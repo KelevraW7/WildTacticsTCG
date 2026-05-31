@@ -28,6 +28,12 @@ namespace TcgEngine.Client
         public AudioClip card_flip_audio;
         public AudioClip card_rare_flip_audio;
 
+        [Header("FX carta nueva")]
+        public GameObject new_card_fx;          // Efecto de partículas al revelar carta nueva
+        public Color      new_card_flash_color  = new Color(1f, 0.85f, 0.25f, 1f); // Dorado
+        public float      new_card_flash_in     = 0.12f; // segundos para llegar al dorado
+        public float      new_card_flash_out    = 1.4f;  // segundos para volver al color base
+
         private CardData icard;
         private VariantData variant;
 
@@ -105,6 +111,42 @@ namespace TcgEngine.Client
                 FXTool.DoFX(card_flip_fx, transform.position);
                 AudioTool.Get().PlaySFX("pack_open", card_flip_audio);
             }
+
+            // Efectos extra para cartas nuevas
+            if (is_new)
+            {
+                if (new_card_fx != null)
+                    FXTool.DoFX(new_card_fx, transform.position);
+
+                StartCoroutine(FlashNewCardBorder());
+            }
+        }
+
+        private IEnumerator FlashNewCardBorder()
+        {
+            if (card_ui?.frame_image == null) yield break;
+
+            Color original = card_ui.frame_image.color;
+
+            // Flash rápido → dorado
+            float t = 0f;
+            while (t < new_card_flash_in)
+            {
+                t += Time.deltaTime;
+                card_ui.frame_image.color = Color.Lerp(original, new_card_flash_color, t / new_card_flash_in);
+                yield return null;
+            }
+            card_ui.frame_image.color = new_card_flash_color;
+
+            // Fade suave → color original
+            t = 0f;
+            while (t < new_card_flash_out)
+            {
+                t += Time.deltaTime;
+                card_ui.frame_image.color = Color.Lerp(new_card_flash_color, original, t / new_card_flash_out);
+                yield return null;
+            }
+            card_ui.frame_image.color = original;
         }
 
         public void Remove()

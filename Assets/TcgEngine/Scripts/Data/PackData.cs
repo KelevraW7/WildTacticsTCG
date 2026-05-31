@@ -88,6 +88,8 @@ namespace TcgEngine
     {
         Random = 0,
         Fixed = 10,
+        AllCreatures = 20,  // 5 criaturas aleatorias del pool completo (60), igual probabilidad
+        AllEvents    = 30,  // 5 eventos aleatorios del pool completo, igual probabilidad
     }
 
     [System.Serializable]

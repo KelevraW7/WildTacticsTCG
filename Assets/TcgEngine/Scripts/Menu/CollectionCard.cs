@@ -20,6 +20,9 @@ namespace TcgEngine.UI
         public Material color_mat;
         public Material grayscale_mat;
 
+        [Header("Pokédex — carta bloqueada")]
+        public Image locked_image;   // Image a tamaño completo que cubre la carta (asignar en prefab)
+
         public UnityAction<CardUI> onClick;
         public UnityAction<CardUI> onClickRight;
 
@@ -58,6 +61,35 @@ namespace TcgEngine.UI
                 quantity_bar.material = color_mat;
                 quantity_bar.material = color_mat;
                 card_ui.SetMaterial(color_mat);
+            }
+        }
+
+        /// <summary>
+        /// Pokédex: muestra el reverso de la carta si está bloqueada, o la carta normal si está desbloqueada.
+        /// Requiere que locked_image esté asignado en el prefab; si no, hace fallback a grayscale.
+        /// </summary>
+        public void SetLocked(bool locked, Sprite locked_sprite)
+        {
+            if (locked_image != null)
+            {
+                if (locked && locked_sprite != null)
+                    locked_image.sprite = locked_sprite;
+
+                locked_image.gameObject.SetActive(locked);
+                card_ui.gameObject.SetActive(!locked);
+            }
+            else
+            {
+                // Fallback si no hay locked_image en el prefab
+                card_ui.gameObject.SetActive(true);
+                SetGrayscale(locked);
+            }
+
+            // En estado bloqueado, ocultar cantidad. En desbloqueado, respetar lo que SetQuantity dejó.
+            if (locked)
+            {
+                if (quantity_bar != null) quantity_bar.enabled = false;
+                if (quantity     != null) quantity.enabled     = false;
             }
         }
 
