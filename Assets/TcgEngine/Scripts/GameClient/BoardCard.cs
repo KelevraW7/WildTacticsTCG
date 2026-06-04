@@ -176,8 +176,9 @@ namespace TcgEngine.Client
                     return;
                 }
 
-                // Retrasamos el número del corazón ~0.4s para que aparezca cuando el atacante
-                // llega visualmente al objetivo (0.3s retroceso + 0.1s embestida = ~0.4s).
+                // Retrasamos el contador de HP y el número de daño ~0.4s para que
+                // coincidan con el impacto visual (0.3s retroceso + 0.1s embestida).
+                DelayDamage(value, 0.4f);
                 TimeTool.WaitFor(0.4f, () => ShowDamageFX(value));
 
                 // Suppress the generic HitFX when an ability-specific hit FX handles the visual.

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TcgEngine;
+using TcgEngine.Client;
 
 namespace TcgEngine.UI
 {
@@ -48,6 +49,26 @@ namespace TcgEngine.UI
             this.avatar = null;
             avatar_img.enabled = true;
             avatar_img.sprite = default_icon;
+            SetLocked(false);
+        }
+
+        /// <summary>
+        /// Aplica el estado visual de bloqueado: oscurece la imagen.
+        /// disable_button=true (defecto) también desactiva el botón;
+        /// disable_button=false deja el botón activo para permitir clicks de información.
+        /// </summary>
+        public void SetLocked(bool locked, bool disable_button = true)
+        {
+            avatar_img.color = locked ? new Color(1f, 1f, 1f, 0.30f) : Color.white;
+            if (avatar_button != null && disable_button)
+                avatar_button.interactable = !locked;
+        }
+
+        public bool IsLocked()
+        {
+            if (avatar == null) return false;
+            UserData udata = Authenticator.Get()?.UserData;
+            return !avatar.IsUnlocked(udata);
         }
 
         public void SetImage(Sprite sprite)

@@ -64,6 +64,13 @@ namespace TcgEngine.Client
             }
             else if (gdata.IsPlayerActionTurn(player) && card.player_id == player.player_id)
             {
+                // GOLPEAR: si hay un segundo ataque pendiente, solo se puede usar esa criatura
+                if (!string.IsNullOrEmpty(gdata.golpear_pending_uid) && card.uid != gdata.golpear_pending_uid)
+                {
+                    WarningText.ShowText("Debes finalizar el segundo ataque con tu criatura con GOLPEAR");
+                    return;
+                }
+
                 // EMBESTIR: paralyzed cards cannot be selected or attack
                 if (card.HasStatus(StatusType.Paralysed))
                 {

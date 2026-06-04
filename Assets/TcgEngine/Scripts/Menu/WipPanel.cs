@@ -88,9 +88,6 @@ namespace TcgEngine.UI
         {
             base.Awake();
             _instance = this;
-            // Desactivar inmediatamente para no bloquear raycasts con alpha=0.
-            // El singleton ya está registrado antes de desactivar.
-            gameObject.SetActive(false);
         }
 
         protected override void Update()

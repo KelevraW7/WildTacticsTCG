@@ -97,7 +97,7 @@ namespace TcgEngine.Gameplay
                 return;
 
             game_data.state = GameState.Play;
-            game_data.first_player = 0;
+            game_data.first_player = 0;   // Temporal: el jugador humano (índice 0) siempre empieza. TODO: reactivar Random cuando el panel de moneda esté completo
             game_data.current_player = game_data.first_player;
             game_data.turn_count = 1;
 
@@ -150,10 +150,15 @@ namespace TcgEngine.Gameplay
             List<CardData> goldPool   = creaturePool.FindAll(c => c.team != null && c.team.id.ToLower() == "gold");
             List<CardData> commonPool = creaturePool.FindAll(c => c.team == null || c.team.id.ToLower() != "gold");
 
+            // Barajar los pools antes de repartir para que cada partida sea distinta
+            ShuffleCardDataList(goldPool);
+            ShuffleCardDataList(commonPool);
+
             Debug.Log($"🃏 [WildAssignDecks] Pool desbloqueado — doradas: {goldPool.Count} | comunes: {commonPool.Count} | eventos: {eventPool.Count}");
 
             foreach (Player player in game_data.players)
             {
+
                 // ── Mazo de criaturas (11 cartas: 1 dorada + 10 comunes) ──────────────
                 // Se consume el pool en orden (sin repetición entre jugadores).
                 // El pack inicial tiene 20 comunes + 6 doradas = suficiente para 2 jugadores

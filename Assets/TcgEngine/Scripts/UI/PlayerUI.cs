@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +26,8 @@ namespace TcgEngine.UI
 
         private bool killed = false;
         private float timer = 0f;
+        private AvatarData resolved_avatar = null;
+        private bool avatar_resolved = false;
 
 
         private static List<PlayerUI> ui_list = new List<PlayerUI>();
@@ -62,10 +64,34 @@ namespace TcgEngine.UI
             {
                 pname.text = player.username;
 
-                AvatarData adata = AvatarData.Get(player.avatar);
-                if (avatar != null && adata != null && !killed)
-                    avatar.SetAvatar(adata);
+                if (!avatar_resolved)
+                {
+                    if (is_opponent && GameClient.game_settings.game_type == GameType.Solo)
+                    {
+                        // IA: avatar aleatorio excluyendo el del jugador local
+                        Player me = GameClient.Get().GetPlayer();
+                        AvatarData myAvat = ResolveAvatar(me, true);
+                        string excludeId = myAvat != null ? myAvat.id : "";
 
+                        List<AvatarData> candidates = new List<AvatarData>();
+                        foreach (AvatarData a in AvatarData.GetAll())
+                            if (a.id != excludeId && a.avatar != null)
+                                candidates.Add(a);
+
+                        resolved_avatar = candidates.Count > 0
+                            ? candidates[UnityEngine.Random.Range(0, candidates.Count)]
+                            : (AvatarData.GetAll().Count > 0 ? AvatarData.GetAll()[0] : null);
+                    }
+                    else
+                    {
+                        resolved_avatar = ResolveAvatar(player, !is_opponent);
+                    }
+
+                    avatar_resolved = resolved_avatar != null;
+                }
+
+                if (avatar != null && resolved_avatar != null && !killed)
+                    avatar.SetAvatar(resolved_avatar);
             }
 
 
@@ -75,6 +101,34 @@ namespace TcgEngine.UI
                 timer = 0f;
                 SlowUpdate();
             }
+        }
+
+        /// <summary>
+        /// Resuelve el AvatarData de un jugador con cadena de fallback:
+        /// avatar asignado → UserData (solo jugador local) → primer avatar disponible.
+        /// </summary>
+        private AvatarData ResolveAvatar(Player player, bool isLocalPlayer)
+        {
+            // 1. Avatar asignado en la partida
+            AvatarData adata = AvatarData.Get(player.avatar);
+            if (adata != null) return adata;
+
+            // 2. Avatar guardado en UserData (solo jugador local)
+            if (isLocalPlayer)
+            {
+                UserData udata = Authenticator.Get()?.UserData;
+                if (udata != null)
+                {
+                    adata = AvatarData.Get(udata.avatar);
+                    if (adata != null) return adata;
+                }
+            }
+
+            // 3. Primer avatar disponible
+            List<AvatarData> all = AvatarData.GetAll();
+            if (all.Count > 0) return all[0];
+
+            return null;
         }
 
         void SlowUpdate()

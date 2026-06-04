@@ -30,6 +30,8 @@ namespace TcgEngine
         public int matches;
         public int victories;
         public int defeats;
+        public int competitive_victories;
+        public int competitive_defeats;
 
         public UserCardData[] cards;
         public UserCardData[] packs;
@@ -306,6 +308,16 @@ namespace TcgEngine
 		{
 			return avatars.Contains(avatar_tid);
 		}
+
+		public void AddAvatar(string avatar_tid)
+        {
+            if (!HasAvatar(avatar_tid))
+            {
+                List<string> list = new List<string>(avatars);
+                list.Add(avatar_tid);
+                avatars = list.ToArray();
+            }
+        }
 
 		public bool HasCardback(string cardback_tid)
 		{

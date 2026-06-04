@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using TcgEngine;
 using TcgEngine.Client;
 
@@ -26,6 +27,12 @@ namespace TcgEngine.UI
         public Text version_text;
         public DeckSelector deck_selector;
         public DeckDisplay deck_preview;
+
+        [Header("Abandono pendiente (cierre forzado)")]
+        [Tooltip("Panel que aparece al detectar que el jugador cerró el juego en mitad de una partida Competitiva.")]
+        public UIPanel pending_abandon_panel;
+        [Tooltip("Texto informativo dentro del panel de abandono pendiente.")]
+        public TMP_Text pending_abandon_text;
 
         private bool starting = false;
 
@@ -116,7 +123,49 @@ namespace TcgEngine.UI
 
                 //Decks
                 RefreshDeckList();
+
+                // Detectar si el jugador cerró el juego a mitad de una partida Competitiva
+                CheckPendingAbandon();
             }
+        }
+
+        /// <summary>
+        /// Si el jugador cerró el juego sin terminar una partida Competitiva,
+        /// aplica la penalización de -50 WC y muestra un aviso.
+        /// </summary>
+        private void CheckPendingAbandon()
+        {
+            if (PlayerPrefs.GetInt("wt_competitive_pending", 0) != 1)
+                return;
+
+            // Limpiar el flag antes de nada para no penalizar dos veces
+            PlayerPrefs.DeleteKey("wt_competitive_pending");
+            PlayerPrefs.Save(); // forzar escritura en disco para que no persista si la app vuelve a cerrarse
+
+            // Aplicar -50 WC
+            UserData udata = Authenticator.Get().UserData;
+            int penalty = 50;
+            if (udata != null)
+            {
+                int old_coins = udata.coins;
+                udata.coins = Mathf.Max(0, udata.coins - penalty);
+                _ = Authenticator.Get().SaveUserData();
+                Debug.Log($"[MainMenu] Cierre forzado detectado. Coins: {old_coins} → {udata.coins}");
+            }
+
+            // Mostrar aviso
+            if (pending_abandon_panel != null)
+            {
+                if (pending_abandon_text != null)
+                    pending_abandon_text.text =
+                        "Cerraste una partida Competitiva.\nSe han descontado −50 WC.";
+                pending_abandon_panel.Show();
+            }
+        }
+
+        public void OnClickPendingAbandonOk()
+        {
+            pending_abandon_panel?.Hide();
         }
 
         public void RefreshDeckList()

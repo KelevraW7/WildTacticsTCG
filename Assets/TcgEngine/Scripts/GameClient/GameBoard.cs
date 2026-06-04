@@ -35,6 +35,10 @@ namespace TcgEngine.Client
 
         void Update()
         {
+            // No actualizar el tablero mientras el panel de intro (lanzamiento de moneda) esté activo
+            if (CoinFlipPanel.isPanelShowing)
+                return;
+
             if (!GameClient.Get().IsReady())
                 return;
 
@@ -164,6 +168,10 @@ namespace TcgEngine.Client
 
         public void RefreshBoard()
         {
+            // Si el panel de moneda está activo, diferir el refresco
+            if (CoinFlipPanel.isPanelShowing)
+                return;
+
             Debug.Log("♻️ Refrescando Board desde GameBoard.RefreshBoard()");
 
             Game game = GameClient.Get()?.GetGameData();

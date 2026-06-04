@@ -49,6 +49,7 @@ namespace TcgEngine.UI
         public GameObject      redeem_panel;        // Panel que envuelve texto + botón (bajo el preview)
         public TextMeshProUGUI redeem_text;         // "X / 10"
         public Button          btn_redeem;          // Botón "Canjear"
+        public TextMeshProUGUI redeem_hint_text;    // "10 copias → +100 WildCoins"
 
         // ── Constantes de canje ───────────────────────────────────────────
         private const int REDEEM_THRESHOLD    = 10;  // copias necesarias para canjear
@@ -259,6 +260,14 @@ namespace TcgEngine.UI
 
             if (redeem_text != null)
                 redeem_text.text = $"{qty} / {REDEEM_THRESHOLD}";
+
+            if (redeem_hint_text != null)
+            {
+                bool is_golden = selected_card.team != null &&
+                                 selected_card.team.id.ToLower() == "gold";
+                int reward = is_golden ? REDEEM_COINS_GOLDEN : REDEEM_COINS_NORMAL;
+                redeem_hint_text.text = $"Cada 10 copias extra = {reward} WC\n(Siempre conservarás 1 copia)";
+            }
 
             if (btn_redeem != null)
                 btn_redeem.interactable = qty >= REDEEM_THRESHOLD;

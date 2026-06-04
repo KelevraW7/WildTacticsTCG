@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using TcgEngine.Client;
 
 namespace TcgEngine.UI
@@ -19,8 +20,14 @@ namespace TcgEngine.UI
         public AvatarUI avatar;
         public CardbackUI cardback;
         public Text elo;
-        public Text winrate;
+        public Text winrate;        // WINRATE ONLINE  → "—"
         public Text cards_all;
+        // Estadísticas por modo (formato "V / D")
+        public Text online_vd;      // ONLINE           → "— / —"
+        public Text solo_vd;        // SOLO             → "X / X"
+        public Text competitive_vd; // COMPETITIVO      → "X / X"
+        public Text total_matches;  // PARTIDAS TOTALES → "X"
+        // Campos legacy (pueden quedar sin asignar si se usan los nuevos)
         public Text victories;
         public Text defeats;
 
@@ -32,6 +39,8 @@ namespace TcgEngine.UI
         [Header("Avatars")]
         public UIPanel avatar_panel;
         public AvatarUI[] avatars;
+        [Tooltip("Texto donde se muestra la condición de desbloqueo al pulsar un avatar bloqueado.")]
+        public TMP_Text avatar_lock_hint;
 
         [Header("Cardbacks")]
         public UIPanel cardback_panel;
@@ -90,9 +99,15 @@ namespace TcgEngine.UI
         private void ClearPanel()
         {
             player_name.text = "";
+            player_level.text = "";
             elo.text = "";
             winrate.text = "";
-            player_level.text = "";
+            if (online_vd      != null) online_vd.text      = "";
+            if (solo_vd        != null) solo_vd.text        = "";
+            if (competitive_vd != null) competitive_vd.text = "";
+            if (total_matches  != null) total_matches.text  = "";
+            if (victories      != null) victories.text      = "";
+            if (defeats        != null) defeats.text        = "";
             avatar.Hide();
             cardback.Hide();
         }
@@ -106,7 +121,7 @@ namespace TcgEngine.UI
             {
                 UserData user = user_data;
                 player_name.text = user.username;
-                player_level.text = GameplayData.Get().GetPlayerLevel(user.xp).ToString();
+                player_level.text = "—";   // Sistema de niveles pendiente
 
                 AvatarData avatar = AvatarData.Get(user.avatar);
                 this.avatar.SetAvatar(avatar);
@@ -114,12 +129,20 @@ namespace TcgEngine.UI
                 CardbackData cb = CardbackData.Get(user.cardback);
                 this.cardback.SetCardback(cb);
 
-                int winrate_val = user.matches > 0 ? Mathf.RoundToInt(user.victories * 100f / user.matches) : 0;
-                winrate.text = winrate_val + "%";
-                elo.text = user.elo.ToString();
-                victories.text = user.victories.ToString();
-                defeats.text = user.defeats.ToString();
-                cards_all.text = user.CountUniqueCards() + " / " + CardData.GetAllDeckbuilding().Count;
+                winrate.text = "—";   // Winrate online pendiente
+                elo.text     = "—";   // ELO online pendiente
+
+                // Estadísticas en formato "V / D"
+                if (online_vd      != null) online_vd.text      = "—V / —D";
+                if (solo_vd        != null) solo_vd.text        = user.victories + "V / " + user.defeats + "D";
+                if (competitive_vd != null) competitive_vd.text = user.competitive_victories + "V / " + user.competitive_defeats + "D";
+                if (total_matches  != null) total_matches.text  = user.matches.ToString();
+
+                // Campos legacy (por compatibilidad si siguen asignados en el Inspector)
+                if (victories != null) victories.text = user.victories.ToString();
+                if (defeats   != null) defeats.text   = user.defeats.ToString();
+
+                cards_all.text = user.CountUniqueCards() + " / " + CardData.GetAll().Count;
 
                 buttons_area?.SetActive(IsYou());    //Buttons like logout only active if your account
                 account_button?.SetActive(Authenticator.Get().IsApi());
@@ -129,21 +152,24 @@ namespace TcgEngine.UI
 
         private void RefreshAvatarList()
         {
+            UserData udata = Authenticator.Get()?.UserData;
+
             foreach (AvatarUI icon in avatars)
                 icon.SetDefaultAvatar();
+
+            if (avatar_lock_hint != null)
+                avatar_lock_hint.text = "";
 
             int index = 0;
             foreach (AvatarData adata in AvatarData.GetAll())
             {
-                if (index < avatars.Length)
-                {
-                    AvatarUI line = avatars[index];
-                    if (adata != null)
-                    {
-                        line.SetAvatar(adata);
-                        index++;
-                    }
-                }
+                if (index >= avatars.Length) break;
+                if (adata == null) continue;
+
+                AvatarUI line = avatars[index];
+                line.SetAvatar(adata);
+                line.SetLocked(!adata.IsUnlocked(udata), disable_button: false);
+                index++;
             }
         }
 
@@ -170,13 +196,23 @@ namespace TcgEngine.UI
         private void OnClickAvatar(AvatarData avatar)
         {
             user_data = Authenticator.Get().UserData;
-            if (avatar != null && user_data != null && IsYou())
+            if (avatar == null || user_data == null || !IsYou()) return;
+
+            // Avatar bloqueado: mostrar pista de desbloqueo
+            if (!avatar.IsUnlocked(user_data))
             {
-                user_data.avatar = avatar.id;
-                RefreshPanel();
-                SaveUserAvatar(avatar);
-                avatar_panel.Hide();
+                if (avatar_lock_hint != null)
+                    avatar_lock_hint.text = avatar.GetUnlockHint();
+                return;
             }
+
+            if (avatar_lock_hint != null)
+                avatar_lock_hint.text = "";
+
+            user_data.avatar = avatar.id;
+            RefreshPanel();
+            SaveUserAvatar(avatar);
+            avatar_panel.Hide();
         }
 
         private void OnClickCardback(CardbackData cb)

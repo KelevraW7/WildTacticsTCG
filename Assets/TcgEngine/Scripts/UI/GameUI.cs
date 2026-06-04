@@ -20,11 +20,23 @@ namespace TcgEngine.UI
         public UIPanel menu_panel;
         public Text quit_btn;
 
+        [Header("Confirmación de abandono (Competitivo)")]
+        [Tooltip("Panel modal que pide confirmación antes de abandonar en modo Competitivo.")]
+        public UIPanel confirm_quit_panel;
+        [Tooltip("Texto de aviso dentro del panel de confirmación.")]
+        public Text confirm_quit_message;
+
         [Header("Turn Area")]
         public Text turn_count;
         public Text turn_timer;
         public Animator timeout_animator;
         public AudioClip timeout_audio;
+
+        [Header("Tutorial")]
+        [Tooltip("Panel modal con el diagrama de ventajas de tipo.")]
+        public UIPanel types_panel;
+        [Tooltip("Panel modal con las 6 habilidades explicadas.")]
+        public UIPanel abilities_panel;
 
         private float selector_timer = 0f;
         private float end_turn_timer = 0f;
@@ -164,13 +176,55 @@ namespace TcgEngine.UI
 
         public void OnClickQuit()
         {
-            bool online = GameClient.game_settings.IsOnlinePlayer();
-            bool ended = GameClient.Get().HasEnded();
+            bool online  = GameClient.game_settings.IsOnlinePlayer();
+            bool ended   = GameClient.Get().HasEnded();
+            bool competitive = !online
+                               && GameClient.game_settings.game_type == GameType.Solo
+                               && GameClient.ai_settings.ai_level >= 10;
+
+            // En Competitivo con partida activa, pedir confirmación antes de abandonar
+            if (competitive && !ended && confirm_quit_panel != null)
+            {
+                if (confirm_quit_message != null)
+                    confirm_quit_message.text = "¿Abandonar la partida?\nPerderás 50 WC.";
+                menu_panel.Hide();
+                confirm_quit_panel.Show();
+                return;
+            }
+
+            menu_panel.Hide();
             if (online && !ended)
                 GameClient.Get().Resign();
             else
                 StartCoroutine(QuitRoutine("Menu"));
+        }
+
+        /// <summary>
+        /// El jugador confirmó que quiere abandonar la partida Competitiva y asumir la penalización.
+        /// </summary>
+        public void OnClickQuitConfirm()
+        {
+            // Aplicar penalización de abandono (-50 WC) antes de salir
+            RewardManager.Get()?.ApplyAbandonPenalty();
+
+            confirm_quit_panel?.Hide();
             menu_panel.Hide();
+
+            bool online = GameClient.game_settings.IsOnlinePlayer();
+            bool ended  = GameClient.Get().HasEnded();
+            if (online && !ended)
+                GameClient.Get().Resign();
+            else
+                StartCoroutine(QuitRoutine("Menu"));
+        }
+
+        /// <summary>
+        /// El jugador canceló — cierra el modal y reabre el menú de pausa.
+        /// </summary>
+        public void OnClickQuitCancel()
+        {
+            confirm_quit_panel?.Hide();
+            menu_panel.Show();
         }
 
         private IEnumerator QuitRoutine(string scene)
@@ -184,6 +238,26 @@ namespace TcgEngine.UI
 
             GameClient.Get().Disconnect();
             SceneNav.GoTo(scene);
+        }
+
+        // ── Tutorial ─────────────────────────────────────────────────────────────
+
+        public void OnClickTypes()
+        {
+            abilities_panel?.Hide();
+            types_panel?.Toggle();
+        }
+
+        public void OnClickAbilities()
+        {
+            types_panel?.Hide();
+            abilities_panel?.Toggle();
+        }
+
+        public void OnClickCloseTutorial()
+        {
+            types_panel?.Hide();
+            abilities_panel?.Hide();
         }
 
         public void OnClickSwapObserve()

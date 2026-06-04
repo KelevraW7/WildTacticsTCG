@@ -25,6 +25,7 @@ namespace TcgEngine.UI
         {
             canvas_group = GetComponent<CanvasGroup>();
             canvas_group.alpha = 0f;
+            canvas_group.blocksRaycasts = false;
             visible = false;
         }
 
@@ -54,11 +55,16 @@ namespace TcgEngine.UI
 
         public virtual void Show(bool instant = false)
         {
-            visible = true;
-            gameObject.SetActive(true);
-
-            if (instant || display_speed < 0.01f)
-                canvas_group.alpha = 1f;
+            gameObject.SetActive(true); // Activar primero (puede disparar Awake → visible=false)
+            visible = true;             // Sobreescribir después para que Awake no lo cancele
+            if (canvas_group == null)
+                canvas_group = GetComponent<CanvasGroup>();
+            if (canvas_group != null)
+            {
+                canvas_group.blocksRaycasts = true;
+                if (instant || display_speed < 0.01f)
+                    canvas_group.alpha = 1f;
+            }
 
             if (onShow != null)
                 onShow.Invoke();
@@ -67,8 +73,14 @@ namespace TcgEngine.UI
         public virtual void Hide(bool instant = false)
         {
             visible = false;
-            if (instant || display_speed < 0.01f)
-                canvas_group.alpha = 0f;
+            if (canvas_group == null)
+                canvas_group = GetComponent<CanvasGroup>();
+            if (canvas_group != null)
+            {
+                canvas_group.blocksRaycasts = false;
+                if (instant || display_speed < 0.01f)
+                    canvas_group.alpha = 0f;
+            }
 
             if (onHide != null)
                 onHide.Invoke();

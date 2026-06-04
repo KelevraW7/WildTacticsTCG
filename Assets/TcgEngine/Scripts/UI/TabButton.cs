@@ -50,6 +50,7 @@ namespace TcgEngine.UI
 
         private void OnClick()
         {
+            Debug.Log("[TabButton] OnClick grupo=" + group + " en " + gameObject.name);
             Activate();
             onClick?.Invoke();
             onClickAny?.Invoke(this);

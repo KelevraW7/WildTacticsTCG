@@ -92,8 +92,8 @@ namespace TcgEngine.UI
             if (desc_casual      != null) desc_casual.text      = "IA con ventaja de tipo. Partida casual.";
             if (desc_competitive != null) desc_competitive.text = "IA al máximo. Arriesga tus WildCoins.";
 
-            if (reward_easy        != null) reward_easy.text        = "+1 WC";
-            if (reward_casual      != null) reward_casual.text      = "+10 WC";
+            if (reward_easy        != null) reward_easy.text        = "+10 WC";
+            if (reward_casual      != null) reward_casual.text      = "+25 WC";
             if (reward_competitive != null) reward_competitive.text = "+100 WC\n−50 WC";
         }
 
@@ -147,6 +147,23 @@ namespace TcgEngine.UI
             Hide();
             GameClient.ai_settings.ai_level = s_selected_level;
             GameClient.game_settings.scene  = GameplayData.Get().GetRandomArena();
+
+            // Mazos vacíos: WildAssignDecks (servidor) los construye dinámicamente
+            // desde todas las cartas desbloqueadas del jugador, sin solapamiento entre jugadores.
+            GameClient.player_settings.deck = new UserDeckData("wt_solo_player", "Solo Player");
+            GameClient.ai_settings.deck     = new UserDeckData("wt_solo_ai",    "Solo AI");
+
+            // Guardar flag para detectar si el jugador cierra el juego a mitad de partida competitiva
+            if (s_selected_level >= 10)
+            {
+                PlayerPrefs.SetInt("wt_competitive_pending", 1);
+                PlayerPrefs.Save();
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("wt_competitive_pending");
+            }
+
             MainMenu.Get().StartGame(GameType.Solo, GameMode.Casual);
         }
     }
