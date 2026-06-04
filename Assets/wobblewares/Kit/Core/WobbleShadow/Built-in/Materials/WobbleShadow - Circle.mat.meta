@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ca135c6691bbd4d8eb4a84e04aa5dca9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Core/WobbleShadow/Built-in/Materials/WobbleShadow
+    - Circle.mat
+  uploadId: 692861

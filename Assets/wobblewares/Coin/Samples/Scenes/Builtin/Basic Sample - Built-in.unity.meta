@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4270924e36c464f318b8bad5d90c7fe0
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Samples/Scenes/Builtin/Basic Sample - Built-in.unity
+  uploadId: 692861

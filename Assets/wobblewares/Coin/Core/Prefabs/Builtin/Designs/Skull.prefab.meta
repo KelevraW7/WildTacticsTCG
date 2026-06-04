@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c8effb4a72920448a98de4a4014d9518
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Core/Prefabs/Builtin/Designs/Skull.prefab
+  uploadId: 692861

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 24fcb950708bd4941b13fdc85f49574b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Samples/WobbleFont/Sample - TextMeshPro.unity
+  uploadId: 692861

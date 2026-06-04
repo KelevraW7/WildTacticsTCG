@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c6e19b20c0474f849833be547d857b5
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Samples/Scenes/Builtin/03 - Swipe to Flick/03
+    Swipe to Flick.unity
+  uploadId: 692861

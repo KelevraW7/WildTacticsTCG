@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6cce03f3852394b3998e08875b5c4654
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Samples/Scenes/Builtin/02 - Weighting/02 Weighting.unity
+  uploadId: 692861

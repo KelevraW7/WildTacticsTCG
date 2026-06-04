@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 684df1e06a5ab434d9c38a550765af4e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Samples/Scenes/Builtin/01 - User Guide/Sample
+    - Ground Material.mat
+  uploadId: 692861

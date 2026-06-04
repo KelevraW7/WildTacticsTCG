@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c843517e7aff5406a86f9b11ae0783ae
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Samples/Scenes/Builtin/04 - Precise Targeting/04
+    Precise Targeting.unity
+  uploadId: 692861

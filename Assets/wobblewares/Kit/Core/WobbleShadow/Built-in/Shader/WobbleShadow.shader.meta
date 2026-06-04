@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ac7a3293cf0924611b47fa6aa70c2f4f
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _ShadowTex: {instanceID: 0}
+  - _FalloffTex: {instanceID: 0}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Core/WobbleShadow/Built-in/Shader/WobbleShadow.shader
+  uploadId: 692861

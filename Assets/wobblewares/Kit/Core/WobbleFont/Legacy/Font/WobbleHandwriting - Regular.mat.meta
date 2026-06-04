@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d6708a3e5f0b94022a2f61f844f34789
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Core/WobbleFont/Legacy/Font/WobbleHandwriting
+    - Regular.mat
+  uploadId: 692861

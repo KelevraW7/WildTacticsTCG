@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fab425b3b9e194942bc6f9b79a26d3f1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Coin/Core/Prefabs/Builtin/Designs/Circle.prefab
+  uploadId: 692861

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e8bb63896bbaf4447a7a796f81e86cc8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Samples/WobbleToon/Built-in/Materials/WobbleToon
+    - Blue.mat
+  uploadId: 692861

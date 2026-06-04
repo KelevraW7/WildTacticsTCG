@@ -1,0 +1,116 @@
+{
+  "Buttons/WT_Button_Primary_Normal_9S.png": {
+    "left": 48,
+    "right": 48,
+    "top": 48,
+    "bottom": 48
+  },
+  "Buttons/WT_Button_Primary_Hover_9S.png": {
+    "left": 48,
+    "right": 48,
+    "top": 48,
+    "bottom": 48
+  },
+  "Buttons/WT_Button_Primary_Disabled_9S.png": {
+    "left": 48,
+    "right": 48,
+    "top": 48,
+    "bottom": 48
+  },
+  "Buttons/WT_Button_Secondary_Normal_9S.png": {
+    "left": 48,
+    "right": 48,
+    "top": 42,
+    "bottom": 42
+  },
+  "Buttons/WT_Button_Secondary_Hover_9S.png": {
+    "left": 48,
+    "right": 48,
+    "top": 42,
+    "bottom": 42
+  },
+  "Buttons/WT_TopTab_Normal_9S.png": {
+    "left": 42,
+    "right": 42,
+    "top": 42,
+    "bottom": 42
+  },
+  "Buttons/WT_TopTab_Active_9S.png": {
+    "left": 42,
+    "right": 42,
+    "top": 42,
+    "bottom": 42
+  },
+  "Panels/WT_ModeCard_Normal_9S.png": {
+    "left": 70,
+    "right": 70,
+    "top": 70,
+    "bottom": 70
+  },
+  "Panels/WT_ModeCard_Hover_9S.png": {
+    "left": 70,
+    "right": 70,
+    "top": 70,
+    "bottom": 70
+  },
+  "Panels/WT_ModeCard_Selected_9S.png": {
+    "left": 70,
+    "right": 70,
+    "top": 70,
+    "bottom": 70
+  },
+  "Panels/WT_ModeCard_Locked_9S.png": {
+    "left": 70,
+    "right": 70,
+    "top": 70,
+    "bottom": 70
+  },
+  "Panels/WT_TopBar_Backplate_9S.png": {
+    "left": 60,
+    "right": 60,
+    "top": 60,
+    "bottom": 60
+  },
+  "Panels/WT_ProfilePanel_9S.png": {
+    "left": 58,
+    "right": 58,
+    "top": 58,
+    "bottom": 58
+  },
+  "Panels/WT_DifficultyModal_9S.png": {
+    "left": 70,
+    "right": 70,
+    "top": 70,
+    "bottom": 70
+  },
+  "Panels/WT_DifficultySlot_Normal_9S.png": {
+    "left": 54,
+    "right": 54,
+    "top": 54,
+    "bottom": 54
+  },
+  "Panels/WT_DifficultySlot_Hover_9S.png": {
+    "left": 54,
+    "right": 54,
+    "top": 54,
+    "bottom": 54
+  },
+  "Frames/WT_AvatarFrame_9S.png": {
+    "left": 58,
+    "right": 58,
+    "top": 58,
+    "bottom": 58
+  },
+  "Frames/WT_LevelBadge_9S.png": {
+    "left": 44,
+    "right": 44,
+    "top": 44,
+    "bottom": 44
+  },
+  "Frames/WT_LogoFrame_9S.png": {
+    "left": 58,
+    "right": 58,
+    "top": 58,
+    "bottom": 58
+  }
+}

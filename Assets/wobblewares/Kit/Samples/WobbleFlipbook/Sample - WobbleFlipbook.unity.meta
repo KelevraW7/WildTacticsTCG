@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba0ab3ef2aea3492eb49b1e9c600e811
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 253955
+  packageName: wobblecoin - tactile, physics-based coin
+  packageVersion: 1.0.5
+  assetPath: Assets/wobblewares/Kit/Samples/WobbleFlipbook/Sample - WobbleFlipbook.unity
+  uploadId: 692861
