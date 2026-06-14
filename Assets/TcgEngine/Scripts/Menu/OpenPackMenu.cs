@@ -135,6 +135,11 @@ namespace TcgEngine.Client
             foreach (UserCardData card in cards)
                 udata.AddCard(card.tid, card.variant, card.quantity);
 
+            // XP por abrir pack
+            int pack_xp = ProgressionData.Get()?.xp_pack_open ?? 20;
+            udata.xp += pack_xp;
+            Debug.Log($"[OpenPack] +{pack_xp} XP por abrir pack");
+
             await Authenticator.Get().SaveUserData();
             HandPackArea.Get().LoadPacks();
         }
@@ -158,6 +163,16 @@ namespace TcgEngine.Client
             {
                 UserCardData[] cards = ApiTool.JsonToArray<UserCardData>(res.data);
                 RevealCards(pack, cards);
+
+                // XP por abrir pack
+                UserData udata2 = Authenticator.Get().UserData;
+                if (udata2 != null)
+                {
+                    int pack_xp2 = ProgressionData.Get()?.xp_pack_open ?? 20;
+                    udata2.xp += pack_xp2;
+                    Debug.Log($"[OpenPack] +{pack_xp2} XP por abrir pack");
+                    await Authenticator.Get().SaveUserData();
+                }
             }
 
             HandPackArea.Get().LoadPacks();

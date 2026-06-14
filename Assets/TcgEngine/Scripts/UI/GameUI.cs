@@ -31,6 +31,9 @@ namespace TcgEngine.UI
         public Text turn_timer;
         public Animator timeout_animator;
         public AudioClip timeout_audio;
+        public GameObject turn_indicator_yours;  // TurnA — punto azul "TU TURNO"
+        public GameObject turn_indicator_rival;  // TurnB — punto rojo "SU TURNO"
+        public Image timer_circle;               // Image Filled Radial360 para el contador circular
 
         [Header("Tutorial")]
         [Tooltip("Panel modal con el diagrama de ventajas de tipo.")]
@@ -92,6 +95,14 @@ namespace TcgEngine.UI
             turn_timer.enabled = data.turn_timer > 0f;
             turn_timer.text = Mathf.RoundToInt(data.turn_timer).ToString();
             turn_timer.enabled = data.turn_timer < 999f;
+
+            // Turn indicator
+            if (turn_indicator_yours != null) turn_indicator_yours.SetActive(yourturn);
+            if (turn_indicator_rival != null) turn_indicator_rival.SetActive(!yourturn);
+
+            // Circular timer (Image Type: Filled, Fill Method: Radial 360)
+            if (timer_circle != null && data.turn_timer < 999f)
+                timer_circle.fillAmount = Mathf.Clamp01(data.turn_timer / 60f);
 
             //Simulate timer (pause while waiting for GOLPEAR second attack)
             bool golpear_waiting = !string.IsNullOrEmpty(data.golpear_pending_uid);

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbeff33785ad1744fb53929473f6bdd1, type: 3}
+  m_Name: blue_frame
+  m_EditorClassIdentifier: 
+  id: blue_frame
+  title: Water
+  team: {fileID: 11400000, guid: ed6dfd9dc7797584994eaf1fba66535f, type: 2}
+  frame_preview: {fileID: 968515633303508389, guid: 4de636ad4a005544b9e5288e3653ca1b,
+    type: 3}
+  frame_board: {fileID: -5192886082478556730, guid: a2d4b97010e93534b839022874a0b403,
+    type: 3}

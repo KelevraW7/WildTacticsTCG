@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbab0ae33512fd4ea9fdecef97599a9, type: 3}
+  m_Name: elephant_fire_base
+  m_EditorClassIdentifier: 
+  id: elephant_fire_base
+  title: Base
+  illustration: {fileID: -1922251249878674451, guid: 172b1e34abc35ee4b82418591df16e1c,
+    type: 3}

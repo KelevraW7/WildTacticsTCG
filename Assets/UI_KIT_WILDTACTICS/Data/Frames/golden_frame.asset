@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbeff33785ad1744fb53929473f6bdd1, type: 3}
+  m_Name: golden_frame
+  m_EditorClassIdentifier: 
+  id: golden_frame
+  title: Gold
+  team: {fileID: 11400000, guid: 39eeb56b4a814be4a8c8b06cda4ce06f, type: 2}
+  frame_preview: {fileID: 174797661399066417, guid: e50ca70b168909c44856be0b8bea53b6,
+    type: 3}
+  frame_board: {fileID: 7627756791223017287, guid: 8e58778f728172444808ff55ffd7d3d7,
+    type: 3}

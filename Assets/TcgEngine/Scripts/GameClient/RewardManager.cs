@@ -64,15 +64,26 @@ namespace TcgEngine.Client
                 // Actualizar estadísticas de partida
                 UpdateMatchStats(player_won, ai_level);
 
-                if (coins_delta != 0)
-                {
-                    string result = player_won ? "Victoria" : "Derrota";
-                    Debug.Log($"[RewardManager] Solo {result} (ai_level {ai_level}): {(coins_delta >= 0 ? "+" : "")}{coins_delta} wildcoins");
+                int xp_delta = GetSoloXP(ai_level, player_won);
 
+                // Bonus criaturas supervivientes (solo en victoria)
+                int creatures_alive = 0;
+                if (player_won)
+                {
+                    creatures_alive = CountAliveCreatures(player_id);
+                    int xp_per_creature = ProgressionData.Get()?.xp_creature_alive ?? 3;
+                    xp_delta += creatures_alive * xp_per_creature;
+                }
+
+                string result = player_won ? "Victoria" : "Derrota";
+                Debug.Log($"[RewardManager] Solo {result} (ai_level {ai_level}): {(coins_delta >= 0 ? "+" : "")}{coins_delta} WC  |  +{xp_delta} XP  (criaturas vivas: {creatures_alive})");
+
+                if (coins_delta != 0 || xp_delta != 0)
+                {
                     if (Authenticator.Get().IsTest())
-                        GainSoloWildcoinsTest(coins_delta);
+                        GainSoloRewardsTest(coins_delta, xp_delta);
                     else if (Authenticator.Get().IsApi())
-                        GainSoloWildcoinsTest(coins_delta); // Misma lógica — sin endpoint dedicado aún
+                        GainSoloRewardsTest(coins_delta, xp_delta);
                 }
             }
         }
@@ -128,20 +139,93 @@ namespace TcgEngine.Client
         /// Returns the wildcoins delta for a Solo game result.
         /// Positive = earn coins. Negative = lose coins (Competitivo only).
         /// </summary>
+        /// <summary>Monedas ganadas/perdidas en Solo según dificultad y resultado.</summary>
         public static int GetSoloWildcoins(int ai_level, bool player_won)
         {
             if (ai_level <= 0)
-                return player_won ? 10 : 0;        // Fácil
+                return player_won ? 10 : 0;
             if (ai_level <= 5)
-                return player_won ? 25 : 0;        // Medio
-            return player_won ? 100 : -50;         // Competitivo
+                return player_won ? 25 : 0;
+            return player_won ? 100 : -50;
         }
 
-        private async void GainSoloWildcoinsTest(int coins_delta)
+        /// <summary>XP ganada en Solo según dificultad y resultado, leída de ProgressionData.</summary>
+        public static int GetSoloXP(int ai_level, bool player_won)
+        {
+            ProgressionData pd = ProgressionData.Get();
+            if (pd != null) return pd.GetSoloXP(player_won, ai_level);
+            // Fallback
+            if (!player_won) return 5;
+            if (ai_level <= 0) return 10;
+            if (ai_level <= 5) return 25;
+            return 100;
+        }
+
+        /// <summary>
+        /// Comprueba si esta es la primera victoria del día del jugador.
+        /// Si lo es, actualiza la fecha guardada y devuelve true.
+        /// </summary>
+        private static bool IsFirstWinToday()
+        {
+            string key   = "wt_first_win_date_" + Authenticator.Get().Username;
+            string today = System.DateTime.Now.ToString("yyyy-MM-dd");
+            string saved = PlayerPrefs.GetString(key, "");
+            if (saved == today) return false;
+            PlayerPrefs.SetString(key, today);
+            PlayerPrefs.Save();
+            return true;
+        }
+
+        /// <summary>
+        /// Cuenta las criaturas vivas del jugador al terminar la partida:
+        /// - Tablero: solo las que tienen hp > 0
+        /// - Mano y mazo: todas las criaturas (no han recibido daño)
+        /// </summary>
+        private static int CountAliveCreatures(int player_id)
+        {
+            Player player = GameClient.Get().GetPlayer();
+            if (player == null) return 0;
+
+            int count = 0;
+
+            foreach (Card card in player.cards_board)
+            {
+                if (card.hp <= 0) continue;
+                CardData cdata = CardData.Get(card.card_id);
+                if (cdata != null && cdata.IsCharacter())
+                    count++;
+            }
+
+            foreach (Card card in player.cards_deck)
+            {
+                CardData cdata = CardData.Get(card.card_id);
+                if (cdata != null && cdata.IsCharacter())
+                    count++;
+            }
+
+            return count;
+        }
+
+        private async void GainSoloRewardsTest(int coins_delta, int xp_delta)
         {
             UserData udata = Authenticator.Get().UserData;
             if (udata == null) return;
-            udata.coins = Mathf.Max(0, udata.coins + coins_delta); // nunca por debajo de 0
+
+            if (coins_delta != 0)
+                udata.coins = Mathf.Max(0, udata.coins + coins_delta);
+
+            if (xp_delta > 0)
+            {
+                bool first_win_bonus = (coins_delta > 0) && IsFirstWinToday();
+                if (first_win_bonus)
+                {
+                    int multiplier = ProgressionData.Get()?.first_win_multiplier ?? 2;
+                    Debug.Log($"[RewardManager] Primera victoria del día — XP x{multiplier}: {xp_delta} → {xp_delta * multiplier}");
+                    xp_delta *= multiplier;
+                }
+                udata.xp += xp_delta;
+            }
+
             reward_gained = true;
             await Authenticator.Get().SaveUserData();
         }
@@ -202,7 +286,6 @@ namespace TcgEngine.Client
 
             if (coins_delta != 0)
             {
-                // Modificar monedas directamente y forzar guardado síncrono
                 UserData udata = Authenticator.Get().UserData;
                 if (udata != null)
                 {

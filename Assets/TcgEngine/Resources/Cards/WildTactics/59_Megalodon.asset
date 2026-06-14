@@ -17,6 +17,10 @@ MonoBehaviour:
   art_full: {fileID: 806946233008793545, guid: 080773ee6ba363c4295443af633084c2, type: 3}
   art_board: {fileID: 6984558280708808962, guid: 2581566f77cd8a349a60084b2abfd90f,
     type: 3}
+  skins:
+  - {fileID: 11400000, guid: 7492c8d1cbf4215419964fce5a2287a6, type: 2}
+  default_frame: {fileID: 11400000, guid: f40ddae404611a44da8b0a1512ec25bd, type: 2}
+  unlockable_frames: []
   type: 10
   team: {fileID: 11400000, guid: 39eeb56b4a814be4a8c8b06cda4ce06f, type: 2}
   rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
@@ -27,7 +31,8 @@ MonoBehaviour:
   stats: []
   abilities:
   - {fileID: 11400000, guid: b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7, type: 2}
-  text: 'SUMERGIR: Al entrar en juego, obtiene un escudo que bloquea el primer daño recibido.'
+  text: "SUMERGIR: Al entrar en juego, obtiene un escudo que bloquea el primer da\xF1o
+    recibido."
   desc: 
   spawn_fx: {fileID: 7052257666040929376, guid: caadb540421ddca4ba84bb173024079b,
     type: 3}
@@ -39,6 +44,8 @@ MonoBehaviour:
   death_audio: {fileID: 0}
   attack_audio: {fileID: 0}
   damage_audio: {fileID: 0}
+  scenario_color: {r: 1, g: 1, b: 1, a: 1}
+  scenario_background: {fileID: 0}
   deckbuilding: 0
   cost: 100
   packs: []

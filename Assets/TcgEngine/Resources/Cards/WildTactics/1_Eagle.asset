@@ -18,6 +18,10 @@ MonoBehaviour:
     type: 3}
   art_board: {fileID: -3471540388742628207, guid: 4c3d6b8b8147cd84fbdb7a7a814fa4f7,
     type: 3}
+  skins:
+  - {fileID: 11400000, guid: e72ccb6704708584392861fc4a4009be, type: 2}
+  default_frame: {fileID: 11400000, guid: d60911259119c9041ab4799549f3bb9c, type: 2}
+  unlockable_frames: []
   type: 10
   team: {fileID: 11400000, guid: 6bbb96863ece0314fb318c0fce569afc, type: 2}
   rarity: {fileID: 11400000, guid: 72c2458d2a8395f4b9a869c4b4b9f084, type: 2}
@@ -40,6 +44,8 @@ MonoBehaviour:
   death_audio: {fileID: 0}
   attack_audio: {fileID: 0}
   damage_audio: {fileID: 0}
+  scenario_color: {r: 1, g: 1, b: 1, a: 1}
+  scenario_background: {fileID: 0}
   deckbuilding: 0
   cost: 100
   packs: []

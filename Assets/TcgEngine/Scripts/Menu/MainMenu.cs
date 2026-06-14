@@ -290,6 +290,8 @@ namespace TcgEngine.UI
                 return;
             }
 
+            DesafioPanelUI.Get()?.Hide();
+            OnlinePanelUI.Get()?.Hide();
             WipPanel.Get()?.Hide();
             DifficultyPanel.Get()?.Show();
         }
@@ -312,13 +314,15 @@ namespace TcgEngine.UI
         public void OnClickDesafio()
         {
             DifficultyPanel.Get()?.Hide();
-            WipPanel.Get()?.ShowMode("DESAFÍO");
+            OnlinePanelUI.Get()?.Hide();
+            DesafioPanelUI.Get()?.Show();
         }
 
         public void OnClickOnline()
         {
             DifficultyPanel.Get()?.Hide();
-            WipPanel.Get()?.ShowMode("ONLINE");
+            DesafioPanelUI.Get()?.Hide();
+            OnlinePanelUI.Get()?.Show();
         }
 
         public void OnClickAdventure()

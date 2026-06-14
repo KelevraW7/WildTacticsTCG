@@ -30,6 +30,16 @@ namespace TcgEngine
         public Sprite art_full;
         public Sprite art_board;
 
+        [Header("Skins (Maestrías)")]
+        [Tooltip("Lista de skins de la carta. [0] = skin Base. Las siguientes se desbloquean por maestría.")]
+        public CardSkinData[] skins;
+
+        [Header("Marcos (Maestrías)")]
+        [Tooltip("Marco por defecto de la carta.")]
+        public CardFrameData default_frame;
+        [Tooltip("Marcos adicionales desbloqueables por maestría.")]
+        public CardFrameData[] unlockable_frames;
+
         [Header("Stats")]
         public CardType type;
         public TeamData team;
@@ -90,12 +100,30 @@ namespace TcgEngine
 
         public Sprite GetBoardArt(VariantData variant)
         {
+            if (skins != null && skins.Length > 0 && skins[0] != null && skins[0].illustration != null)
+                return skins[0].illustration;
             return art_board;
         }
 
         public Sprite GetFullArt(VariantData variant)
         {
+            if (skins != null && skins.Length > 0 && skins[0] != null && skins[0].illustration != null)
+                return skins[0].illustration;
             return art_full;
+        }
+
+        public Sprite GetFramePreview()
+        {
+            if (default_frame != null && default_frame.frame_preview != null)
+                return default_frame.frame_preview;
+            return null;
+        }
+
+        public Sprite GetFrameBoard()
+        {
+            if (default_frame != null && default_frame.frame_board != null)
+                return default_frame.frame_board;
+            return null;
         }
 
         public string GetTitle()

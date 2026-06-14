@@ -55,9 +55,61 @@ namespace TcgEngine
             elo = 1000;
         }
 
+        /// <summary>Nivel actual calculado iterativamente a partir del XP total.</summary>
         public int GetLevel()
         {
-            return Mathf.FloorToInt(xp / 1000) + 1;
+            ProgressionData pd = ProgressionData.Get();
+            int level = 1;
+            int cumulative = 0;
+            while (cumulative + GetXpForLevel(pd, level) <= xp)
+            {
+                cumulative += GetXpForLevel(pd, level);
+                level++;
+                if (level > 9999) break;
+            }
+            return level;
+        }
+
+        /// <summary>XP acumulada al inicio del nivel actual.</summary>
+        public int GetXpAtLevelStart()
+        {
+            ProgressionData pd = ProgressionData.Get();
+            int level = GetLevel();
+            int cumulative = 0;
+            for (int i = 1; i < level; i++)
+                cumulative += GetXpForLevel(pd, i);
+            return cumulative;
+        }
+
+        /// <summary>XP necesaria para pasar del nivel actual al siguiente.</summary>
+        public int GetXpNeededForNextLevel()
+        {
+            return GetXpForLevel(ProgressionData.Get(), GetLevel());
+        }
+
+        /// <summary>XP dentro del nivel actual.</summary>
+        public int GetXpInCurrentLevel()
+        {
+            return xp - GetXpAtLevelStart();
+        }
+
+        /// <summary>Progreso dentro del nivel actual, de 0 a 1.</summary>
+        public float GetXpProgress()
+        {
+            return Mathf.Clamp01(GetXpInCurrentLevel() / (float)GetXpNeededForNextLevel());
+        }
+
+        private static int GetXpForLevel(ProgressionData pd, int level)
+        {
+            if (pd != null) return pd.GetXpForLevel(level);
+            // Fallback hardcoded si el asset no está cargado
+            switch (level)
+            {
+                case 1: return 500;  case 2: return 1000; case 3: return 1500;
+                case 4: return 2500; case 5: return 3500; case 6: return 5000;
+                case 7: return 6500;
+                default: return 6500 + (level - 7) * 2250;
+            }
         }
 
         public string GetAvatar()

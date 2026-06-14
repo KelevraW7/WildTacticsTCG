@@ -31,13 +31,10 @@ namespace TcgEngine.UI
             if (player != null && player.history_list != null)
             {
                 int index = 0;
-                foreach (ActionHistory order in player.history_list)
+                for (int h = player.history_list.Count - 1; h >= 0 && index < history_lines.Length; h--)
                 {
-                    if (index < history_lines.Length)
-                    {
-                        history_lines[index].SetLine(order);
-                        index++;
-                    }
+                    history_lines[index].SetLine(player.history_list[h]);
+                    index++;
                 }
 
                 while (index < history_lines.Length)

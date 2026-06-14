@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbeff33785ad1744fb53929473f6bdd1, type: 3}
+  m_Name: red_frame
+  m_EditorClassIdentifier: 
+  id: red_frame
+  title: Fire
+  team: {fileID: 11400000, guid: 6bbb96863ece0314fb318c0fce569afc, type: 2}
+  frame_preview: {fileID: 7873678162009441162, guid: a53ab7bb283dfd740adc33d4e848a423,
+    type: 3}
+  frame_board: {fileID: 6216929932141755505, guid: 17003ae5e7d0d554cb59c16f2ce8f582,
+    type: 3}

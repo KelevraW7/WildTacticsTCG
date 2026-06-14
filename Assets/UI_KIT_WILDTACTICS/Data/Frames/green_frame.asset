@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbeff33785ad1744fb53929473f6bdd1, type: 3}
+  m_Name: green_frame
+  m_EditorClassIdentifier: 
+  id: green_frame
+  title: Plant
+  team: {fileID: 11400000, guid: 76e82b9e2297c8a4baf81d0e7e4fe67a, type: 2}
+  frame_preview: {fileID: 6448733369389359155, guid: 093b3d428a4392a499a61e65be38904f,
+    type: 3}
+  frame_board: {fileID: 1913197184274502360, guid: 365773c3686ef314788855aaafddf575,
+    type: 3}

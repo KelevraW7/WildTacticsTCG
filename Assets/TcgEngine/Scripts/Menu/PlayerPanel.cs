@@ -84,6 +84,19 @@ namespace TcgEngine.UI
         protected override void Start()
         {
             base.Start();
+            // Ocultarse automáticamente al pulsar cualquier tab del grupo "menu"
+            TabButton.onClickAny += OnAnyTabClicked;
+        }
+
+        private void OnDestroy()
+        {
+            TabButton.onClickAny -= OnAnyTabClicked;
+        }
+
+        private void OnAnyTabClicked(TabButton btn)
+        {
+            if (btn.group == "menu" && IsVisible())
+                Hide();
         }
 
         private async void LoadData()

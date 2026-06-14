@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbeff33785ad1744fb53929473f6bdd1, type: 3}
+  m_Name: black_frame
+  m_EditorClassIdentifier: 
+  id: black_frame
+  title: Cardback
+  team: {fileID: 0}
+  frame_preview: {fileID: -5837521097440693142, guid: a0b41344219161741a8ca0cacb59b1e7,
+    type: 3}
+  frame_board: {fileID: 4055461617398924647, guid: afb9b71b6c0796e4a9d4ade80f0e3a61,
+    type: 3}

@@ -25,6 +25,8 @@ namespace TcgEngine.Client
         public Text StatusText;
         public SpriteRenderer card_sprite;
         public Sprite reverse_sprite; // Sprite para carta boca abajo
+        public CardFrameData reverse_frame; // Marco negro para carta boca abajo
+        [SerializeField] private float illustrationOffsetY = 0.15f; // Desplazamiento vertical de la ilustración revelada
 
         public SpriteRenderer card_glow;
         public SpriteRenderer card_shadow;
@@ -91,6 +93,7 @@ namespace TcgEngine.Client
             card_glow.color = new Color(card_glow.color.r, card_glow.color.g, card_glow.color.b, 0f);
             canvas.gameObject.SetActive(false);
             status_alpha_target = 0f;
+            SetupIllustrationMask();
 
             if (equipment != null)
                 equipment.Hide();
@@ -309,12 +312,31 @@ namespace TcgEngine.Client
                 : card.CardData.GetBoardArt(card.VariantData);
 
             if (sprite != card_sprite.sprite)
+            {
                 card_sprite.sprite = sprite;
+                FitSpriteToFrameWidth(card_sprite, 1.9f);
+            }
 
-            // Frame image
-            Sprite frame = card.VariantData.frame_board;
-            if (frame != null && card_ui.frame_image != null)
+            // Aplicar offset vertical cada frame para que sea ajustable en Inspector
+            float targetY = isRevealed ? illustrationOffsetY : 0f;
+            Vector3 cp = card_sprite.transform.localPosition;
+            if (!Mathf.Approximately(cp.y, targetY))
+                card_sprite.transform.localPosition = new Vector3(cp.x, targetY, cp.z);
+
+            // Frame image — usa CardFrameData si está asignado, si no fallback a VariantData
+            if (card_ui.frame_image != null)
+            {
+                Sprite frame;
+                if (!isRevealed && reverse_frame != null && reverse_frame.frame_board != null)
+                    frame = reverse_frame.frame_board;
+                else
+                {
+                    frame = card.CardData.GetFrameBoard();
+                    if (frame == null) frame = card.VariantData.frame_board;
+                }
                 card_ui.frame_image.sprite = frame;
+                card_ui.frame_image.enabled = frame != null;
+            }
 
             // Equipment
             if (equipment != null)
@@ -405,7 +427,13 @@ namespace TcgEngine.Client
             if (card == null || card_uid == null)
                 return;
             {
-                card_sprite.sprite = icard.GetBoardArt(card.VariantData);
+                bool startRevealed = card.revealed;
+                card_sprite.sprite = startRevealed
+                    ? icard.GetBoardArt(card.VariantData)
+                    : (reverse_sprite != null ? reverse_sprite : icard.GetBoardArt(card.VariantData));
+                FitSpriteToFrameWidth(card_sprite, 1.9f);
+                Vector3 p = card_sprite.transform.localPosition;
+                card_sprite.transform.localPosition = new Vector3(p.x, startRevealed ? illustrationOffsetY : 0f, p.z);
                 armor.enabled = false;
                 armor_icon.enabled = false;
                 status_alpha_target = 0f;
@@ -833,6 +861,30 @@ namespace TcgEngine.Client
         public static List<BoardCard> GetAll()
         {
             return card_list;
+        }
+
+        // Escala el SpriteRenderer para que su ancho = targetWidth, manteniendo proporciones.
+        // La máscara (IllustrationMask) recortará el exceso de altura.
+        private void FitSpriteToFrameWidth(SpriteRenderer sr, float targetWidth)
+        {
+            if (sr == null || sr.sprite == null) return;
+            float worldWidth = sr.sprite.rect.width / sr.sprite.pixelsPerUnit;
+            if (worldWidth <= 0f) return;
+            float scale = targetWidth / worldWidth;
+            sr.transform.localScale = new Vector3(scale, scale, 1f);
+        }
+
+        // Ajusta la escala del SpriteMask para que ocupe exactamente targetSize x targetSize
+        // unidades de mundo, independientemente del PPU del sprite asignado.
+        private void SetupIllustrationMask()
+        {
+            SpriteMask sm = GetComponentInChildren<SpriteMask>();
+            if (sm == null || sm.sprite == null) return;
+            float spriteWorldWidth = sm.sprite.rect.width / sm.sprite.pixelsPerUnit;
+            if (spriteWorldWidth <= 0f) return;
+            float targetSize = 1.9f;
+            float s = targetSize / spriteWorldWidth;
+            sm.transform.localScale = new Vector3(s, s, 1f);
         }
     }
 }
